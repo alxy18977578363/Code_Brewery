@@ -23,7 +23,8 @@
 ## 2025.4.25
 1. 学习了B树和B+树的查找，构建，删除
 
-<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px;">
+<details>
+<summary><b>数据库索引</b></summary>
 
 ## 数据库索引
 ### 数据库索引的作用  
@@ -182,4 +183,4 @@ AND操作:
 2. **空间效率**：对于低基数列，位图比传统索引更节省空间
 3. **统计方便**：计算1的个数就能知道匹配的记录数
 
-</div>
+</details>
