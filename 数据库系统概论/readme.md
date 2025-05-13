@@ -194,15 +194,20 @@ AND操作:
 flowchart TB
     A[前端SQL查询] --> B[语法解析]
     B --> C[生成关系代数表达式]
-    C --> D[优化器]
-    D --> E[选择执行计划]
-    E --> F[执行引擎]
-    F --> G[输出结果]
-    
+    C --> D[基于统计信息优化]
+    D --> E[选择最优执行计划]
+    E --> F[执行引擎处理]
+    F --> G[输出结果集]
+
     subgraph 优化器
-        D --> D1[表统计]
-        D --> D2[代价估算]
+        D --> D1["表大小/索引/分布统计"]  # GitHub 可能在此处解析失败
+        D --> D2["代价估算模型"]
+        D2 --> E
     end
+
+    style A fill:#f9f,stroke:#333  # 此样式不被支持
+    style G fill:#0f0,stroke:#333
+    style 优化器 fill:#eee,stroke-dasharray: 5 5  # 此样式不被支持
 ```
 ## 查询优化
 ```mermaid
