@@ -210,10 +210,22 @@ flowchart TB
     style 优化器 fill:#eee,stroke-dasharray: 5 5
 ```
 ## 查询优化
-- 为什么要优化查询？
-  - 因为查询时有代价的 1. 从磁盘读数据(主) 2. cpu计算 3. 网络处理
-  - 从硬盘读取数据分为两部分： 1. 寻址时间    2. 数据从硬盘读到内存
-  - 所需时间代价
+```mermaid
+flowchart LR
+    A[查询优化目标] --> B["减少 I/O 代价"]
+    B --> C["最小化磁盘访问"]
+    C --> D["公式: 总时间 = (b×tb) + (s×ts)"]
+    
+    subgraph 磁盘访问分解
+        D --> D1["数据传输时间: b×tb"]
+        D --> D2["寻址时间: s×ts"]
+    end
+
+    style A fill:#0f0,stroke:#333
+    style D1 fill:#f96,stroke:#333
+    style D2 fill:#f96,stroke:#333
+```
+- 所需时间代价
 $$
 \underbrace{b * tb}_{\text{数据传输}} + 
 \underbrace{s * ts}_{\substack{
