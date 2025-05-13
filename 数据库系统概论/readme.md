@@ -216,11 +216,7 @@ flowchart TD
 #### 结论2：若r表(作外表)大小为a个数据块，s表(做内表)大小为b个数据块，每个数据块装n条数据，则全表扫描需要加载  
 
 $$
-\underbrace{a}_{\text{外表初始加载}} + 
-\underbrace{a \times n \times b}_{\substack{
-\text{每条外表记录} \\ 
-\text{都需要加载内表}
-}}
+a_{\text{外表初始加载}} + a \times n \times b_{\text{每条外表记录需加载内表}}
 $$
 
   
