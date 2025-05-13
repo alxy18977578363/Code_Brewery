@@ -190,19 +190,7 @@ AND操作:
 
 # 查询处理
 ## 数据库查询流程图
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcccc'}, 'config': {'flowchart': {'useMaxWidth': false}, 'securityLevel': 'loose'}}}%%
-flowchart LR
-    A[前端Query] --> B[解析命令] 
-    B --> C[形成关系代数表达式]
-    C --> D[优化器]
-    D -->|输入统计信息| E[决策较优执行计划]
-    E --> F[执行引擎]
-    F --> G[输出结果]
-    subgraph 优化阶段
-        D --> E
-    end
-```
+前端query -> 解析命令 -> 形成关系代数表达式 -> 优化(基于统计信息的输入) -> 决策一个较优的过程 -> 执行引擎 -> 输出结果
 
 ## 查询优化
 ```mermaid
