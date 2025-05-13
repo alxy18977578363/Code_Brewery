@@ -7,7 +7,9 @@
 **姓名**: 李盛鹏 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**学号**: 2351136 
 
 ---
-
+```latex
+总加载量 = \underbrace{a}_{外表} + \underbrace{a \times n \times b}_{内表扫描}
+```
 ## 2025.4.20
 1. 学习了无损连接分解，主要有两种方法求解，一种是基于函数依赖交并，另一种是矩阵画图法
 2. 学习了函数依赖的闭包，也就是一个属性所能决定的特征的有哪些
