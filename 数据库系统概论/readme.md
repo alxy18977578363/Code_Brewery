@@ -211,25 +211,18 @@ flowchart TB
 ```
 ## 查询优化
 ```mermaid
-flowchart LR
-    A[查询代价] --> B["📁 磁盘I/O（最慢）"]
-    A --> C["⚡ CPU计算"]
-    A --> D["🌐 网络传输"]
-```
-```mermaid
-flowchart LR
-    A[查询优化目标] --> B["减少 I/O 代价"]
-    B --> C["最小化磁盘访问"]
-    C --> D["公式: 总时间 = (b×tb) + (s×ts)"]
+flowchart TD
+    A[为什么要优化查询?] --> B[查询的代价]
+    B --> B1[1. 从磁盘读取数据\n（主要开销）]
+    B --> B2[2. CPU计算]
+    B --> B3[3. 网络处理]
     
-    subgraph 磁盘访问分解
-        D --> D1["数据传输时间: b×tb"]
-        D --> D2["寻址时间: s×ts"]
-    end
-
-    style A fill:#0f0,stroke:#333
-    style D1 fill:#f96,stroke:#333
-    style D2 fill:#f96,stroke:#333
+    B1 --> C[从硬盘读取数据的组成]
+    C --> C1["1. 寻址时间（s × ts）"]
+    C --> C2["2. 数据传输时间（b × tb）"]
+    
+    C1 --> D["总时间代价公式:\n<b>b × tb + s × ts</b>"]
+    C2 --> D
 ```
 
 ## 数据查询的算法
