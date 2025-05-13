@@ -191,6 +191,7 @@ AND操作:
 # 查询处理
 ## 数据库查询流程图
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcccc'}, 'config': {'flowchart': {'useMaxWidth': false}, 'securityLevel': 'loose'}}}%%
 flowchart LR
     A[前端Query] --> B[解析命令] 
     B --> C[形成关系代数表达式]
@@ -198,28 +199,25 @@ flowchart LR
     D -->|输入统计信息| E[决策较优执行计划]
     E --> F[执行引擎]
     F --> G[输出结果]
-
-    %% 注释：用虚线框突出优化阶段
     subgraph 优化阶段
         D --> E
     end
 ```
+
 ## 查询优化
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ccffcc'}, 'config': {'flowchart': {'useMaxWidth': false}, 'securityLevel': 'loose'}}}%%
 flowchart TD
     A[优化查询原因] --> B[查询代价]
     B --> B1["磁盘I/O（主要开销）"]
     B --> B2[CPU计算]
     B --> B3[网络传输]
-    
     B1 --> C["磁盘读取时间 = 寻址时间 + 数据传输时间"]
     C --> C1["寻址时间 = s × ts"]
     C --> C2["数据传输时间 = b × tb"]
-    
     C1 --> D["总时间 = b×tb + s×ts"]
     C2 --> D
 ```
-
 ## 数据查询的算法
 ### 全表扫描算法
 - 假设内存共有M块
