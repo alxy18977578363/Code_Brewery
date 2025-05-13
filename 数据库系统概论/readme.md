@@ -191,23 +191,18 @@ AND操作:
 # 查询处理
 ## 数据库查询流程图
 ```mermaid
-flowchart TB
-    A[前端SQL查询] --> B[语法解析]
-    B --> C[生成关系代数表达式]
-    C --> D[基于统计信息优化]
-    D --> E[选择最优执行计划]
-    E --> F[执行引擎处理]
-    F --> G[输出结果集]
+flowchart LR
+    A[前端Query] --> B[解析命令] 
+    B --> C[形成关系代数表达式]
+    C --> D[优化器]
+    D -->|输入统计信息| E[决策较优执行计划]
+    E --> F[执行引擎]
+    F --> G[输出结果]
 
-    subgraph 优化器
-        D --> D1["表大小/索引/分布统计"]  # GitHub 可能在此处解析失败
-        D --> D2["代价估算模型"]
-        D2 --> E
+    %% 注释：用虚线框突出优化阶段
+    subgraph 优化阶段
+        D --> E
     end
-
-    style A fill:#f9f,stroke:#333  # 此样式不被支持
-    style G fill:#0f0,stroke:#333
-    style 优化器 fill:#eee,stroke-dasharray: 5 5  # 此样式不被支持
 ```
 ## 查询优化
 ```mermaid
