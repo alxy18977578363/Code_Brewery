@@ -215,7 +215,8 @@ flowchart LR
     A[查询代价] --> B["📁 磁盘I/O（最慢）"]
     A --> C["⚡ CPU计算"]
     A --> D["🌐 网络传输"]
-
+```
+```mermaid
 flowchart LR
     A[查询优化目标] --> B["减少 I/O 代价"]
     B --> C["最小化磁盘访问"]
