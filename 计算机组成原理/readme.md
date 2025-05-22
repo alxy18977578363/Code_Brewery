@@ -188,15 +188,7 @@ CPU具有空间局限性和时间局限性，表现为在最近的未来要用�
 - tm 访问一次主存所需时间  
 平均访问时间的公式t为
 
-$$
-t = H \cdot tc + (1 - H) \cdot tm
-$$
-
-或者
-
-$$
-t = H \cdot tc + (1 - H) \cdot (tm + tc)
-$$
+$ t = H \cdot tc + (1 - H) \cdot tm $  或者  $ t = H \cdot tc + (1 - H) \cdot (tm + tc) $
 
 具体看的是题目要求，是否Cache和主存同时访问
 ### 7.3 Cache地址映像
