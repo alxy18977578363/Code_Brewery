@@ -1,15 +1,3 @@
-<head>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
-    </script>
-</head>
-
 <center>
 
 # 计算机组成原理
@@ -200,11 +188,11 @@ CPU具有空间局限性和时间局限性，表现为在最近的未来要用�
 - tm 访问一次主存所需时间  
 平均访问时间的公式t为
 
-$t = H \times t_c + (1 - H) \times t_m$
+$$t = H \times t_c + (1 - H) \times t_m$$
 
 或者
 
-$ t = H \cdot tc + (1 - H) \cdot (tm + tc) $
+$$t = H \cdot tc + (1 - H) \cdot (tm + tc)$$
 
 具体看的是题目要求，是否Cache和主存同时访问
 ### 7.3 Cache地址映像
