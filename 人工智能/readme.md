@@ -52,8 +52,57 @@
             - ![alt text](image/λ过大只剩下b.png)
         因此λ要控制好 
 
-</details>
+## 3.1 正则化线性回归 (Regularized Linear Regression)
+### 3.1.1 损失函数
+$$
+\min_{\hat{w},b} J(\hat{w},b) = \min_{\hat{w},b} \left[ 
+\frac{1}{2m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + 
+\frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2 
+\right]
+$$
 
+### 3.1.2 它的梯度下降
+**参数更新（同时进行）**：
+- **权重 $w_j$ 更新：**
 $$
-w_j = \underbrace{\left(1 - \frac{\alpha\lambda}{m}\right)w_j}_{\text{权重衰减项}} - \underbrace{\alpha\frac{1}{m}\sum_{i=1}^{m}\left(f_{w,b}(\vec{x}^{(i)}) - y^{(i)}\right)x_j^{(i)}}_{\text{usual update}}
+w_j = w_j - \alpha \frac{\partial}{\partial w_j}J(\hat{w},b) \Rightarrow 
+w_j - \alpha \left[ 
+\frac{1}{m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)})x_{j}^{(i)} + 
+\frac{\lambda}{m}w_j 
+\right], \quad j=1,\cdots,n
 $$
+
+- **偏置 $b$ 更新：**
+$$
+b = b - \alpha \frac{\partial}{\partial b}J(\hat{w},b) \Rightarrow 
+b - \alpha \left[ 
+\frac{1}{m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)}) 
+\right]
+$$
+
+- $w_j$: 第$j$个特征的权重
+- $\alpha$: 学习率（learning rate）
+- $\lambda$: 正则化系数
+- $m$: 训练样本数量
+- $f_{w,b}(\vec{x}) = w^T\vec{x} + b$: 线性模型预测值
+- $\vec{x}^{(i)}$: 第$i$个样本的特征向量
+- $x_j^{(i)}$: 第$i$个样本的第$j$个特征值
+
+### 3.1.3 分析
+由
+$$
+w_j = w_j - \alpha \frac{\partial}{\partial w_j}J(\hat{w},b) \Rightarrow 
+w_j - \alpha \left[ 
+\frac{1}{m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)})x_{j}^{(i)} + 
+\frac{\lambda}{m}w_j 
+\right], \quad j=1,\cdots,n
+$$
+整理得到
+$$
+w_j = \left(1 - \frac{\alpha\lambda}{m}\right)w_j - \alpha\frac{1}{m}\sum_{i=1}^{m}\left(f_{w,b}(\vec{x}^{(i)}) - y^{(i)}\right)x_j^{(i)}
+$$
+
+前面的$\left(1 - \frac{\alpha\lambda}{m}\right)w_j$这一项将衰减$w_j$的值，因此正则化的作用其实就是让权值w不要那么的大。
+
+
+</details>
