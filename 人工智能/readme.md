@@ -53,3 +53,7 @@
         因此λ要控制好 
 
 </details>
+
+$$
+w_j = \underbrace{\left(1 - \frac{\alpha\lambda}{m}\right)w_j}_{\text{权重衰减项}} - \underbrace{\alpha\frac{1}{m}\sum_{i=1}^{m}\left(f_{w,b}(\vec{x}^{(i)}) - y^{(i)}\right)x_j^{(i)}}_{\text{usual update}}
+$$
