@@ -94,7 +94,7 @@ w_j - \alpha \left[
 
 $$w_j = \left(1 - \frac{\alpha\lambda}{m}\right)w_j - \alpha\frac{1}{m}\sum_{i=1}^{m}\left(f_{w,b}(\vec{x}^{(i)}) - y^{(i)}\right)x_j^{(i)}$$
 
-前面的$\left(1 - \frac{\alpha\lambda}{m}\right)w_j$这一项将衰减$w_j$的值，因此正则化的作用其实就是让权值w不要那么的大。
+前面的 $\left(1 - \frac{\alpha\lambda}{m}\right)w_j$ 这一项将衰减 $w_j$ 的值，因此正则化的作用其实就是让权值w不要那么的大。
 
 
 </details>
