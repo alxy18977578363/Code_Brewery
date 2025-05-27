@@ -112,4 +112,4 @@ D. 采样函数
 
 价值迭代的更新公式为：  
 
-$$V_{k+1}(s) = \max_a \left( \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V_k(s') \right] \ri
+$$V_{k+1}(s) = \max_a \left( \sum_{s'} P(s'|s,a) \left[ R(s,a,s') + \gamma V_k(s') \right] \ri$$
