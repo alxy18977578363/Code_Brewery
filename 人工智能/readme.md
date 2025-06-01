@@ -43,12 +43,14 @@
 
 #### 3.1.1 均值归一化公式
 $$x_i = \frac{x_i - \mu_i}{max-min}$$
+
 - $\mu_i$：第$i$个特征的均值，是样本均值不是最大最小值相加除以2.
 - $max$：样本最大值
 - $min$：样本最小值
 
 #### 3.1.2 Z值归一化公式
 $$x_i = \frac{x_i - \mu_i}{\sigma_i}$$
+
 - $\mu_i$：第$i$个特征的均值
 - $\sigma_i$：第$i$个特征的标准差
 
@@ -74,7 +76,7 @@ b - \alpha \left[
 \frac{1}{m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)}) 
 \right]$$
 
-- $w_j$: 第$j$个特征的权重
+- $w_j$: 第 $j$ 个特征的权重
 - $\alpha$: 学习率（learning rate）
 - $\lambda$: 正则化系数
 - $m$: 训练样本数量
