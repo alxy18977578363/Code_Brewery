@@ -222,4 +222,80 @@ $$a^{[l]}_j = g(w^{[l]}_j a^{[l-1]} + b^{[l]}_j)$$
 **知识回顾**：以前在机器学习的时候，标记上下标的是x，为 $x^{(i)}_j$ ,表示第 $i$ 个样本的第 $j$ 个特征。上标比的是不同样本的x，现在对w，b进行上下标，比的是不同层的w，b。  
 以前只有一组w，b，现在由于每个神经元都是一个逻辑回归单元，所以有一堆w，b。
 
+## 3. tensorflow
+### 3.1 tensorflow中的数据
+np.array()最外层一定只能是'[]'
+- **向量（行向量）**
+$x = np.array([1, 2, 3])$ ，形状为(3,)  
+只有一个'[]',最外层[]框住的每个单元都是一个元素，形状为(3,)
+- **矩阵（二维数组）**
+$x = np.array([[1, 2, 3]])$ 形状为(1,3)
+$x = np.array([[1, 2, 3], [4, 5, 6]])$ ，形状为(2,3)  
+有两个'[]',最外层[]框住的每个单元都是一个向量
+- **张量（三维数组）**
+$x = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])$ ，形状为(2,2,3)  
+有三个'[]',最外层[]框住的每个单元都是一个矩阵
+
+### 3.2 tensorflow中的转换
+由于历史的原因，numpy和tensorflow数据互通需要转换
+**array.numpy()** :将tensor转换为numpy数组
+
+### 3.3 利用tensorflow创建神经网络
+![alt text](image/筛选咖啡的简单神经网络.png)
+#### 3.3.1 显式调用
+```python
+x = np.array([[200.0,17.0]])
+layer_1 = Dense(units=3, activation='sigmoid')
+a1 = layer_1(x)
+
+layer_2 = Dense(units=1, activation='sigmoid')
+a2 = layer_2(a1)
+```
+如此，手动地一层一层调用完成
+#### 3.3.2 利用Sequential()函数
+sequential()是一个顺序函数，能帮你自动连接网络，按照顺序调用层
+```python
+layer_1 = Dense(units=3, activation='sigmoid')
+layer_2 = Dense(units=1, activation='sigmoid')
+model = Sequential([layer_1, layer_2])
+```
+
+## 4. 自己实现前向传播
+### 4.1 在一个单层中的前向传播(事例)：
+![alt text](image/在一个单层中的前向传播(事例).png)  
+就是每一个一个神经元去算去激活
+### 4.2 前向传播的一般实现
+![alt text](image/前向传播的一般实现.png)  
+设计dense()函数:
+- **输入**
+  - 权重 $W$ ，如图，将该层每个神经元的w先转为列向量，然后再拼起来，得到矩阵 $W$
+  - 偏置 $b$ , 如图，将该层每个神经元的b拼起来，得到向量 $b$
+  - 激活函数 $g$
+  - 输入 $a_{in}$
+- **输出**
+  - 输出向量 $a_{out}$ , 就是激活值向量
+```python
+def dense(a_in, W, b, g):
+    units = W.shape[1]
+    a_out = np.zeros(units)
+    for j in range(units):
+        w = W[:, j]
+        z = np.dot(w, a_in) + b[j]
+        a_out[j] = g(z)
+    return a_out
+```
+设计sequential()函数:
+- **输入**：输入层输入 x 数据
+- **输出**： 输出层输出 y
+
+```python
+def sequential(x):
+    a1 = dense(x, W1, b1, g)
+    a2 = dense(a1, W2, b2, g)
+    a3 = dense(a2, W3, b3, g)
+    a4 = dense(a3, W4, b4, g)
+    f_x = a4
+    return f_x
+```
+
 </details>
