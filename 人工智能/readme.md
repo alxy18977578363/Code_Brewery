@@ -121,6 +121,57 @@ $$w_j = \left(1 - \frac{\alpha\lambda}{m}\right)w_j - \alpha\frac{1}{m}\sum_{i=1
     - ![alt text](image/λ过大只剩下b.png)   
 因此λ要控制好 
 
+## 6. 逻辑回归
+**motivation**:在二分类问题中，线性回归无法解决x坐标趋近于无穷的问题，倘若说f(x) = 0.5 是决策边界的话，那么当x -> +∞，那就会导致很多该被判为 1 的样本被判为0。  
+![alt text](image/引入逻辑回归的原因.png)
+### 6.1 逻辑回归模型
+- **本质**：一种用于**二分类**（可扩展至多分类）的统计学习方法，输出为概率值（0~1）。
+- **核心思想**：通过线性回归结合Sigmoid函数，将连续值映射为概率。  
+
+**sigmoid公式**：
+- **线性部分**：  
+  $$z = w^T x + b$$  
+  （w为权重，b为偏置，x为特征向量）
+- **Sigmoid函数**：  
+  $$\sigma(z) = \frac{1}{1 + e^{-z}}$$ 
+  将z映射到 `(0,1)`，表示概率P(y=1 | x) 。
+
+
+### 6.2 决策边界
+- **二分类规则**：  
+  - 若 $sigma(z) \geq 0.5$，预测  $y=1$ ；  
+  - 若 $\sigma(z) < 0.5$ ，预测 $y=0$。  
+- **边界形式**：  
+  其实就是$w^T x + b = 0$
+
+
+### 6.3 损失函数
+![](image/逻辑回归不适合用平方损失函数的原因.png)   
+由于逻辑函数如果代入平方损失函数，将会得到一个非凸函数，使得梯度下降法会局部最优。因而要寻求别的损失函数。
+#### 6.3.1 **交叉熵损失（Log Loss）**：
+这个Loss函数的原理是最大似然估计，而且logic函数在该Loss函数下是凸函数，因此可以用梯度下降法进行优化。  
+![alt text](image/交叉熵损失.png)  
+$$J(w, b) = -\frac{1}{m} \sum_{i=1}^m \left[ y^{(i)} \log(\sigma(z^{(i)})) + (1-y^{(i)}) \log(1-\sigma(z^{(i)})) \right]$$
+- 当 $y^{(i)} = 1 时$ ，Loss函数如图，越靠近1，Loss越小；若靠近0，则Loss趋近于+∞，驱使模型做出修改
+  ![alt text](image/交叉熵损失1.png)
+- 当 $y^{(i)} = 0 时$ ，Loss函数如图，越靠近0，Loss越小；若靠近1，则Loss趋近于+∞，驱使模型做出修改
+  ![alt text](image/交叉熵损失2.png)
+
+#### 6.3.2 **参数调优**
+**梯度下降法**：    
+$$w = w - \alpha \frac{\partial J}{\partial w}$$
+
+$$\quad b = b - \alpha \frac{\partial J}{\partial b}$$
+
+**梯度计算**：  
+
+$$\frac{\partial J}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m (\sigma(z^{(i)}) - y^{(i)}) x_j^{(i)}$$
+
+**偏差计算**：  
+
+$$\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (\sigma(z^{(i)}) - y^{(i)})$$   
+
+其实和线性回归长的一模一样
 
 </details>
 
