@@ -336,12 +336,15 @@ def dense(a_in, W, B, g):
 - **linear activation function**
 #### 5.1.1 Relu
 $$f(x) = max(0, x)$$
+
 ![alt text](image/Relu.png)
 #### 5.1.2 Sigmoid
 $$f(x) = \frac{1}{1+e^{-x}}$$
+
 ![alt text](image/Sigmoid.png)
 #### 5.1.3 linear activation function
 $$f(x) = x$$
+
 ![alt text](image/linear%20activation%20function.png)
 
 ### 5.2 为什么我们需要激活函数
