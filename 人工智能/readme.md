@@ -446,7 +446,7 @@ $$J(w, b) = -\frac{1}{m} \sum_{i=1}^m \left[ y^{(i)} \log(\sigma(z^{(i)})) + (1-
 
 ### 8.4 正则化偏差和误差
 这一节，说白了，就是通过试错的方式找到合适的 $\lambda$ 。  
-![alt text](image.png)  
+![alt text](image/正则化偏差和误差.png)  
 - 正则化偏差：$\lambda$ 太小，模型过拟合
 - 正则化误差：$\lambda$ 太大，模型欠拟合
 
