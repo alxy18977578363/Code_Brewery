@@ -359,8 +359,8 @@ $$f(x) = x$$
 要区别于**多标签问题**，是多选题，一个事物可以有多个标签，也可以没有标签。  
 ![alt text](image/多类问题.png)
 ### 6.1 Softmax
-
-$$g(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}, \quad i = 1, 2, \ldots, K$$ 
+  
+$$g(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}, \quad i = 1, 2, \ldots, K$$   
 
 在输出端，所有输出值 $g(\mathbf{z}_i) \in (0, 1)$ 且和为 1。
 ### 6.2 Softmax的损失函数
@@ -369,16 +369,16 @@ $$g(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}, \quad i = 1, 2, \ldots
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
 
 model.compile(loss=SparseCategoricalCrossentropy(from_logits=True))     # from_logits=True是优化，避免单独计算 softmax 时的指数溢出风险。
-```
-
+```  
+ 
 $$\operatorname{loss}\left(a_{1},\ldots, a_{N},y\right)=\left\{\begin{array}{ll}
 -\log a_{1} & \text{if } y=1 \\
 -\log a_{2} & \text{if } y=2 \\
 \vdots & \vdots \\
 -\log a_{N} & \text{if } y=N
-\end{array}\right.$$
+\end{array}\right.$$  
 
-由上一节，已知 $\mathbf{a}_i \in (0, 1)$ ， 所以当正确值是某一类时，$a_i$ 越靠近1，损失越小。  
+由上一节，已知 $\mathbf{a}_i \in (0, 1)$ ， 所以当正确值是某一类时， $a_i$ 越靠近1，损失越小。  
 ![alt text](image/Softmax的损失函数.png)
 ### 6.3 多类和多标签的区别
 在代码方面，多类问题用softmax去激活
