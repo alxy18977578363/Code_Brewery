@@ -359,7 +359,7 @@ $$f(x) = x$$
 要区别于**多标签问题**，是多选题，一个事物可以有多个标签，也可以没有标签。  
 ![alt text](image/多类问题.png)
 ### 6.1 Softmax
-$$\mathbf{a}_i = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}, \quad \text{其中} \quad i \in \{1, 2, \ldots, K\}$$  
+$${a}_i = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}, \quad \text{其中} \quad i \in \{1, 2, \ldots, K\}$$  
 
 在输出端，所有输出值 $g(\mathbf{z}_i) \in (0, 1)$ 且和为 1。
 ### 6.2 Softmax的损失函数
