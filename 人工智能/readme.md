@@ -360,7 +360,7 @@ $$f(x) = x$$
 ![alt text](image/多类问题.png)
 ### 6.1 Softmax
 
-$$g(\mathbf{z}_i) = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}$$  
+$$g(\mathbf{z}) = \frac{e^{\mathbf{z}}}{\mathbf{1}^T e^{\mathbf{z}}}$$  
 
 在输出端，所有输出值 $g(\mathbf{z}_i) \in (0, 1)$ 且和为 1。
 ### 6.2 Softmax的损失函数
