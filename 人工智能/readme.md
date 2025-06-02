@@ -414,7 +414,7 @@ $$J(w, b) = \min_{\hat{w},b} \left[
 \frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2 
 \right]$$
 
-那么去掉正交项，就是 $J_{train}(w, b)$ 、$J_{test}(w, b)$ 、$J_{cv}(w, b)$ 。  
+那么去掉正交项，就是 $J_{train}(w, b)$ 、 $J_{test}(w, b)$ 、 $J_{cv}(w, b)$ 。  
 
 如果loss是
 $$J(w, b) = \min_{\hat{w},b} \left[ 
@@ -423,7 +423,7 @@ $$J(w, b) = \min_{\hat{w},b} \left[
 \right]$$
 
 $$J(w, b) = -\frac{1}{m} \sum_{i=1}^m \left[ y^{(i)} \log(\sigma(z^{(i)})) + (1-y^{(i)}) \log(1-\sigma(z^{(i)})) \right] + \frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2  $$
-那么去掉正交项，就是 $J_{train}(w, b)$ 、$J_{test}(w, b)$ 、$J_{cv}(w, b)$ 。  
+那么去掉正交项，就是 $J_{train}(w, b)$ 、 $J_{test}(w, b)$ 、 $J_{cv}(w, b)$ 。  
 
 ### 8.2 对比一系列模型
 只看**训练集**和**交叉验证集**，不看测试集，因为测试集是用来评估模型的泛化能力的，不是用来模型对比的。  
