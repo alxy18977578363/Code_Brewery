@@ -354,4 +354,109 @@ $$f(x) = x$$
 
 **知识点**: 隐藏层不要全用线性函数去激活
 
+## 6. 多类问题
+多分类问题，就是单选题，一个事物只能选择一个类并属于它。  
+要区别于**多标签问题**，是多选题，一个事物可以有多个标签，也可以没有标签。  
+![alt text](image/多类问题.png)
+### 6.1 Softmax
+
+$$g(\mathbf{z}_i) = \frac{e^{z_i}}{\sum_{j=1}^K e^{z_j}}$$  
+
+在输出端，所有输出值 $g(\mathbf{z}_i) \in (0, 1)$ 且和为 1。
+### 6.2 Softmax的损失函数
+被称作稀疏类别交叉熵函数
+```python
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+
+model.compile(loss=SparseCategoricalCrossentropy(from_logits=True))     # from_logits=True是优化，避免单独计算 softmax 时的指数溢出风险。
+```
+
+$$\operatorname{loss}\left(a_{1},\ldots, a_{N},y\right)=\left\{\begin{array}{ll}
+-\log a_{1} & \text{if } y=1 \\
+-\log a_{2} & \text{if } y=2 \\
+\vdots & \vdots \\
+-\log a_{N} & \text{if } y=N
+\end{array}\right.$$
+
+由上一节，已知 $\mathbf{a}_i \in (0, 1)$ ， 所以当正确值是某一类时，$a_i$ 越靠近1，损失越小。  
+![alt text](image/Softmax的损失函数.png)
+### 6.3 多类和多标签的区别
+在代码方面，多类问题用softmax去激活
+```python
+Dense(num_classes, activation='softmax')
+```
+而多标签问题用sigmoid去激活
+```python
+Dense(num_classes, activation='sigmoid')
+```
+
+尽管输出层都是多个units，但是多类问题要单选出最可能的一类，而多标签问题可以有多个标签，只关注那些标签 **有** 或 **没有**。
+
+## 7. 高级优化方法
+### 7.1 adam 优化
+- 使用梯度下降法最小化loss时，如果学习率太小，会走的慢。学习率太大，会震荡。因此用 adam 优化器能够 **自动调整学习率** ，使得模型在训练过程中更加稳定。
+- 而且，**不只有一个学习率**，有几个参数就有几个学习率，彼此之间单独处理。
+
+```python
+# 可以更改初始化的学习率，让你更快地练模型
+model.compile(optimizer= tf.kears.optimizers.Adam(learning_rate=1e-3), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
+```
+## 8. 模型评估
+先定义好损失函数loss，将数据集分为三个部分。  
+- **训练集**：相当于平时练习
+- **验证集**：相当于模拟考，为了看某一系列模型中谁最好，如果不对比一系列模型则不需要该集。
+- **测试集**：评估模型的泛化能力。
+
+### 8.1 定义评估的函数
+如果loss是
+$$J(w, b) = \min_{\hat{w},b} \left[ 
+\frac{1}{2m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + 
+\frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2 
+\right]$$
+
+那么去掉正交项，就是 $J_{train}(w, b)$ 、$J_{test}(w, b)$ 、$J_{cv}(w, b)$ 。  
+
+如果loss是
+$$J(w, b) = \min_{\hat{w},b} \left[ 
+\frac{1}{2m}\sum_{i=1}^{m}(f_{\hat{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + 
+\frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2 
+\right]$$
+
+$$J(w, b) = -\frac{1}{m} \sum_{i=1}^m \left[ y^{(i)} \log(\sigma(z^{(i)})) + (1-y^{(i)}) \log(1-\sigma(z^{(i)})) \right] + \frac{\lambda}{2m}\sum_{j=1}^{n}w_{j}^2  $$
+那么去掉正交项，就是 $J_{train}(w, b)$ 、$J_{test}(w, b)$ 、$J_{cv}(w, b)$ 。  
+
+### 8.2 对比一系列模型
+只看**训练集**和**交叉验证集**，不看测试集，因为测试集是用来评估模型的泛化能力的，不是用来模型对比的。  
+![alt text](image/对比一系列模型.png)  
+- 好的模型， $J_{cv}$ , $J_{train}$ 都很小
+- 欠拟合模型，$J_{cv}$ , $J_{train}$ 都很大
+- 过拟合模型，$J_{cv}$ 很大，$J_{train}$ 很小  
+
+![alt text](image/对比一系列模型来挑选.png)  
+要是有一堆模型，挑选的时候，就看他们的 $J_{cv}$ ，$J_{cv}$ 最小的模型，它在这系列模型是最好的。
+
+### 8.3 验证集帮助模型评估
+- $J_{train} ≈ J_{cv}$ 且 $J_{train}$ 很大，说明欠拟合，在图的左边
+- $J_{cv} \gg J_{train}$ 且 $J_{train}$ 很小，说明过拟合，在图的右边
+![alt text](image/验证集帮助模型评估.png)  
+
+### 8.4 建立表现基准
+![alt text](image/建立表现基准.png)  
+在判断是否为高偏差和高方差的时候，需要一个基准。如果 $J_{train} - 基准$ 和  $J_{cv} - J_{train}$ 都够小，就说明模型很好
+
+### 8.4 正则化偏差和误差
+这一节，说白了，就是通过试错的方式找到合适的 $\lambda$ 。  
+![alt text](image.png)  
+- 正则化偏差：$\lambda$ 太小，模型过拟合
+- 正则化误差：$\lambda$ 太大，模型欠拟合
+
+多试错，找到中间的那个 $\lambda$ ，此时 $J_{train} ≈ J_{cv}$
+
+找到了之后，就可以在使用模型时，用这个 $\lambda$ 去训练模型。
+```python
+Dense(num_classes, activation='sigmoid', kernel_regularizer=tf.keras.regularizers.l2(0.01))
+```
+
+多增加一个`kernel_regularizer=tf.keras.regularizers.l2(0.01)` 是为了让模型以正则化的方式防止过拟合。
+
 </details>
