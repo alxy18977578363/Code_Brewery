@@ -260,6 +260,27 @@ layer_2 = Dense(units=1, activation='sigmoid')
 model = Sequential([layer_1, layer_2])
 ```
 
+### 3.4 利用tensorflow的简化操作
+```python
+# 搭建一个简单的神经网络
+import tensorflow as tf
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+
+model = Sequential([
+    Dense(units=3, activation='sigmoid', input_shape=(2,)),
+    Dense(units=1, activation='sigmoid')
+])
+
+# 定义loss函数，编译并训练
+from tensorflow.keras.losses import BinaryCrossentropy
+
+model.compile(loss=BinaryCrossentropy())    # 交叉熵loss
+model.fit(x_train, y_train, epochs=100)   # 训练
+```
+
+
+
 ## 4. 自己实现前向传播
 ### 4.1 在一个单层中的前向传播(事例)：
 ![alt text](image/在一个单层中的前向传播(事例).png)  
@@ -297,5 +318,37 @@ def sequential(x):
     f_x = a4
     return f_x
 ```
+
+### 4.3 利用矩阵高效实现
+```python
+def dense(a_in, W, B, g):
+    Z = np.matmul(W, a_in) + B    % 利用矩阵乘法，格式就要像线性代数那样
+    A_out = g(Z)
+    return A_out
+```
+
+## 5. 激活函数
+如何选取主要是看你想实现什么。如果二分类，用Sigmoid；
+如果输出非负数，用Relu；如果有正有负，用linear activation function。
+### 5.1 常见的激活函数
+- **Relu**
+- **Sigmoid**
+- **linear activation function**
+#### 5.1.1 Relu
+$$f(x) = max(0, x)$$
+![alt text](image/Relu.png)
+#### 5.1.2 Sigmoid
+$$f(x) = \frac{1}{1+e^{-x}}$$
+![alt text](image/Sigmoid.png)
+#### 5.1.3 linear activation function
+$$f(x) = x$$
+![alt text](image/linear%20activation%20function.png)
+
+### 5.2 为什么我们需要激活函数
+用激活函数，是为了和以前的线性回归，逻辑回归不一样。能学到更多特征  
+![alt text](image/为什么我们需要激活函数.png)  
+假如说，在所有隐藏层都使用线性激活函数，那么整个神经网络就是一个线性回归模型。这就没有任何意义了。  
+
+**知识点**: 隐藏层不要全用线性函数去激活
 
 </details>
