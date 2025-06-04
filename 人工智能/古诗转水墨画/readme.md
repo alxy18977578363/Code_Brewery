@@ -47,5 +47,5 @@
 - **Sklearn**：[scikit-learn.org](https://scikit-learn.org)  
 - **PyTorch**：[pytorch.org](https://pytorch.org/)  
 - **文献**：*High-Resolution Image Synthesis with Latent Diffusion Models*  
-- **HuggingFace模型**：[stable-diffusion-v1-5](https://huggingface.co/stable-diffusion-v1-5)  
+- **HuggingFace模型**：[stable-diffusion-v1-5](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5)  
 - **Diffusers库**：[GitHub](https://github.com/huggingface/diffusers)  
