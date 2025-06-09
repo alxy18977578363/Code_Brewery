@@ -763,22 +763,13 @@ AND操作:
 
 # 查询处理
 ## 数据库查询流程图
-前端query -> 解析命令 -> 形成关系代数表达式 -> 优化(基于统计信息的输入) -> 决策一个较优的过程 -> 执行引擎 -> 输出结果
+前端query -> 解析命令 -> 形成关系代数表达式 -> 优化(基于统计信息的输入) -> 决策一个较优的过程 -> 执行引擎 -> 输出结果  
+
+![alt text](image/查询处理.png)
 
 ## 查询优化
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ccffcc'}, 'config': {'flowchart': {'useMaxWidth': false}, 'securityLevel': 'loose'}}}%%
-flowchart TD
-    A[优化查询原因] --> B[查询代价]
-    B --> B1["磁盘I/O（主要开销）"]
-    B --> B2[CPU计算]
-    B --> B3[网络传输]
-    B1 --> C["磁盘读取时间 = 寻址时间 + 数据传输时间"]
-    C --> C1["寻址时间 = s × ts"]
-    C --> C2["数据传输时间 = b × tb"]
-    C1 --> D["总时间 = b×tb + s×ts"]
-    C2 --> D
-```
+![alt text](image/查询优化.png)
+
 ## 数据查询的算法
 ### 全表扫描算法
 - 假设内存共有M块
