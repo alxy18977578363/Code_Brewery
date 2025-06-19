@@ -661,8 +661,6 @@ $$𝑀𝐷𝑃 = (𝑆, 𝐴, 𝑃, 𝑅, 𝛾)$$
 
 </details>
 
-</details>
-
 <details>
 <summary><b>机器学习</b></summary>
 
