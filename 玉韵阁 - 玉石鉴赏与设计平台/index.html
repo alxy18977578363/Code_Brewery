@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玉韵阁 - 玉石鉴赏与设计平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>玉韵阁 - 玉石鉴赏与设计平台</h1>
+            <p>探索玉石之美，创造独特设计，了解玉器文化</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav>
+            <button class="nav-btn active" data-target="appreciation">玉石鉴赏</button>
+            <button class="nav-btn" data-target="design">玉石设计</button>
+            <button class="nav-btn" data-target="knowledge">玉器科普</button>
+        </nav>
+        
+        <!-- 玉石鉴赏部分 -->
+        <section id="appreciation" class="content-section active">
+            <div class="jade-gallery">
+                <div class="jade-display">
+                    <img id="current-jade" src="../images/hetianyu.jpg" alt="和田玉" class="jade-image">
+                    <div class="jade-controls">
+                        <button class="control-btn" id="prev-jade">❮</button>
+                        <button class="control-btn" id="next-jade">❯</button>
+                    </div>
+                </div>
+                <div class="jade-info">
+                    <h3 id="jade-name">和田玉</h3>
+                    <p id="jade-description">和田玉是中国四大名玉之一，产自新疆和田地区，质地细腻温润，颜色丰富，以羊脂白玉最为珍贵。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 玉石设计部分 -->
+        <section id="design" class="content-section">
+            <div class="design-area">
+                <div class="design-canvas" id="design-canvas">
+                    <p>在此处添加您的设计元素</p>
+                </div>
+                <div class="design-options">
+                    <div class="option-category">
+                        <h3>玉石材质</h3>
+                        <div class="option-items" id="material-options">
+                            <!-- 材质选项由JavaScript动态生成 -->
+                        </div>
+                    </div>
+        
+                    <div class="option-category">
+                        <h3>装饰元素</h3>
+                        <div class="option-items" id="decoration-options">
+                            <!-- 装饰选项由JavaScript动态生成 -->
+                        </div>
+                    </div>
+        
+                    <div class="option-category">
+                        <h3>形状样式</h3>
+                        <div class="option-items" id="shape-options">
+                            <!-- 形状选项由JavaScript动态生成 -->
+                        </div>
+                    </div>
+        
+                    <!-- 新增的尺寸大小选项 -->
+                    <div class="option-category">
+                        <h3>尺寸大小</h3>
+                        <div class="option-items" id="size-options">
+                            <!-- 尺寸选项由JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 材质控制面板 -->
+            <div class="material-controls" id="material-controls">
+                <!-- 材质控制由JavaScript动态生成 -->
+            </div>
+        
+            <div class="design-controls">
+                <button class="design-btn" id="save-design">保存设计</button>
+                <button class="design-btn" id="reset-design">重置设计</button>
+            </div>
+        </section>
+        
+        <!-- 玉器科普部分 -->
+        <section id="knowledge" class="content-section">
+            <div class="knowledge-section">
+                <div class="knowledge-cards" id="knowledge-cards">
+                    <!-- 知识卡片由JavaScript动态生成 -->
+                </div>
+                
+                <div class="quiz-container">
+                    <h3>玉器知识小测验</h3>
+                    <div class="quiz-question" id="quiz-question">中国四大名玉不包括以下哪种？</div>
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- 测验选项由JavaScript动态生成 -->
+                    </div>
+                    <div class="quiz-result" id="quiz-result"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 玉石鉴赏与设计平台 | 探索中华玉文化之美</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/appreciation.js"></script>
+    <script src="js/design.js"></script>
+    <script src="js/knowledge.js"></script>
+</body>
+</html>

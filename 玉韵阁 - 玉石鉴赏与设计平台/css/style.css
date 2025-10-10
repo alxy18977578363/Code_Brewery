@@ -1,0 +1,1100 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+}
+
+:root {
+    --jade-green: #5e8c7a;
+    --jade-light: #8ab4a0;
+    --jade-dark: #3a5a4c;
+    --gold: #d4af37;
+    --cream: #f5f1e6;
+    --text-dark: #333333;
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    padding: 30px 0;
+    background: linear-gradient(135deg, var(--jade-dark), var(--jade-green));
+    color: white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* 导航样式 */
+nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    margin: 0 10px;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--jade-dark);
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background-color: var(--jade-green);
+    color: white;
+}
+
+/* 内容区域样式 */
+.content-section {
+    display: none;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    min-height: 500px;
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 玉石鉴赏样式 */
+/* 在 css/style.css 中添加或修改以下样式 */
+
+.jade-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.jade-display {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    /* 增加高度 */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #f8f8f8;
+}
+
+.jade-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 保持图片比例并填满容器 */
+    transition: transform 0.3s ease;
+}
+
+.jade-image:hover {
+    transform: scale(1.02);
+}
+
+.jade-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.jade-info {
+    width: 100%;
+    max-width: 900px;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#jade-name {
+    font-size: 2.2em;
+    color: #2c5530;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#jade-description {
+    font-size: 1.3em;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .jade-display {
+        height: 400px;
+        /* 移动端稍小一些 */
+        max-width: 95%;
+    }
+
+    .jade-info {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    #jade-name {
+        font-size: 1.8em;
+    }
+
+    #jade-description {
+        font-size: 1.1em;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .jade-display {
+        height: 300px;
+    }
+
+    .jade-info {
+        padding: 15px;
+    }
+
+    #jade-name {
+        font-size: 1.5em;
+    }
+
+    #jade-description {
+        font-size: 1em;
+    }
+}
+
+/* 玉石设计样式 */
+/* 玉石设计增强样式 */
+
+/* 设计区域布局 */
+.design-area {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.design-canvas {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    box-shadow:
+        inset 0 2px 10px rgba(0, 0, 0, 0.1),
+        0 5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+/* 3D场景效果 */
+.jade-scene {
+    position: relative;
+    transition: transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 玉石材质基础样式 */
+.design-material {
+    position: relative;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* 内部纹理效果 */
+.inner-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+/* 材质高光效果 */
+.material-highlight {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 30%;
+    height: 20%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(5px);
+}
+
+/* 形状特殊样式 */
+.bi-hole,
+.cong-hole,
+.bracelet-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8f9fa;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bi-hole {
+    width: 20%;
+    height: 20%;
+}
+
+.cong-hole {
+    width: 30%;
+    height: 50%;
+    border-radius: 10%;
+}
+
+.bracelet-hole {
+    width: 40%;
+    height: 40%;
+}
+
+/* 阴影效果 */
+.jade-shadow {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+/* 选项区域样式 */
+.design-options {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.option-category {
+    margin-bottom: 25px;
+}
+
+.option-category h3 {
+    color: var(--jade-dark);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--jade-light);
+    font-size: 1.1rem;
+}
+
+.option-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.option-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background: #f8f9fa;
+}
+
+.option-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-item.active {
+    border-color: var(--jade-green);
+    background: rgba(94, 140, 122, 0.1);
+}
+
+.option-name {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-dark);
+}
+
+/* 材质样本 */
+.material-sample {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 装饰样本 */
+.decoration-sample {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* 形状样本 */
+.shape-sample {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--jade-green);
+    background: rgba(94, 140, 122, 0.1);
+}
+
+.shape-sample.disc {
+    border-radius: 50%;
+    position: relative;
+}
+
+.shape-sample.disc::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid var(--jade-green);
+}
+
+.shape-sample.tube {
+    border-radius: 5px;
+    position: relative;
+}
+
+.shape-sample.tube::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 35px;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid var(--jade-green);
+}
+
+.shape-sample.pendant {
+    border-radius: 40% 40% 50% 50%;
+    clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+}
+
+.shape-sample.bracelet {
+    border-radius: 50%;
+    position: relative;
+}
+
+.shape-sample.bracelet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid var(--jade-green);
+}
+
+/* 大小样本 */
+.size-sample {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--jade-green);
+    border-radius: 5px;
+    position: relative;
+}
+
+.size-sample.small {
+    transform: scale(0.7);
+}
+
+.size-sample.medium {
+    transform: scale(1);
+}
+
+.size-sample.large {
+    transform: scale(1.3);
+}
+
+/* 材质控制 */
+.material-controls {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--jade-dark);
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.control-group span {
+    float: right;
+    font-weight: bold;
+    color: var(--jade-green);
+}
+
+/* 设计控制按钮 */
+.design-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.design-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--jade-green);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.design-btn:hover {
+    background-color: var(--jade-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 通知样式 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    transform: translateX(150%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: var(--jade-green);
+}
+
+.notification.error {
+    background: #c94c4c;
+}
+
+/* 响应式设计 */
+@media (max-width: 968px) {
+    .design-area {
+        grid-template-columns: 1fr;
+    }
+
+    .design-options {
+        max-height: none;
+    }
+
+    .option-items {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .option-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .design-controls {
+        flex-direction: column;
+    }
+
+    .design-btn {
+        width: 100%;
+    }
+}
+
+/* 真实装饰元素样式 */
+.decoration-sample {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f4e8 0%, #e8e0d0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d4af37;
+    position: relative;
+    overflow: hidden;
+}
+
+.decoration-sample svg {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* 装饰图案在画布上的样式 */
+.design-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.8;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.design-decoration svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 特定装饰图案的微调 */
+.dragon-pattern svg {
+    transform: scale(1.2);
+}
+
+.phoenix-pattern svg {
+    transform: scale(1.1);
+}
+
+.cloud-pattern svg {
+    transform: scale(0.9);
+}
+
+.blessing-pattern svg,
+.longevity-pattern svg {
+    transform: scale(1.3);
+}
+
+/* 装饰元素的动画效果 */
+.design-decoration {
+    animation: gentleGlow 3s ease-in-out infinite alternate;
+}
+
+/* 装饰元素控制样式增强 */
+.decoration-controls {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(94, 140, 122, 0.05);
+    border-radius: 10px;
+}
+
+.decoration-controls h4 {
+    color: var(--jade-dark);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.control-label {
+    width: 100px;
+    font-weight: bold;
+    color: var(--jade-dark);
+}
+
+.control-slider {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.control-value {
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    color: var(--jade-green);
+}
+
+/* 装饰元素预览增强 */
+.design-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.8;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+}
+
+.design-decoration svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes gentleGlow {
+    from {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) brightness(1);
+    }
+
+    to {
+        filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.3)) brightness(1.1);
+    }
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    color: var(--jade-dark);
+    border-top: 1px solid rgba(94, 140, 122, 0.2);
+}
+
+/* 玉器科普增强样式 */
+
+/* 分类筛选器 */
+.category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--jade-green);
+    background: white;
+    color: var(--jade-green);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--jade-green);
+    color: white;
+}
+
+/* 知识卡片容器 */
+.knowledge-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* 知识卡片增强样式 */
+.knowledge-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.card-header h3 {
+    color: var(--jade-dark);
+    margin: 0;
+    flex: 1;
+}
+
+.card-category {
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* 时间线样式 */
+.timeline-container {
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(94, 140, 122, 0.05);
+    border-radius: 15px;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--jade-dark);
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--jade-light);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -13px;
+    background-color: white;
+    border: 4px solid var(--jade-green);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.right::after {
+    left: -13px;
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.timeline-content h3 {
+    color: var(--jade-dark);
+    margin-top: 0;
+}
+
+.timeline-time {
+    display: inline-block;
+    background: var(--jade-light);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.timeline-icon {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: var(--jade-green);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.timeline-item.right .timeline-icon {
+    right: auto;
+    left: 20px;
+}
+
+/* 趣味知识轮播 */
+.fun-facts-container {
+    margin: 40px 0;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.fun-facts-carousel {
+    overflow: hidden;
+    position: relative;
+    height: 80px;
+}
+
+.fun-facts-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.fun-fact-item {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--jade-dark);
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* 测验增强样式 */
+.quiz-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--jade-dark);
+}
+
+.quiz-result.correct {
+    color: #3a8c6e;
+}
+
+.quiz-result.incorrect {
+    color: #c94c4c;
+}
+
+.quiz-result.final {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(94, 140, 122, 0.1);
+    border-radius: 10px;
+}
+
+.quiz-explanation {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(94, 140, 122, 0.05);
+    border-radius: 10px;
+    display: none;
+}
+
+.quiz-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.quiz-option {
+    padding: 12px 15px;
+    margin: 8px 0;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+    background-color: #e9ecef;
+    border-color: #5e8c7a;
+}
+
+.quiz-result {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.quiz-result.correct {
+    background-color: rgba(58, 140, 110, 0.1);
+    color: #3a8c6e;
+}
+
+.quiz-result.incorrect {
+    background-color: rgba(201, 76, 76, 0.1);
+    color: #c94c4c;
+}
+
+.quiz-result.final {
+    background-color: rgba(94, 140, 122, 0.2);
+    color: #3a5a4c;
+    font-size: 1.1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .knowledge-cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-item::after {
+        left: 18px;
+    }
+
+    .timeline-item.right::after {
+        left: 18px;
+    }
+
+    .timeline-icon {
+        left: 10px;
+        right: auto;
+    }
+
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-controls {
+        flex-direction: column;
+    }
+}
