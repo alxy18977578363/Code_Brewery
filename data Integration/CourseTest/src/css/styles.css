@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    background: var(--header-bg);
+    color: var(--header-color);
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--link-hover-color);
+}
+
+section {
+    padding: 20px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.skill {
+    width: 30%;
+    margin: 10px 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--footer-bg);
+    color: var(--footer-color);
+}
+
+:root {
+    --header-bg: #333;
+    --header-color: #fff;
+    --link-hover-color: #ff6347;
+    --footer-bg: #333;
+    --footer-color: #fff;
+}
+
+.dark-theme {
+    --header-bg: #222;
+    --header-color: #fff;
+    --link-hover-color: #ff7f50;
+    --footer-bg: #222;
+    --footer-color: #fff;
+}
+
+.light-theme {
+    --header-bg: #f4f4f4;
+    --header-color: #333;
+    --link-hover-color: #007bff;
+    --footer-bg: #f4f4f4;
+    --footer-color: #333;
+}
+
+@media (max-width: 768px) {
+    .skill {
+        width: 100%;
+    }
+}
+
+#navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+#navbar li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon i {
+    font-size: 20px;
+}

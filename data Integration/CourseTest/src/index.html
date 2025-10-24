@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>个人简介 - 李盛鹏</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-theme {
+            --primary-color: #1abc9c;
+            --secondary-color: #34495e;
+            --background-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --card-bg: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: var(--secondary-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-text {
+            display: inline;
+        }
+
+        .nav-icon {
+            display: none;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* 主要区域 */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 技能展示 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .skill-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            background-color: #ddd;
+            border-radius: 10px;
+            margin: 1rem 0;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0;
+            transition: width 2s ease;
+        }
+
+        /* 联系表单 */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">李盛鹏</div>
+            <ul class="nav-links">
+                <li>
+                    <a href="#home" onclick="smoothScroll('home')">
+                        <span class="nav-text">首页</span>
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" onclick="smoothScroll('about')">
+                        <span class="nav-text">关于我</span>
+                        <span class="nav-icon"><i class="fas fa-user"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#skills" onclick="smoothScroll('skills')">
+                        <span class="nav-text">技能</span>
+                        <span class="nav-icon"><i class="fas fa-code"></i></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" onclick="smoothScroll('contact')">
+                        <span class="nav-text">联系我</span>
+                        <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+                    </a>
+                </li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>你好，我是李盛鹏</h1>
+                <p>资深球迷 | 同济大学本科生 | 技术爱好者</p>
+                <a href="#contact" class="btn" onclick="smoothScroll('contact')">联系我</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>关于我</h2>
+            <p>我是一名同济大学本科生，MBTI 是 isfp ，平时喜欢打游戏，兴趣爱好广泛，各种运动和吉他都有涉猎，喜欢听音乐看电影。</p>
+        </section>
+
+        <section id="skills" class="container">
+            <h2>我的技能</h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-delay="0">
+                    <div class="skill-icon">💻</div>
+                    <h3>机器学习</h3>
+                    <p>Python, Scikit-learn, TensorFlow, PyTorch, Pandas, NumPy</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-delay="200">
+                    <div class="skill-icon">⚙️</div>
+                    <h3>后端开发</h3>
+                    <p>Node.js, Python, MySQL, MongoDB</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-delay="400">
+                    <div class="skill-icon">🎨</div>
+                    <h3>视频剪辑</h3>
+                    <p>Adobe Premiere Pro, Final Cut Pro</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>联系我</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error" id="nameError">请输入有效的姓名</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error" id="emailError">请输入有效的邮箱地址</div>
+                </div>
+                <div class="form-group">
+                    <label for="message">消息</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <div class="error" id="messageError">请输入消息内容</div>
+                </div>
+                <button type="submit" class="submit-btn">发送消息</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // 加载保存的主题
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        }
+
+        // 平滑滚动
+        function smoothScroll(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // 技能动画
+        function animateSkills() {
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    const delay = card.getAttribute('data-delay');
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                        const progressBar = card.querySelector('.skill-progress');
+                        const width = progressBar.getAttribute('data-width');
+                        progressBar.style.width = width + '%';
+                    }, parseInt(delay));
+                }
+            });
+        }
+
+        // 表单验证
+        function validateForm() {
+            let isValid = true;
+
+            // 姓名验证
+            const name = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            if (name.value.trim().length < 2) {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
+
+            // 邮箱验证
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // 消息验证
+            const message = document.getElementById('message');
+            const messageError = document.getElementById('messageError');
+            if (message.value.trim().length < 10) {
+                messageError.style.display = 'block';
+                isValid = false;
+            } else {
+                messageError.style.display = 'none';
+            }
+
+            return isValid;
+        }
+
+        // 导航栏文字/图标切换
+        function toggleNavDisplay() {
+            const navTexts = document.querySelectorAll('.nav-text');
+            const navIcons = document.querySelectorAll('.nav-icon');
+
+            if (window.scrollY === 0) {
+                // 在顶部时显示文字
+                navTexts.forEach(text => text.style.display = 'inline');
+                navIcons.forEach(icon => icon.style.display = 'none');
+            } else {
+                // 滚动后显示图标
+                navTexts.forEach(text => text.style.display = 'none');
+                navIcons.forEach(icon => icon.style.display = 'inline');
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            loadTheme();
+
+            // 初始设置导航栏显示
+            toggleNavDisplay();
+
+            // 表单提交事件
+            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    alert('消息发送成功！感谢您的联系。');
+                    this.reset();
+                }
+            });
+
+            // 滚动事件监听
+            window.addEventListener('scroll', function () {
+                animateSkills();
+                toggleNavDisplay();
+            });
+
+            // 初始执行一次
+            animateSkills();
+        });
+    </script>
+</body>
+
+</html>
