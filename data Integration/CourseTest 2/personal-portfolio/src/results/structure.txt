@@ -1,0 +1,66 @@
+# Source: http://localhost/
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>
+  <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<body>
+  <header>
+    <nav class="container">
+      <div class="logo">
+      <ul class="nav-links">
+        <li>
+          <a href="#home" onclick="smoothScroll('home')">
+        <li>
+          <a href="#about" onclick="smoothScroll('about')">
+        <li>
+          <a href="#skills" onclick="smoothScroll('skills')">
+        <li>
+          <a href="#contact" onclick="smoothScroll('contact')">
+      <button class="theme-toggle" onclick="toggleTheme()">
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>
+        <p>
+        <a class="btn" href="#contact" onclick="smoothScroll('contact')">
+    <section id="about" class="container">
+      <h2>
+      <p>
+    <section id="skills" class="container">
+      <h2>
+      <div class="skills-grid">
+        <div class="skill-card" data-delay="0">
+          <div class="skill-icon">
+          <h3>
+          <p>
+          <div class="skill-bar">
+        <div class="skill-card" data-delay="200">
+          <div class="skill-icon">
+          <h3>
+          <p>
+          <div class="skill-bar">
+        <div class="skill-card" data-delay="400">
+          <div class="skill-icon">
+          <h3>
+          <p>
+          <div class="skill-bar">
+    <section id="contact" class="container">
+      <h2>
+      <form id="contactForm" class="contact-form">
+        <div class="form-group">
+          <label for="name">
+          <input id="name" type="text" name="name" required="">
+          <div id="nameError" class="error">
+        <div class="form-group">
+          <label for="email">
+          <input id="email" type="email" name="email" required="">
+          <div id="emailError" class="error">
+        <div class="form-group">
+          <label for="message">
+          <textarea id="message" name="message" rows="5" required="">
+          <div id="messageError" class="error">
+        <button class="submit-btn" type="submit">
+  <script>
