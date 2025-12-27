@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.ocean.database'
+version = '1.0.0'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Flink dependencies
+    implementation 'org.apache.flink:flink-java:1.18.0'
+    implementation 'org.apache.flink:flink-streaming-java:1.18.0'
+    implementation 'org.apache.flink:flink-clients:1.18.0'
+    
+    // HTTP Server - 使用 Netty 实现 REST API
+    implementation 'io.netty:netty-all:4.1.100.Final'
+    
+    // JSON处理
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
+    
+    // MySQL数据库驱动
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    
+    // HikariCP 连接池
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    
+    // SLF4J 日志
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    
+    // 测试依赖
+    testImplementation 'junit:junit:4.13.2'
+}
+
+application {
+    mainClass = 'com.ocean.database.Application'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+            'Main-Class': 'com.ocean.database.Application'
+        )
+    }
+    
+    // 创建fat jar包含所有依赖
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
