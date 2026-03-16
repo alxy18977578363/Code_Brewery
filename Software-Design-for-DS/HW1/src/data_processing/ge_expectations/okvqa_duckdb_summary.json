@@ -1,0 +1,40 @@
+{
+  "total_rows": 5046,
+  "missing_values": {
+    "question_id": 0,
+    "image": 0,
+    "question": 0,
+    "answers": 0,
+    "question_type": 0,
+    "answer_type": 0
+  },
+  "question_type_dist": {
+    "Plants and Animals": 860,
+    "Vehicles and Transportation": 813,
+    "Cooking and Food": 805,
+    "Other": 619,
+    "Sports and Recreation": 567,
+    "People and Everyday life": 428,
+    "Objects, Material and Clothing": 428,
+    "Brands, Companies and Products": 172,
+    "Geography, History, Language and Culture": 141,
+    "Weather and Climate": 129,
+    "Science and Technology": 84
+  },
+  "answer_type_dist": {
+    "other": 5046
+  },
+  "answers_count_dist": {
+    "10": 5046
+  },
+  "main_answer_ratio": {
+    "mean": 0.5710496763112697,
+    "min": 0.2,
+    "max": 1.0
+  },
+  "question_length": {
+    "mean": 41.7072929052715,
+    "min": 11,
+    "max": 155
+  }
+}

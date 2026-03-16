@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>OK-VQA数据集质量验证结果</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 36px;
+            color: #222;
+            background: #fafafa;
+        }
+        .summary {
+            width: 95%;
+            margin: 0 auto 18px auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-sizing: border-box;
+        }
+        .summary h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.05em;
+        }
+        .summary p {
+            margin: 4px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 95%;
+            margin: 0 auto;
+            background: #fff;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #f2f2f2;
+        }
+        .pass {
+            color: #228b22;
+            font-weight: bold;
+        }
+        .fail {
+            color: #b22222;
+            font-weight: bold;
+        }
+        caption {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        ul {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary">
+        <h3>执行摘要</h3>
+        <p>总样本数: 5046</p>
+        <p>规则总数: 17，通过: 16，未通过: 1，规则通过率: 94.12%</p>
+        <p>问题文本长度（均值/最小/最大）: 41.71 / 11 / 155</p>
+        <p>字段缺失值概览:</p>
+        <ul><li>question_id: 0</li><li>image: 0</li><li>question: 0</li><li>answers: 0</li><li>question_type: 0</li><li>answer_type: 0</li></ul>
+    </div>
+
+    <table>
+        <caption>OK-VQA数据集质量规则验证详细结果</caption>
+        <tr>
+            <th>字段名</th>
+            <th>规则类型</th>
+            <th>规则描述</th>
+            <th>样本总数</th>
+            <th>异常样本数</th>
+            <th>通过率</th>
+            <th>验证结果</th>
+            <th>备注</th>
+        </tr>
+        <tr><td>question_id</td><td>非空</td><td>所有 question_id 必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>question_id</td><td>唯一性</td><td>所有 question_id 必须全局唯一</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>question_id</td><td>类型</td><td>所有 question_id 必须为 int64 类型</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>question_id</td><td>数值范围</td><td>所有 question_id 必须大于等于 1</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>image</td><td>非空</td><td>所有 image 字段必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>image_bytes</td><td>长度范围</td><td>图片字节长度应在 1KB~10MB 之间，95% 以上样本满足</td><td>5046</td><td>0</td><td>&gt;=95%</td><td class="pass">通过</td><td>部分图片可能缺失或损坏</td></tr><tr><td>image</td><td>类型正则</td><td>图片文件名后缀应为 jpg/jpeg/png/gif/bmp/webp</td><td>5046</td><td>5046</td><td>0.00%</td><td class="fail">未通过</td><td>若 image 字段不是文件名（而是列表/结构化对象），该规则会失败</td></tr><tr><td>question</td><td>非空</td><td>所有 question 字段必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>question</td><td>正则</td><td>问题文本应以英文问号 ? 结尾</td><td>5046</td><td>0</td><td>&gt;=99%</td><td class="pass">通过</td><td>个别样本可能为陈述句</td></tr><tr><td>question</td><td>长度</td><td>问题文本长度应在 1~300 之间</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>answers</td><td>非空</td><td>所有 answers 字段必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>answers_count</td><td>数量范围</td><td>每个问题答案数量应在 1~10 之间</td><td>5046</td><td>0</td><td>&gt;=99%</td><td class="pass">通过</td><td>个别样本答案数量可能异常</td></tr><tr><td>answers_all_not_empty</td><td>内容完整</td><td>所有答案均应为非空文本，95% 以上样本满足</td><td>5046</td><td>3</td><td>&gt;=95%</td><td class="pass">通过</td><td>部分答案可能为空字符串</td></tr><tr><td>question_type</td><td>非空</td><td>所有 question_type 字段必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>question_type</td><td>类别合法性</td><td>所有 question_type 必须属于预定义 11 类</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>answer_type</td><td>非空</td><td>所有 answer_type 字段必须非空</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr><tr><td>answer_type</td><td>类别合法性</td><td>所有 answer_type 只能为 other</td><td>5046</td><td>0</td><td>100.00%</td><td class="pass">通过</td><td></td></tr>
+    </table>
+
+    <p style="text-align:center;margin-top:30px;">
+        <b>结论：</b>本报告由脚本自动生成。
+    </p>
+</body>
+</html>
