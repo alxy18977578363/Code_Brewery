@@ -1,0 +1,41 @@
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}
+\setmainfont{Microsoft YaHei}
+\setmonofont{Consolas}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  justification=centering
+}
+
+\titleformat{\section}
+  {\Large\bfseries}
+  {\thesection}
+  {0.8em}
+  {}
+
+\titleformat{\subsection}
+  {\large\bfseries}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.4em}
+\linespread{1.25}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}

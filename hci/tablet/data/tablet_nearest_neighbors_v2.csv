@@ -1,0 +1,38 @@
+source_brand,source_model,target_brand,target_model,distance
+Amazon,Fire Max 11,Honor,Pad X8 Pro,1.4366578732223538
+Amazon,Fire 7 (2022),Honor,Tab 7,4.343909686204251
+Apple,iPad Air (2020),Xiaomi,Pad 5 Wi-Fi,2.6564566707678643
+Apple,iPad Air 11 (2024),Oppo,Pad 3 Pro,2.8476223638742026
+Apple,iPad Pro 11 (2022),Oppo,Pad 2,2.9881543757232056
+Apple,iPad Pro 11 (2021),Oppo,Pad 2,3.29169077537766
+Apple,iPad Pro 11 (2024),Oppo,Pad 3 Pro,4.59782666301865
+Honor,Pad X8 Pro,Oppo,Pad Air2,0.7844625825092802
+Honor,Tab 7,Lenovo,Tab M10 Plus (3rd Gen) Wi-Fi SD680,1.0378287298142734
+Honor,Pad 9,Oppo,Pad Air2,1.29116960390223
+Honor,Pad 8,Oppo,Pad Neo Wi-Fi,1.534641914911022
+Honor,MagicPad 13,Oppo,Pad 2,2.223447506598626
+Huawei,MatePad 11.5 2023,Xiaomi,Pad 6,0.7428704457677292
+Huawei,MatePad Air Wi-Fi,Xiaomi,Pad 6,1.1247879574822206
+Huawei,MatePad Pro 12.6 Wi-Fi,Samsung,Galaxy Tab S7 FE Wi-Fi,2.528218613228819
+Huawei,MatePad Pro 13.2,Honor,MagicPad 13,2.6770304223180887
+Huawei,MatePad Pro 12.6 5G,Samsung,Galaxy Tab S7 FE Wi-Fi,2.755129874058326
+Lenovo,Tab M10 Plus (3rd Gen) Wi-Fi G80,Xiaomi,Redmi Pad,0.6144150084784054
+Lenovo,Tab M10 Plus (3rd Gen) Wi-Fi SD680,Xiaomi,Redmi Pad,0.6234972754852453
+Lenovo,Tab P12 Pro,Samsung,Galaxy Tab S8 Ultra Wi-Fi,1.8860580863488914
+Lenovo,Tab P11 Pro (2nd Gen),Huawei,MatePad Air Wi-Fi,2.1072068695701764
+Lenovo,Yoga Tab 11 Wi-Fi,Samsung,Galaxy Tab S7 FE Wi-Fi,2.763304258574567
+Oppo,Pad Air2,Honor,Pad X8 Pro,0.7844625825092802
+Oppo,Pad Neo Wi-Fi,Honor,Pad X8 Pro,0.7844625825092802
+Oppo,Pad 2,Xiaomi,Pad 6,1.1192169513704728
+Oppo,Pad 2024,Xiaomi,Pad 6,2.231827130532461
+Oppo,Pad 3 Pro,Huawei,MatePad Air Wi-Fi,2.6819573500597
+Samsung,Galaxy Tab S6 Lite Wi-Fi,Honor,Tab 7,1.6427939618613825
+Samsung,Galaxy Tab S8 Ultra Wi-Fi,Lenovo,Tab P12 Pro,1.8860580863488914
+Samsung,Galaxy Tab S9 Wi-Fi,Huawei,MatePad Air Wi-Fi,2.068265361993482
+Samsung,Galaxy Tab S7 FE Wi-Fi,Lenovo,Tab P12 Pro,2.168457419772899
+Samsung,Galaxy Tab S10 Ultra Wi-Fi,Honor,MagicPad 13,3.6928888860757767
+Xiaomi,Redmi Pad,Lenovo,Tab M10 Plus (3rd Gen) Wi-Fi G80,0.6144150084784054
+Xiaomi,Pad 6,Huawei,MatePad 11.5 2023,0.7428704457677292
+Xiaomi,Redmi Pad Pro,Honor,Pad 9,1.41409620476811
+Xiaomi,Pad 5 Wi-Fi,Honor,Pad 8,2.1800708117496517
+Xiaomi,Pad 6S Pro 12.4,Oppo,Pad 3 Pro,5.242726876909038
