@@ -1,0 +1,31 @@
+"""
+Chennai Restaurant Dataset EDA - Dependencies
+项目依赖文件
+"""
+
+# Web框架
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# 核心数据处理库
+pandas>=1.5.0
+numpy>=1.24.0
+
+# 可视化库
+matplotlib>=3.7.0
+plotly>=5.0.0
+
+# 科学计算库 (可选，用于高级统计)
+scipy>=1.9.0
+scikit-learn>=1.2.0
+
+# 数据验证 (可选)
+# great-expectations>=0.17.0
+
+# Jupyter支持 (如果在Jupyter环境中使用)
+# jupyter>=1.0.0
+# ipython>=8.0.0
+
+# 导出支持 (可选)
+# openpyxl>=3.10.0  # 用于Excel导出
+# xlsxwriter>=3.0.0
