@@ -1,0 +1,39 @@
+flowchart TD
+  Start([项目启动]) --> P1[Part 1: Kaggle 数据集采集]
+  P1 --> P1A(选择合适的数据集：POI、评论、出租车/出行数据)
+  Start --> P2[Part 2: 爬取 Meituan / 大众点评]
+  P2 --> P2A(编写爬虫：requests / selenium / 抓包)
+  P2A --> P2B(反爬与 IP/速率策略)
+  P1A --> INT[数据集成与 ETL]
+  P2B --> INT
+  INT --> CLEAN[数据清洗与标准化]
+  CLEAN --> MAP(时空栅格化 / 经纬度映射)
+  MAP --> STORE[数据存储：MySQL（分表/分库）]
+  STORE --> MODEL[指标建模与特征工程]
+  MODEL --> STATS[统计分析与模型验证]
+  STATS --> VIS[可视化设计与开发]
+  VIS --> DASH[可视化大屏 / HTML 报告]
+  DASH --> OPS[部署与运营（定时任务、数据补采）]
+  OPS --> P2A
+  OPS --> MODEL
+
+  subgraph 采集工具与脚本
+    P1A
+    P2A
+    P2B
+  end
+
+  classDef source fill:#cfe2ff,stroke:#1f4e79;
+  class P1,P2,P1A,P2A,P2B source
+  style Start fill:#ffdede,stroke:#333,stroke-width:1px
+  style INT fill:#fff2cc
+  style CLEAN fill:#d5f5e3
+  style MAP fill:#f3e5f5
+  style STORE fill:#f0f0f0,stroke:#999
+  style MODEL fill:#ffe0e6
+  style STATS fill:#e6f7ff
+  style VIS fill:#d0ebff
+  style DASH fill:#fff2cc
+  style OPS fill:#e8f8f5
+
+  %% 备注：数据从两条采集路径进入集成层；MySQL 做为主存储，展示层为轻量聚合表或 JSON 文件供前端加载

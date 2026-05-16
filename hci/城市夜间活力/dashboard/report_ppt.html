@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Night Economy Report Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0b141c;
+      --bg-2: #0f2633;
+      --bg-3: #132d3a;
+      --accent-1: #ffb703;
+      --accent-2: #8ecae6;
+      --accent-3: #fb8500;
+      --text-1: #f6f7fb;
+      --text-2: #c5d1dc;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.14);
+      --border: rgba(255, 255, 255, 0.18);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "DM Sans", serif;
+      color: var(--text-1);
+      background: radial-gradient(1200px 800px at 20% 10%, #1c3b52 0%, var(--bg-1) 45%),
+        radial-gradient(900px 600px at 90% 20%, #1c3240 0%, var(--bg-2) 55%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-3));
+      scroll-behavior: smooth;
+    }
+
+    .deck {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 64px 8vw 56px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 28px;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 24px 28px 24px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--text-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 1.6vw, 22px);
+      color: var(--text-2);
+      margin: 10px 0 0;
+      max-width: 720px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card.strong {
+      background: var(--card-strong);
+    }
+
+    .kpi {
+      font-family: "DM Sans", "Noto Serif SC", sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      margin: 8px 0 4px;
+      color: var(--accent-1);
+    }
+
+    .label {
+      color: var(--text-2);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      font-size: 18px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-2);
+    }
+
+    .chart {
+      width: 100%;
+      height: 240px;
+    }
+
+    .media-wrap {
+      height: 320px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .media-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      padding: 10px;
+    }
+
+    .frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 16px;
+      background: #0c151d;
+    }
+
+    .chart text {
+      fill: var(--text-2);
+      font-size: 12px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .flow .map {
+      height: 300px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: radial-gradient(220px 180px at 40% 40%, rgba(142, 202, 230, 0.25), transparent),
+        radial-gradient(180px 160px at 70% 60%, rgba(255, 183, 3, 0.2), transparent),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.08));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flow .map::after {
+      content: "流向示意";
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      color: var(--text-2);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .flow .map span {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 12px rgba(142, 202, 230, 0.8);
+    }
+
+    .flow .map span:nth-child(1) { top: 40%; left: 30%; }
+    .flow .map span:nth-child(2) { top: 50%; left: 60%; background: var(--accent-1); }
+    .flow .map span:nth-child(3) { top: 65%; left: 45%; background: var(--accent-3); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .timeline .step {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      text-align: center;
+    }
+
+    .timeline .step strong {
+      display: block;
+      font-size: 16px;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+    }
+
+    .nav {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .nav button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+
+    .nav button.active {
+      background: var(--accent-1);
+      box-shadow: 0 0 10px rgba(255, 183, 3, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      .grid.two,
+      .grid.three,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .nav { display: none; }
+
+      .slide { padding: 56px 8vw 42px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <section class="slide" id="slide-1">
+      <div class="header">
+        <span>Night Economy</span>
+        <span>2026.04.14</span>
+      </div>
+      <div>
+        <h1 class="title">城市夜间经济数据分析与可视化</h1>
+        <p class="subtitle">结合多源数据，从时空维度刻画夜间活力分布与出行流动。</p>
+      </div>
+      <div class="footer">
+        <span>课程项目汇报</span>
+        <span>团队：XXXX</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-2">
+      <div class="header">
+        <span>01 背景</span>
+        <span>问题定义</span>
+      </div>
+      <div class="grid two">
+        <div class="card strong">
+          <h2 class="title">为什么研究夜间经济？</h2>
+          <div class="list">
+            <div>夜间消费是城市活力的重要信号</div>
+            <div>交通与商业布局需要时段化决策</div>
+            <div>多源数据提供可量化的分析基础</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">核心问题</div>
+          <div class="list" style="margin-top: 12px;">
+            <div>夜间活力集中在哪些区域？</div>
+            <div>高峰时段与持续时长如何变化？</div>
+            <div>出行流动与消费热度是否一致？</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>背景与研究目标</span>
+        <span>1 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3">
+      <div class="header">
+        <span>02 数据</span>
+        <span>多源融合</span>
+      </div>
+      <div class="grid three">
+        <div class="card">
+          <div class="label">POI 与评论</div>
+          <div class="kpi">340</div>
+          <div class="list">
+            <div>夜间消费类 POI</div>
+            <div>评价词频与热度</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">出行轨迹</div>
+          <div class="kpi">129,560</div>
+          <div class="list">
+            <div>夜间订单记录</div>
+            <div>22:00-02:00 高峰</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">空间基底</div>
+          <div class="kpi">10 区</div>
+          <div class="list">
+            <div>行政区划</div>
+            <div>2026-03-01 至 04-01</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>数据规模与类型</span>
+        <span>2 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-4">
+      <div class="header">
+        <span>03 处理流程</span>
+        <span>标准化</span>
+      </div>
+      <div class="timeline">
+        <div class="step"><strong>清洗</strong>缺失与异常剔除</div>
+        <div class="step"><strong>时间</strong>统一夜间时段</div>
+        <div class="step"><strong>空间</strong>映射区划/网格</div>
+        <div class="step"><strong>特征</strong>构造活力指标</div>
+        <div class="step"><strong>融合</strong>多源关联分析</div>
+      </div>
+      <div class="grid two" style="margin-top: 18px;">
+        <div class="card">
+          <div class="label">关键处理</div>
+          <div class="list">
+            <div>夜间订单时间归一化</div>
+            <div>POI 类别筛选与标签化</div>
+            <div>流向数据聚合到区域</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">输出</div>
+          <div class="list">
+            <div>夜间活力指数矩阵</div>
+            <div>OD 流向矩阵</div>
+            <div>时空对比指标表</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>数据处理逻辑</span>
+        <span>3 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-5">
+      <div class="header">
+        <span>04 指标体系</span>
+        <span>分析框架</span>
+      </div>
+      <div class="grid two">
+        <div class="card strong">
+          <h2 class="title">夜间活力指数</h2>
+          <div class="list">
+            <div>消费热度：POI 密度、评论强度</div>
+            <div>出行强度：订单量、流入/流出差</div>
+            <div>时间持续：高峰持续时长</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">分析方法</div>
+          <div class="list">
+            <div>时段分层对比（20-24 / 0-2）</div>
+            <div>空间排名与聚类</div>
+            <div>相关性验证与异常识别</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>核心指标与方法</span>
+        <span>4 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6">
+      <div class="header">
+        <span>05 时空分布</span>
+        <span>总体格局</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <div class="label">夜间订单走势</div>
+          <div class="media-wrap">
+            <img src="../data/synthetic/figs/fig02_hourly_trend.png" alt="夜间订单量与客单价走势" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">各区夜间消费排名</div>
+          <div class="media-wrap">
+            <img src="../data/synthetic/figs/fig04_district_revenue.png" alt="各区夜间消费总额排名" />
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>时空分布结论</span>
+        <span>5 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-7">
+      <div class="header">
+        <span>06 区域画像</span>
+        <span>重点对比</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <div class="label">分品类夜间时段走势</div>
+          <div class="media-wrap">
+            <img src="../data/synthetic/figs/fig03_category_hourly.png" alt="分品类夜间时段走势" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">二级品类订单排行</div>
+          <div class="media-wrap">
+            <img src="../data/synthetic/figs/fig08_category2_rank.png" alt="二级品类订单排行" />
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>空间差异性</span>
+        <span>6 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-8">
+      <div class="header">
+        <span>07 出行流动</span>
+        <span>流向关系</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <div class="label">流动轨迹视图</div>
+          <div class="media-wrap">
+            <iframe class="frame" src="./flow.html" title="夜间流动轨迹"></iframe>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">流向发现</div>
+          <div class="list">
+            <div>核心区流入强度更集中</div>
+            <div>00:00 后流动显著收敛</div>
+            <div>流动方向指向中心集聚</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>出行-消费联动</span>
+        <span>7 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-9">
+      <div class="header">
+        <span>08 可视化系统</span>
+        <span>Dashboard 演示</span>
+      </div>
+      <div class="grid two">
+        <div class="card strong">
+          <h2 class="title">交互式仪表盘</h2>
+          <div class="list">
+            <div>多图联动：地图 + 柱状 + 趋势</div>
+            <div>时段、区域筛选与对比</div>
+            <div>快速定位夜间热点</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">消费活力大屏</div>
+          <div class="media-wrap">
+            <iframe class="frame" src="./dashboard.html" title="消费活力大屏"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>可视化亮点</span>
+        <span>8 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-10">
+      <div class="header">
+        <span>09 结论</span>
+        <span>建议与展望</span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <div class="label">关键发现</div>
+          <div class="list">
+            <div>夜间活力集中在少数核心区</div>
+            <div>22:00-24:00 为峰值时段</div>
+            <div>流入强度与消费热度高度一致</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label">建议与展望</div>
+          <div class="list">
+            <div>优化夜间公共交通供给</div>
+            <div>引导多中心夜间业态</div>
+            <div>引入更多人群画像数据</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>总结</span>
+        <span>9 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-11">
+      <div class="header">
+        <span>10 谢谢</span>
+        <span>Q&amp;A</span>
+      </div>
+      <div>
+        <h1 class="title">感谢聆听</h1>
+        <p class="subtitle">欢迎提问与交流</p>
+        <div style="margin-top: 30px;">
+          <span class="pill">夜间经济</span>
+          <span class="pill">多源数据</span>
+          <span class="pill">城市活力</span>
+        </div>
+      </div>
+      <div class="footer">
+        <span>完</span>
+        <span>10 / 10</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav" id="nav"></div>
+
+  <script>
+    const deck = document.getElementById("deck");
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const nav = document.getElementById("nav");
+
+    slides.forEach((slide, index) => {
+      const btn = document.createElement("button");
+      btn.addEventListener("click", () => {
+        slide.scrollIntoView({ behavior: "smooth" });
+      });
+      nav.appendChild(btn);
+    });
+
+    const updateNav = () => {
+      const currentIndex = slides.findIndex((slide) => {
+        const rect = slide.getBoundingClientRect();
+        return rect.top >= 0 && rect.top < window.innerHeight * 0.4;
+      });
+      Array.from(nav.children).forEach((btn, index) => {
+        btn.classList.toggle("active", index === Math.max(currentIndex, 0));
+      });
+    };
+
+    deck.addEventListener("scroll", updateNav);
+    window.addEventListener("load", updateNav);
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+      event.preventDefault();
+      const currentIndex = slides.findIndex((slide) => {
+        const rect = slide.getBoundingClientRect();
+        return rect.top >= 0 && rect.top < window.innerHeight * 0.4;
+      });
+      const nextIndex = event.key === "ArrowDown" ? currentIndex + 1 : currentIndex - 1;
+      if (slides[nextIndex]) slides[nextIndex].scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>

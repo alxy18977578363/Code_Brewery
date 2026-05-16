@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>人流轨迹流动图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #eaf2ff;
+      --muted: rgba(234, 242, 255, 0.65);
+      --panel: rgba(8, 13, 22, 0.7);
+      --accent: #74add1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Lexend", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #131b28 0%, #070b12 60%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    #chart {
+      width: 100vw;
+      height: 100vh;
+    }
+    .overlay {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      max-width: 360px;
+      padding: 18px 20px;
+      background: var(--panel);
+      border: 1px solid rgba(116, 173, 209, 0.25);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .overlay h1 {
+      font-family: "ZCOOL XiaoWei", serif;
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .overlay p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .legend {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 10px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legend span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(120deg, #313695, #d73027);
+    }
+  </style>
+</head>
+<body>
+  <div id="chart"></div>
+  <div class="overlay">
+    <h1>上海夜间流动</h1>
+    <p>基于网格流量构造的流向矢量，颜色由净流量强度映射，方向由进出差异指向城市中心。</p>
+    <div class="legend">
+      <span></span>
+      <div>流动强度由冷到暖渐变</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/maptalks@1.1.1/dist/maptalks.min.js"></script>
+  <script>
+    const uploadedDataURL = "../data/assets/shanghai_taxi_flow_2000_0200.json";
+    const chart = echarts.init(document.getElementById("chart"));
+
+    const option = {
+      backgroundColor: "transparent",
+      title: {
+        text: "",
+      },
+      visualMap: {
+        show: false,
+        calculable: true,
+        realtime: false,
+        min: 0,
+        max: 1,
+        inRange: {
+          color: ["#0b2f6b", "#1b4f9c", "#2c6fc1", "#4a8fdb", "#74add1", "#a6c8e7", "#d3e3f5"],
+        },
+        outOfRange: {
+          colorAlpha: 0,
+        },
+      },
+      maptalks3D: {
+        center: [120.0693, 31.713070],
+        zoom: 11,
+        minZoom: 9,
+        maxZoom: 15,
+        pitch: 10,
+        roam: true,
+        urlTemplate: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        postEffect: {
+          enable: true,
+          FXAA: { enable: true },
+        },
+        light: {
+          main: { intensity: 1, shadow: true, shadowQuality: "high" },
+          ambient: { intensity: 0.2 },
+        },
+      },
+      series: [
+        {
+          type: "lines3D",
+          coordinateSystem: "maptalks3D",
+          blendMode: "lighter",
+          effect: {
+            show: true,
+            trailWidth: 1,
+            trailOpacity: 0.5,
+            trailLength: 0.2,
+            constantSpeed: 5,
+          },
+          data: [],
+          polyline: true,
+          large: true,
+          lineStyle: {
+            opacity: 0.5,
+          },
+        },
+      ],
+    };
+
+    chart.showLoading("default", {
+      text: "加载轨迹数据...",
+      color: "#74add1",
+      textColor: "#dbe9ff",
+      maskColor: "rgba(8, 13, 22, 0.85)",
+    });
+
+    fetch(uploadedDataURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("无法加载轨迹数据");
+        }
+        return response.json();
+      })
+      .then((lineData) => {
+        const data = [];
+        let maxValue = 0;
+        for (let i = 0; i < lineData.length; i += 1) {
+          const line = lineData[i];
+          if (!line || line.length < 2) {
+            continue;
+          }
+          const value = line.length;
+          maxValue = Math.max(maxValue, value);
+          data.push({ coords: line, value });
+        }
+
+        option.visualMap.max = Math.max(1, maxValue);
+        option.series[0].data = data;
+        chart.hideLoading();
+        chart.setOption(option, true);
+      })
+      .catch((error) => {
+        chart.hideLoading();
+        console.error(error);
+        chart.setOption({
+          title: {
+            text: "轨迹数据加载失败",
+            left: "center",
+            top: "middle",
+            textStyle: { color: "#f6b3a7" },
+          },
+        });
+      });
+
+    window.addEventListener("resize", () => {
+      chart.resize();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+flowchart TD
+  Start([项目启动]) --> A(确定业务目标)
+  A --> B[数据采集]
+  B --> B1(真实数据源：点评、交通、POI)
+  B --> B2(合成与增强：模拟出租车轨迹、合成点评)
+  B1 --> C[数据清洗与标准化]
+  B2 --> C
+  C --> D[时空栅格化与索引]
+  D --> E[指标计算与建模]
+  E --> F[数据存储（分层）]
+  F --> G[可视化设计与开发]
+  G --> H[HTML 仪表盘与报告页]
+  H --> I[运营展示与决策支持]
+  I --> J(反馈与模型迭代)
+  J --> B2
+  style Start fill:#f9f,stroke:#333,stroke-width:1px
+  style A fill:#ffeb99
+  style B fill:#c6e0ff
+  style C fill:#d5f5e3
+  style D fill:#f3e5f5
+  style E fill:#ffe0e6
+  style F fill:#f0f0f0,stroke:#999
+  style G fill:#d0ebff
+  style H fill:#fff2cc
+  style I fill:#e8f8f5
+  style J fill:#fbe5e7
+  classDef source fill:#cfe2ff,stroke:#1f4e79;
+  class B1,B2 source
+  %% 说明：箭头表示数据与执行流程，环路表示持续迭代

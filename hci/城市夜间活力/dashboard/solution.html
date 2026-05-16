@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Shanghai Night Vitality - Parallel Coordinates</title>
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				background: #222;
+				color: #fff;
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+			#layout {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+			#chart {
+				width: 100%;
+				height: 70vh;
+				min-height: 520px;
+				border-bottom: 1px solid #333;
+			}
+			#sankey {
+				width: 100%;
+				height: 60vh;
+				min-height: 520px;
+				border-bottom: 1px solid #333;
+			}
+			#radar {
+				width: 100%;
+				height: 55vh;
+				min-height: 480px;
+				border-bottom: 1px solid #333;
+			}
+			#top1-section {
+				padding: 20px 20px 24px;
+				margin-top: 10px;
+				border-top: 1px solid #444;
+				background: #1f1f1f;
+			}
+			#top1-title {
+				margin: 0 0 12px;
+				font-size: 16px;
+				font-weight: 600;
+				color: #f2f2f2;
+			}
+			#top1-table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 13px;
+			}
+			#top1-table th,
+			#top1-table td {
+				border-bottom: 1px solid #333;
+				padding: 8px 10px;
+				text-align: left;
+			}
+			#top1-table th {
+				color: #cfcfcf;
+				font-weight: 600;
+				background: #2b2b2b;
+			}
+			#top1-table tr:nth-child(even) td {
+				background: #262626;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="layout">
+			<div id="chart"></div>
+			<div id="sankey"></div>
+			<div id="radar"></div>
+			<section id="top1-section">
+				<h2 id="top1-title">Top1 by Feature</h2>
+				<table id="top1-table">
+					<thead>
+						<tr>
+							<th>feature</th>
+							<th>top1_street</th>
+							<th>district</th>
+							<th>scole</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</section>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+		<script>
+			const chartDom = document.getElementById("chart");
+			const myChart = echarts.init(chartDom);
+			const sankeyDom = document.getElementById("sankey");
+			const sankeyChart = echarts.init(sankeyDom);
+			const radarDom = document.getElementById("radar");
+			const radarChart = echarts.init(radarDom);
+
+			const CSV_PATH = "../data/synthetic/shanghai_night_vitality_streets.csv";
+			const SANKY_TOP_PER_FEATURE = 5;
+			const featurePalette = [
+				"#78b4ff",
+				"#ffb45b",
+				"#2bcba7",
+				"#ff8896",
+				"#79c628",
+				"#6c93ee",
+				"#f7a23f",
+				"#27bae7",
+				"#cb79ff",
+				"#f95b5a"
+			];
+			const RADAR_FEATURE_LIMIT = 10;
+			const RADAR_MANUAL = [
+				{ name: "footfall_density", weight: 78 },
+				{ name: "avg_dwell_minutes", weight: 70 },
+				{ name: "night_spend", weight: 74 },
+				{ name: "night_orders", weight: 68 },
+				{ name: "night_shop_density", weight: 62 },
+				{ name: "entertainment_ratio", weight: 60 },
+				{ name: "night_events", weight: 58 },
+				{ name: "walkability", weight: 64 },
+				{ name: "lighting_level", weight: 66 },
+				{ name: "crime_rate", weight: 40 }
+			];
+
+			function parseCsv(text) {
+				const lines = text.trim().split(/\r?\n/);
+				const headers = lines[0].split(",");
+				const rows = lines.slice(1).map((line) => line.split(","));
+				return { headers, rows };
+			}
+
+			function buildSchema(headers) {
+				return headers.map((name, index) => ({ name, index }));
+			}
+
+			function toDataArray(headers, rows) {
+				const nameIdx = headers.indexOf("street");
+				const groupIdx = headers.indexOf("district");
+				return rows.map((row) => {
+					return row.map((item, idx) => {
+						if (idx === nameIdx || idx === groupIdx) {
+							return item;
+						}
+						const v = parseFloat(item);
+						return Number.isFinite(v) ? v : 0;
+					});
+				});
+			}
+
+			function normalizeData(headers, originData) {
+				const indices = {
+					name: headers.indexOf("street"),
+					group: headers.indexOf("district")
+				};
+				const groupMap = {};
+				originData.forEach((row) => {
+					const groupName = row[indices.group];
+					if (!groupMap.hasOwnProperty(groupName)) {
+						groupMap[groupName] = 1;
+					}
+				});
+
+				const groupCategories = Object.keys(groupMap);
+				const hStep = Math.round(300 / Math.max(1, groupCategories.length - 1));
+				const groupColors = groupCategories.map((_, i) =>
+					echarts.color.modifyHSL("#5A94DF", hStep * i)
+				);
+
+				return { indices, groupCategories, groupColors };
+			}
+
+			function getOption(headers, schema, data, meta) {
+				const numericDims = schema
+					.map((s) => s.index)
+					.filter(
+						(idx) => idx !== meta.indices.name && idx !== meta.indices.group
+					);
+
+				const parallelAxis = numericDims.map((dim) => ({
+					dim,
+					name: schema[dim].name,
+					nameLocation: "end"
+				}));
+
+				const lineStyle = {
+					width: 1,
+					opacity: 0.5
+				};
+
+				return {
+					backgroundColor: "#333",
+					title: [
+						{
+							text: "Shanghai Night Vitality",
+							top: 0,
+							left: 0,
+							textStyle: {
+								color: "#fff"
+							}
+						}
+					],
+					tooltip: {
+						padding: 10,
+						backgroundColor: "#222",
+						borderColor: "#777",
+						borderWidth: 1
+					},
+					visualMap: {
+						show: true,
+						type: "piecewise",
+						categories: meta.groupCategories,
+						dimension: meta.indices.group,
+						inRange: {
+							color: meta.groupColors
+						},
+						outOfRange: {
+							color: ["#666"]
+						},
+						top: 20,
+						textStyle: {
+							color: "#fff"
+						},
+						realtime: false
+					},
+					parallelAxis,
+					parallel: {
+						left: 260,
+						top: 30,
+						width: "60%",
+						layout: "vertical",
+						parallelAxisDefault: {
+							type: "value",
+							nameLocation: "end",
+							nameGap: 14,
+							nameTextStyle: {
+								color: "#fff",
+								fontSize: 12
+							},
+							axisLine: {
+								lineStyle: {
+									color: "#aaa"
+								}
+							},
+							axisTick: {
+								lineStyle: {
+									color: "#777"
+								}
+							},
+							splitLine: {
+								show: false
+							},
+							axisLabel: {
+								color: "#fff"
+							},
+							realtime: false
+						}
+					},
+					animation: false,
+					series: [
+						{
+							name: "night_vitality",
+							type: "parallel",
+							lineStyle,
+							inactiveOpacity: 0.1,
+							activeOpacity: 1.0,
+							progressive: 500,
+							smooth: true,
+							data
+						}
+					]
+				};
+			}
+
+			function buildSankeyByFeature(headers, rows) {
+				const streetIdx = headers.indexOf("street");
+				const districtIdx = headers.indexOf("district");
+				const scoreIdx = headers.indexOf("Y_night_vitality");
+				const featureHeaders = headers.filter(
+					(h) => h !== "street" && h !== "district" && h !== "Y_night_vitality"
+				);
+
+				const nodes = [];
+				const links = [];
+				const nodeMap = new Map();
+				const addNode = (name, color) => {
+					if (!nodeMap.has(name)) {
+						const node = {
+							name,
+							itemStyle: color ? { color } : undefined
+						};
+						nodeMap.set(name, node);
+						nodes.push(node);
+					}
+				};
+
+				featureHeaders.forEach((feature, idx) => {
+					const featureColor = featurePalette[idx % featurePalette.length];
+					addNode(feature, featureColor);
+
+					const colIdx = headers.indexOf(feature);
+					const ranked = rows
+						.map((row) => {
+							const value = parseFloat(row[colIdx]);
+							return {
+								street: row[streetIdx],
+								district: row[districtIdx],
+								value: Number.isFinite(value) ? value : 0,
+								score:
+									scoreIdx >= 0 ? parseFloat(row[scoreIdx]) : Number.NaN
+							};
+						})
+						.sort((a, b) => b.value - a.value)
+						.slice(0, SANKY_TOP_PER_FEATURE);
+
+					ranked.forEach((item) => {
+						const streetLabel = item.district
+							? `${item.street} (${item.district})`
+							: item.street;
+						addNode(streetLabel, "rgba(255, 255, 255, 0.12)");
+						links.push({
+							source: feature,
+							target: streetLabel,
+							value: item.value,
+							lineStyle: { color: featureColor }
+						});
+					});
+				});
+
+				return { nodes, links };
+			}
+
+			function getSankeyOption(nodes, links) {
+				return {
+					backgroundColor: "#333",
+					title: [
+						{
+							text: "Feature to Street Sankey",
+							top: 0,
+							left: 0,
+							textStyle: {
+								color: "#fff"
+							}
+						}
+					],
+					tooltip: {
+						trigger: "item",
+						triggerOn: "mousemove",
+						formatter: (params) => {
+							if (params.dataType !== "edge") {
+								return params.name || "";
+							}
+							return `${params.data.source} -> ${params.data.target}：${params.data.value.toFixed(3)}`;
+						}
+					},
+					series: [
+						{
+							type: "sankey",
+							data: nodes,
+							links: links,
+							top: "12%",
+							right: "8%",
+							bottom: "8%",
+							left: "8%",
+							nodeWidth: 16,
+							nodeGap: 6,
+							emphasis: { focus: "adjacency" },
+							label: {
+								color: "#fff",
+								fontSize: 11
+							},
+							lineStyle: {
+								curveness: 0.45,
+								opacity: 0.6
+							}
+						}
+					]
+				};
+			}
+
+			function computePearson(values, target) {
+				const n = Math.min(values.length, target.length);
+				if (n === 0) {
+					return 0;
+				}
+				let sumX = 0;
+				let sumY = 0;
+				for (let i = 0; i < n; i += 1) {
+					sumX += values[i];
+					sumY += target[i];
+				}
+				const meanX = sumX / n;
+				const meanY = sumY / n;
+				let num = 0;
+				let denX = 0;
+				let denY = 0;
+				for (let i = 0; i < n; i += 1) {
+					const dx = values[i] - meanX;
+					const dy = target[i] - meanY;
+					num += dx * dy;
+					denX += dx * dx;
+					denY += dy * dy;
+				}
+				const den = Math.sqrt(denX * denY);
+				return den > 0 ? num / den : 0;
+			}
+
+			function buildRadarWeights(headers) {
+				const featureSet = new Set(headers);
+				const selected = RADAR_MANUAL.filter((item) => featureSet.has(item.name))
+					.slice(0, RADAR_FEATURE_LIMIT);
+				const indicators = selected.map((item) => ({
+					name: item.name,
+					max: 100
+				}));
+				const values = selected.map((item) => item.weight);
+				return { indicators, values };
+			}
+
+			function getRadarOption(indicators, values) {
+				return {
+					backgroundColor: "#333",
+					title: {
+						text: "Feature Weight Radar",
+						left: "0%",
+						top: "0%",
+						textStyle: {
+							color: "#fff",
+							fontSize: 16
+						}
+					},
+					tooltip: { trigger: "item" },
+					radar: {
+						center: ["50%", "55%"],
+						radius: "70%",
+						splitNumber: 4,
+						shape: "circle",
+						splitArea: { areaStyle: { color: ["transparent"] } },
+						axisLine: { lineStyle: { color: "#666" } },
+						splitLine: { lineStyle: { color: "#666" } },
+						indicator: indicators,
+						name: {
+							color: "#fff",
+							fontSize: 11
+						}
+					},
+					series: [
+						{
+							type: "radar",
+							symbol: "circle",
+							symbolSize: 6,
+							lineStyle: {
+								color: "rgba(255, 180, 91, 1)",
+								width: 2
+							},
+							itemStyle: {
+								color: "rgba(255, 180, 91, 1)",
+								borderColor: "rgba(255, 180, 91, 0.4)",
+								borderWidth: 6
+							},
+							areaStyle: {
+								color: "rgba(255, 180, 91, 0.25)"
+							},
+							data: [values]
+						}
+					]
+				};
+			}
+
+			function buildTop1Table(headers, rows) {
+				const nameIdx = headers.indexOf("street");
+				const groupIdx = headers.indexOf("district");
+				const scoreIdx = headers.indexOf("Y_night_vitality");
+				const tbody = document.querySelector("#top1-table tbody");
+				tbody.innerHTML = "";
+
+				const numericHeaders = headers.filter(
+					(h) => h !== "street" && h !== "district"
+				);
+
+				numericHeaders.forEach((feature) => {
+					const idx = headers.indexOf(feature);
+					let best = null;
+					rows.forEach((row) => {
+						const val = parseFloat(row[idx]);
+						if (!Number.isFinite(val)) {
+							return;
+						}
+						if (!best || val > best.value) {
+							best = {
+								street: row[nameIdx],
+								district: row[groupIdx],
+								value: val,
+								score:
+									scoreIdx >= 0 ? parseFloat(row[scoreIdx]) : Number.NaN
+							};
+						}
+					});
+
+					if (!best) {
+						return;
+					}
+
+					const tr = document.createElement("tr");
+					const scoreValue = Number.isFinite(best.score)
+						? best.score
+						: best.value;
+					const valueText = scoreValue.toFixed(2);
+					tr.innerHTML = `
+						<td>${feature}</td>
+						<td>${best.street}</td>
+						<td>${best.district}</td>
+						<td>${valueText}</td>
+					`;
+					tbody.appendChild(tr);
+				});
+			}
+
+			fetch(CSV_PATH)
+				.then((res) => res.text())
+				.then((text) => {
+					const { headers, rows } = parseCsv(text);
+					const schema = buildSchema(headers);
+					const data = toDataArray(headers, rows);
+					const meta = normalizeData(headers, data);
+					const option = getOption(headers, schema, data, meta);
+					myChart.setOption(option);
+					const { nodes, links } = buildSankeyByFeature(headers, rows);
+					sankeyChart.setOption(getSankeyOption(nodes, links));
+					const radarData = buildRadarWeights(headers);
+					radarChart.setOption(
+						getRadarOption(radarData.indicators, radarData.values)
+					);
+					buildTop1Table(headers, rows);
+				});
+
+			window.addEventListener("resize", () => {
+				myChart.resize();
+				sankeyChart.resize();
+				radarChart.resize();
+			});
+		</script>
+	</body>
+</html>
