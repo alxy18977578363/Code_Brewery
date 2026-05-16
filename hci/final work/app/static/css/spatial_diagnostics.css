@@ -1,0 +1,128 @@
+.area-atlas-page {
+    padding: 24px;
+    background:
+        radial-gradient(circle at top left, rgba(255, 226, 214, 0.92), transparent 28%),
+        linear-gradient(180deg, #fffaf5 0%, #fff1eb 100%);
+    min-height: 100%;
+}
+
+.area-atlas-header {
+    margin-bottom: 20px;
+    padding: 24px 28px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(138, 42, 24, 0.08);
+    box-shadow: 0 18px 48px rgba(120, 48, 32, 0.08);
+}
+
+.area-kicker {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a3472b;
+}
+
+.area-atlas-header h1 {
+    margin: 0 0 10px;
+    font-size: 36px;
+    color: #651919;
+}
+
+.area-description {
+    margin: 0;
+    max-width: 860px;
+    color: #675952;
+    line-height: 1.7;
+}
+
+.area-dashboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 18px 18px;
+    table-layout: fixed;
+}
+
+.area-dashboard-table thead th {
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #7d201f 0%, #b53a2f 100%);
+    color: #fff8f5;
+    font-size: 16px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.area-dashboard-table tbody td {
+    vertical-align: top;
+    padding: 0;
+    width: 50%;
+}
+
+.chart-card {
+    height: 100%;
+    padding: 16px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(138, 42, 24, 0.08);
+    box-shadow: 0 18px 48px rgba(120, 48, 32, 0.08);
+}
+
+.chart-card-header {
+    margin-bottom: 12px;
+}
+
+.chart-card-header h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: #611818;
+}
+
+.chart-card-header p {
+    margin: 0;
+    color: #71625b;
+    line-height: 1.6;
+}
+
+.chart-host {
+    width: 100%;
+    height: 62vh;
+    min-height: 440px;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+    .area-dashboard-table,
+    .area-dashboard-table thead,
+    .area-dashboard-table tbody,
+    .area-dashboard-table tr,
+    .area-dashboard-table th,
+    .area-dashboard-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .area-dashboard-table {
+        border-spacing: 0;
+    }
+
+    .area-dashboard-table thead tr {
+        display: none;
+    }
+
+    .area-dashboard-table tbody tr {
+        display: grid;
+        gap: 18px;
+    }
+
+    .area-dashboard-table tbody td {
+        margin-bottom: 18px;
+    }
+
+    .chart-host {
+        height: 60vh;
+        min-height: 420px;
+    }
+}

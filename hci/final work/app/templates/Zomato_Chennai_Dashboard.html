@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zomato Chennai — Analytics Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;
+  --sidebar:#16181f;
+  --card:#1e2130;
+  --card2:#252838;
+  --border:#2a2d3e;
+  --text:#e8eaf0;
+  --muted:#8b8fa8;
+  --accent:#e23744;
+  --accent2:#ff6b35;
+  --accent3:#f0a500;
+  --accent4:#2ecc71;
+  --accent5:#3498db;
+  --accent6:#9b59b6;
+  --font:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:220px;min-width:220px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0}
+.logo{padding:22px 20px 18px;border-bottom:1px solid var(--border)}
+.logo-top{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo h1{font-size:16px;font-weight:600;letter-spacing:-0.3px}
+.logo p{font-size:11px;color:var(--muted);margin-top:2px}
+.nav-label{font-size:10px;color:var(--muted);letter-spacing:0.08em;padding:18px 20px 8px;text-transform:uppercase;font-weight:500}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;transition:all 0.15s;border-left:3px solid transparent;color:var(--muted);font-size:13px;font-weight:400}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.nav-item.active{background:rgba(226,55,68,0.12);border-left-color:var(--accent);color:var(--accent)}
+.nav-icon{font-size:15px;min-width:18px;text-align:center}
+.sidebar-footer{margin-top:auto;padding:16px 20px;border-top:1px solid var(--border)}
+.data-badge{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%;background:#2ecc71;flex-shrink:0}
+
+/* MAIN */
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.topbar{height:56px;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0}
+.page-title{font-size:16px;font-weight:500;flex:1}
+.filter-label{font-size:12px;color:var(--muted)}
+.filter-select{background:var(--card);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:12px;padding:6px 10px;border-radius:6px;cursor:pointer;outline:none}
+.filter-select:focus{border-color:var(--accent)}
+.content{flex:1;overflow-y:auto;padding:20px 24px;display:none}
+.content.active{display:block}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;transition:transform 0.15s,border-color 0.15s}
+.kpi:hover{transform:translateY(-2px);border-color:var(--muted)}
+.kpi-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;font-weight:500}
+.kpi-val{font-size:28px;font-weight:600;letter-spacing:-1px;line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:6px}
+.kpi-sub span{font-weight:500}
+.kpi-icon{position:absolute;right:16px;top:16px;font-size:24px;opacity:0.15}
+
+/* CHART ROWS */
+.row2{display:grid;grid-template-columns:1fr 1.6fr;gap:14px;margin-bottom:14px}
+.row3{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px}
+.row-full{margin-bottom:14px}
+.row2-eq{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.row3-eq{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+
+/* CHART CARD */
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+.chart-card-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+.chart-card-sub{font-size:11px;color:var(--muted);margin-bottom:16px}
+.chart-wrap{position:relative}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:8px 12px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);font-weight:500}
+td{padding:9px 12px;border-bottom:1px solid rgba(42,45,62,0.6);color:var(--text)}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.rank{color:var(--muted);font-family:var(--mono);font-size:11px}
+.rating-pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;font-family:var(--mono)}
+.bar-mini{height:4px;border-radius:2px;background:var(--accent);margin-top:4px}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* INSIGHT STRIP */
+.insight-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.insight-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:flex-start;gap:12px}
+.insight-emoji{font-size:22px;line-height:1}
+.insight-title{font-size:12px;font-weight:500;margin-bottom:3px}
+.insight-body{font-size:11px;color:var(--muted);line-height:1.6}
+
+/* FEATURE BAR */
+.feat-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.feat-name{font-size:12px;color:var(--text);min-width:140px;flex-shrink:0}
+.feat-bar-bg{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.feat-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent5),var(--accent6))}
+.feat-count{font-size:11px;color:var(--muted);font-family:var(--mono);min-width:42px;text-align:right}
+
+/* ANIMATED COUNTER */
+.kpi-val{transition:all 0.3s}
+
+/* BAND COLORS */
+.band-ex{color:#2ecc71}
+.band-vg{color:#3498db}
+.band-go{color:#f0a500}
+.band-av{color:#e67e22}
+.band-ba{color:#e74c3c}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo">
+    <div class="logo-top">
+      <div class="logo-icon">🍽️</div>
+      <div>
+        <h1>Zomato Analytics</h1>
+        <p>Chennai Market</p>
+      </div>
+    </div>
+  </div>
+  <div class="nav-label">Pages</div>
+  <div class="nav-item active" onclick="setPage('overview',this)">
+    <span class="nav-icon">📊</span> Overview
+  </div>
+  <div class="nav-item" onclick="setPage('cuisine',this)">
+    <span class="nav-icon">🥘</span> Cuisine & Features
+  </div>
+  <div class="nav-item" onclick="setPage('location',this)">
+    <span class="nav-icon">📍</span> Location Intel
+  </div>
+  <div class="nav-label">Insights</div>
+  <div class="nav-item" onclick="setPage('insights',this)">
+    <span class="nav-icon">💡</span> Key Findings
+  </div>
+  <div class="sidebar-footer">
+    <div class="data-badge"><div class="dot"></div>11,847 restaurants loaded</div>
+    <div style="font-size:10px;color:var(--muted);margin-top:4px">Source: Zomato Chennai 2024</div>
+  </div>
+</div>
+
+<!-- MAIN AREA -->
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="page-title">Overview</div>
+    <div class="filter-label">Segment</div>
+    <select class="filter-select" id="seg-filter" onchange="applyFilter()">
+      <option value="all">All Segments</option>
+      <option value="Restaurant">Restaurant</option>
+      <option value="Fast Food">Fast Food</option>
+      <option value="Cloud Kitchen">Cloud Kitchen</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Cafe">Cafe</option>
+      <option value="Bakery & Sweet Shop">Bakery & Sweet Shop</option>
+      <option value="Bar">Bar</option>
+      <option value="Ice Cream Parlour">Ice Cream Parlour</option>
+    </select>
+    <div class="filter-label">Rating</div>
+    <select class="filter-select" id="band-filter" onchange="applyFilter()">
+      <option value="all">All Ratings</option>
+      <option value="Excellent">Excellent (4.5+)</option>
+      <option value="Very Good">Very Good (4.0–4.4)</option>
+      <option value="Good">Good (3.5–3.9)</option>
+      <option value="Average">Average (3.0–3.4)</option>
+      <option value="Below Avg">Below Average (&lt;3.0)</option>
+    </select>
+  </div>
+
+  <!-- PAGE 1: OVERVIEW -->
+  <div class="content active" id="page-overview">
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent)"></div>
+        <div class="kpi-icon">🍽️</div>
+        <div class="kpi-label">Total Restaurants</div>
+        <div class="kpi-val" id="kpi-total">11,847</div>
+        <div class="kpi-sub">Across <span>Chennai</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent3)"></div>
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-label">Avg Dining Rating</div>
+        <div class="kpi-val" id="kpi-avg">3.52</div>
+        <div class="kpi-sub">Out of <span>5.0 max</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent4)"></div>
+        <div class="kpi-icon">🏆</div>
+        <div class="kpi-label">High Rated (≥ 4.0)</div>
+        <div class="kpi-val" id="kpi-high">1,837</div>
+        <div class="kpi-sub"><span>15.5%</span> of total</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:#e67e22"></div>
+        <div class="kpi-icon">⚠️</div>
+        <div class="kpi-label">Below Average (&lt; 3.0)</div>
+        <div class="kpi-val" id="kpi-low">1,291</div>
+        <div class="kpi-sub"><span>10.9%</span> need attention</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="chart-card">
+        <div class="chart-card-title">Market Segment Mix</div>
+        <div class="chart-card-sub">Restaurant count by category</div>
+        <div class="chart-wrap" style="height:230px">
+          <canvas id="chart-donut"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Rating Distribution</div>
+        <div class="chart-card-sub">Count of restaurants per rating value</div>
+        <div class="chart-wrap" style="height:230px">
+          <canvas id="chart-hist"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row3">
+      <div class="chart-card">
+        <div class="chart-card-title">Top 15 Areas by Restaurant Count</div>
+        <div class="chart-card-sub">Density of food outlets per location</div>
+        <div class="chart-wrap" style="height:310px">
+          <canvas id="chart-areas"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Avg Rating by Segment</div>
+        <div class="chart-card-sub">Which category scores highest?</div>
+        <div class="chart-wrap" style="height:310px">
+          <canvas id="chart-seg-rating"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card row-full">
+      <div class="chart-card-title">Rating Band Distribution</div>
+      <div class="chart-card-sub">How restaurants cluster across quality tiers</div>
+      <div class="chart-wrap" style="height:120px">
+        <canvas id="chart-bands"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: CUISINE & FEATURES -->
+  <div class="content" id="page-cuisine">
+    <div class="row2-eq">
+      <div class="chart-card">
+        <div class="chart-card-title">Top 12 Cuisines</div>
+        <div class="chart-card-sub">Total restaurants serving each cuisine type</div>
+        <div class="chart-wrap" style="height:340px">
+          <canvas id="chart-cuisine"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Segment Size Comparison</div>
+        <div class="chart-card-sub">Restaurants per market segment</div>
+        <div class="chart-wrap" style="height:340px">
+          <canvas id="chart-seg-count"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row2-eq">
+      <div class="chart-card">
+        <div class="chart-card-title">Restaurant Features Popularity</div>
+        <div class="chart-card-sub">How many restaurants offer each amenity</div>
+        <div style="margin-top:8px" id="feat-bars"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Avg Rating by Market Segment</div>
+        <div class="chart-card-sub">Cloud Kitchens lead on rating score</div>
+        <div class="chart-wrap" style="height:300px">
+          <canvas id="chart-seg-rat2"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: LOCATION -->
+  <div class="content" id="page-location">
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent5)"></div>
+        <div class="kpi-label">Top Area by Volume</div>
+        <div class="kpi-val" style="font-size:20px">Porur</div>
+        <div class="kpi-sub"><span>413</span> restaurants</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent4)"></div>
+        <div class="kpi-label">Highest Rated Area</div>
+        <div class="kpi-val" style="font-size:20px">Nungambakkam</div>
+        <div class="kpi-sub">Avg rating <span>3.69</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent" style="background:var(--accent3)"></div>
+        <div class="kpi-label">Total Areas Covered</div>
+        <div class="kpi-val" style="font-size:20px">150+</div>
+        <div class="kpi-sub">Unique locations</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="chart-card">
+        <div class="chart-card-title">Geo Distribution — Lat/Lon Scatter</div>
+        <div class="chart-card-sub">Each point = restaurant location in Chennai</div>
+        <div class="chart-wrap" style="height:320px">
+          <canvas id="chart-scatter"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Area Avg Rating (Top 15)</div>
+        <div class="chart-card-sub">Quality score per neighbourhood</div>
+        <div class="chart-wrap" style="height:320px">
+          <canvas id="chart-area-rat"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-card-title">Area Performance Table</div>
+      <div class="chart-card-sub">Count, avg rating, and quality bar for top 15 areas</div>
+      <div class="tbl-wrap" style="margin-top:10px">
+        <table id="area-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Area</th><th>Restaurants</th><th>Avg Rating</th><th>Quality Bar</th><th>Band</th>
+            </tr>
+          </thead>
+          <tbody id="area-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: INSIGHTS -->
+  <div class="content" id="page-insights">
+    <div class="insight-strip">
+      <div class="insight-card">
+        <div class="insight-emoji">🗺️</div>
+        <div>
+          <div class="insight-title">Porur is most saturated</div>
+          <div class="insight-body">413 restaurants — 14% more than Velachery (362). Intense competition zone with below-avg rating 3.47.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">☁️</div>
+        <div>
+          <div class="insight-title">Cloud Kitchens lead on quality</div>
+          <div class="insight-body">Avg rating 3.68 — highest of all segments. Delivery-first model focuses on food quality over ambiance.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">⭐</div>
+        <div>
+          <div class="insight-title">Only 1% are "Excellent"</div>
+          <div class="insight-body">Just 119 restaurants score 4.5+. The top tier is extremely rare — a strong differentiator for premium brands.</div>
+        </div>
+      </div>
+    </div>
+    <div class="insight-strip">
+      <div class="insight-card">
+        <div class="insight-emoji">🍜</div>
+        <div>
+          <div class="insight-title">Chinese is #1 cuisine</div>
+          <div class="insight-body">3,527 restaurants serve Chinese — more than South Indian (3,079). Chennai's taste is diverse and pan-Indian.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">🛵</div>
+        <div>
+          <div class="insight-title">Delivery dominates features</div>
+          <div class="insight-body">Home Delivery (8,477) and Indoor Seating (8,383) are near-universal. 1,018 are delivery-only cloud kitchens.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">🏆</div>
+        <div>
+          <div class="insight-title">Nungambakkam = quality hub</div>
+          <div class="insight-body">Avg rating 3.69 in 245 restaurants. Premium residential & commercial zone attracts better-quality outlets.</div>
+        </div>
+      </div>
+    </div>
+    <div class="insight-strip">
+      <div class="insight-card">
+        <div class="insight-emoji">📉</div>
+        <div>
+          <div class="insight-title">Hotels score lowest</div>
+          <div class="insight-body">Hotel segment avg rating 3.45 — last among all segments. Hotel restaurants often rely on captive guests.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">🌅</div>
+        <div>
+          <div class="insight-title">Breakfast is a growth niche</div>
+          <div class="insight-body">Only 2,556 offer breakfast — just 21.6% of restaurants. High demand potential near IT corridors.</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-emoji">📊</div>
+        <div>
+          <div class="insight-title">54% are "Good" rated</div>
+          <div class="insight-body">6,441 restaurants score 3.5–3.9. The bell curve is right-skewed — most outlets cluster just above average.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row2-eq">
+      <div class="chart-card">
+        <div class="chart-card-title">Segment Count vs Quality Quadrant</div>
+        <div class="chart-card-sub">Size of bubble = restaurant count</div>
+        <div class="chart-wrap" style="height:300px">
+          <canvas id="chart-bubble"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-title">Rating Band Breakdown</div>
+        <div class="chart-card-sub">Full distribution across quality tiers</div>
+        <div class="chart-wrap" style="height:300px">
+          <canvas id="chart-pie2"></canvas>
+        </div>
+        <div class="legend" style="justify-content:center;margin-top:8px">
+          <div class="legend-item"><div class="legend-dot" style="background:#2ecc71"></div>Excellent</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div>Very Good</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f0a500"></div>Good</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e67e22"></div>Average</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div>Below Avg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+Chart.defaults.color='#8b8fa8';
+Chart.defaults.font.family='DM Sans';
+Chart.defaults.font.size=11;
+
+const GRID_COLOR='rgba(42,45,62,0.8)';
+const gridOpts={color:GRID_COLOR,drawBorder:false};
+const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#252838',titleColor:'#e8eaf0',bodyColor:'#8b8fa8',borderColor:'#2a2d3e',borderWidth:1,padding:10,cornerRadius:8}}};
+
+// RAW DATA
+const segData={
+  labels:['Restaurant','Fast Food','Cloud Kitchen','Hotel','Cafe','Bakery & Sweet','Bar','Ice Cream'],
+  counts:[5292,2803,999,890,692,665,259,247],
+  ratings:[3.51,3.49,3.68,3.45,3.55,3.47,3.64,3.54]
+};
+const areaData={
+  labels:['Porur','Velachery','Ambattur','T. Nagar','Perungudi','Anna Nagar E','Perambur','Medavakkam','Tambaram','Nungambakkam','Ramapuram','Anna Nagar W','Thuraipakkam','Mogappair','Selaiyur'],
+  counts:[413,362,328,308,285,278,273,265,255,245,244,235,233,214,213],
+  ratings:[3.47,3.54,3.49,3.59,3.54,3.63,3.49,3.5,3.52,3.69,3.52,3.56,3.56,3.52,3.48]
+};
+const bandData={labels:['Excellent','Very Good','Good','Average','Below Avg'],counts:[119,1718,6441,2278,1291],colors:['#2ecc71','#3498db','#f0a500','#e67e22','#e74c3c']};
+const histRatings=[2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.8,3.9,4.0,4.1,4.2,4.3,4.4,4.5,4.6,4.7,4.8,4.9];
+const histCounts=[354,32,20,34,48,77,105,147,199,271,329,393,472,522,562,673,3890,683,612,583,681,423,287,209,118,64,29,14,4,8];
+const cuisineData={labels:['Chinese','North Indian','Fast Food','South Indian','Beverages','Biryani','Desserts','Bakery','Street Food','Ice Cream','Sandwich','Chettinad'],counts:[3527,3263,3157,3079,2444,1844,1364,925,895,777,689,646]};
+const featData={labels:['Home Delivery','Indoor Seating','Breakfast','Desserts & Bakes','Vegetarian Only','Free Parking','Delivery Only','Outdoor Seating','Table Booking','Wifi'],counts:[8477,8383,2556,2075,1825,1430,1018,812,504,499]};
+const segColors=['#e23744','#ff6b35','#f0a500','#2ecc71','#3498db','#9b59b6','#1abc9c','#e74c3c'];
+
+let charts={};
+
+function makeChart(id,config){
+  const el=document.getElementById(id);
+  if(!el)return;
+  if(charts[id])charts[id].destroy();
+  charts[id]=new Chart(el.getContext('2d'),config);
+  return charts[id];
+}
+
+function initOverview(){
+  // Donut
+  makeChart('chart-donut',{type:'doughnut',data:{labels:segData.labels,datasets:[{data:segData.counts,backgroundColor:segColors,borderWidth:0,hoverOffset:6}]},options:{...baseOpts,cutout:'68%',plugins:{...baseOpts.plugins,legend:{display:true,position:'right',labels:{boxWidth:10,padding:12,font:{size:11},color:'#8b8fa8'}}}}});
+
+  // Histogram
+  const hColors=histRatings.map(r=>r>=4.5?'#2ecc71':r>=4.0?'#3498db':r>=3.5?'#f0a500':r>=3.0?'#e67e22':'#e74c3c');
+  makeChart('chart-hist',{type:'bar',data:{labels:histRatings.map(r=>r.toFixed(1)),datasets:[{data:histCounts,backgroundColor:hColors,borderRadius:3,borderSkipped:false}]},options:{...baseOpts,scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10,font:{size:10}}},y:{grid:gridOpts,ticks:{font:{size:10}}}}}});
+
+  // Top areas bar
+  makeChart('chart-areas',{type:'bar',data:{labels:areaData.labels,datasets:[{data:areaData.counts,backgroundColor:'rgba(226,55,68,0.7)',borderRadius:4,borderSkipped:false,hoverBackgroundColor:'rgba(226,55,68,1)'}]},options:{...baseOpts,indexAxis:'y',scales:{x:{grid:gridOpts,ticks:{font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+
+  // Seg rating
+  makeChart('chart-seg-rating',{type:'bar',data:{labels:segData.labels,datasets:[{data:segData.ratings,backgroundColor:segColors,borderRadius:6,borderSkipped:false}]},options:{...baseOpts,scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:30}},y:{grid:gridOpts,min:3.2,max:3.8,ticks:{font:{size:10},callback:v=>v.toFixed(1)}}}}});
+
+  // Bands stacked
+  makeChart('chart-bands',{type:'bar',data:{labels:['Distribution'],datasets:bandData.labels.map((l,i)=>({label:l,data:[bandData.counts[i]],backgroundColor:bandData.colors[i],borderRadius:i===0?4:i===4?4:0,borderSkipped:false}))},options:{...baseOpts,indexAxis:'y',scales:{x:{stacked:true,grid:gridOpts,ticks:{font:{size:10}}},y:{stacked:true,display:false}},plugins:{...baseOpts.plugins,legend:{display:true,position:'bottom',labels:{boxWidth:10,padding:16,font:{size:11},color:'#8b8fa8'}}}}});
+}
+
+function initCuisine(){
+  // Cuisine bar
+  makeChart('chart-cuisine',{type:'bar',data:{labels:cuisineData.labels,datasets:[{data:cuisineData.counts,backgroundColor:'rgba(52,152,219,0.75)',borderRadius:4,borderSkipped:false,hoverBackgroundColor:'rgba(52,152,219,1)'}]},options:{...baseOpts,indexAxis:'y',scales:{x:{grid:gridOpts,ticks:{font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+
+  // Seg count
+  makeChart('chart-seg-count',{type:'bar',data:{labels:segData.labels,datasets:[{data:segData.counts,backgroundColor:segColors,borderRadius:6,borderSkipped:false}]},options:{...baseOpts,indexAxis:'y',scales:{x:{grid:gridOpts,ticks:{font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+
+  // Avg rating by segment
+  makeChart('chart-seg-rat2',{type:'bar',data:{labels:segData.labels,datasets:[{data:segData.ratings,backgroundColor:segColors,borderRadius:6,borderSkipped:false}]},options:{...baseOpts,scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:35}},y:{grid:gridOpts,min:3.2,max:3.8,ticks:{font:{size:10},callback:v=>v.toFixed(1)}}}}});
+
+  // Feature bars
+  const maxFeat=Math.max(...featData.counts);
+  const fb=document.getElementById('feat-bars');
+  fb.innerHTML=featData.labels.map((l,i)=>`
+    <div class="feat-row">
+      <div class="feat-name">${l}</div>
+      <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:${(featData.counts[i]/maxFeat*100).toFixed(1)}%"></div></div>
+      <div class="feat-count">${featData.counts[i].toLocaleString()}</div>
+    </div>`).join('');
+}
+
+function initLocation(){
+  // Scatter (lat/lon sample)
+  const scatterPts=[
+    {x:80.1491,y:12.9675},{x:80.2006,y:12.9975},{x:80.2255,y:13.0521},
+    {x:80.2176,y:13.0827},{x:80.2209,y:13.0386},{x:80.2707,y:13.0524},
+    {x:80.2101,y:13.0633},{x:80.1635,y:13.0024},{x:80.0872,y:13.0358},
+    {x:80.2337,y:12.9516},{x:80.1337,y:13.0524},{x:80.2545,y:13.1211},
+    {x:80.2425,y:12.9728},{x:80.1955,y:13.1028},{x:80.2301,y:13.0901},
+    {x:80.2201,y:13.0201},{x:80.1750,y:12.9900},{x:80.2600,y:13.0700},
+    {x:80.2000,y:13.0500},{x:80.1900,y:13.0800},{x:80.2400,y:13.0300},
+    {x:80.1600,y:13.0200},{x:80.2800,y:13.0100},{x:80.2100,y:12.9800},
+    {x:80.1800,y:13.1100},{x:80.2700,y:12.9900},{x:80.2300,y:13.1000},
+    {x:80.1400,y:13.0700},{x:80.2500,y:13.0400},{x:80.1700,y:13.0600}
+  ];
+  makeChart('chart-scatter',{type:'scatter',data:{datasets:[{label:'Restaurants',data:scatterPts,backgroundColor:'rgba(226,55,68,0.5)',pointRadius:4,pointHoverRadius:6}]},options:{...baseOpts,scales:{x:{grid:gridOpts,title:{display:true,text:'Longitude',color:'#8b8fa8',font:{size:10}},ticks:{font:{size:9},callback:v=>v.toFixed(2)}},y:{grid:gridOpts,title:{display:true,text:'Latitude',color:'#8b8fa8',font:{size:10}},ticks:{font:{size:9},callback:v=>v.toFixed(2)}}}}});
+
+  // Area rating bar
+  const ratColors=areaData.ratings.map(r=>r>=3.65?'#2ecc71':r>=3.55?'#3498db':'rgba(226,55,68,0.7)');
+  makeChart('chart-area-rat',{type:'bar',data:{labels:areaData.labels,datasets:[{data:areaData.ratings,backgroundColor:ratColors,borderRadius:4,borderSkipped:false}]},options:{...baseOpts,indexAxis:'y',scales:{x:{grid:gridOpts,min:3.3,max:3.8,ticks:{font:{size:10},callback:v=>v.toFixed(2)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+  // Table
+  const tbody=document.getElementById('area-tbody');
+  tbody.innerHTML=areaData.labels.map((a,i)=>{
+    const r=areaData.ratings[i];
+    const w=((r-3.0)/2*100).toFixed(0);
+    const cls=r>=3.65?'band-ex':r>=3.55?'band-vg':r>=3.5?'band-go':'band-av';
+    const band=r>=3.65?'Very Good':r>=3.55?'Good':r>=3.5?'Good':'Average';
+    return `<tr>
+      <td class="rank">${i+1}</td>
+      <td>${a}</td>
+      <td>${areaData.counts[i].toLocaleString()}</td>
+      <td style="font-family:var(--mono)">${r.toFixed(2)}</td>
+      <td><div style="width:120px"><div class="bar-mini" style="width:${w}%;background:${r>=3.65?'#2ecc71':r>=3.55?'#3498db':'#f0a500'}"></div></div></td>
+      <td><span class="${cls}" style="font-size:11px;font-weight:500">${band}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function initInsights(){
+  // Bubble
+  makeChart('chart-bubble',{type:'bubble',data:{datasets:segData.labels.map((l,i)=>({label:l,data:[{x:segData.counts[i],y:segData.ratings[i],r:Math.sqrt(segData.counts[i])/5}],backgroundColor:segColors[i]+'99',borderColor:segColors[i],borderWidth:1}))},options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,position:'right',labels:{boxWidth:8,padding:10,font:{size:10},color:'#8b8fa8'}}},scales:{x:{grid:gridOpts,title:{display:true,text:'Restaurant Count',color:'#8b8fa8',font:{size:10}}},y:{grid:gridOpts,min:3.3,max:3.8,title:{display:true,text:'Avg Rating',color:'#8b8fa8',font:{size:10}},ticks:{callback:v=>v.toFixed(1)}}}}});
+
+  // Pie2
+  makeChart('chart-pie2',{type:'doughnut',data:{labels:bandData.labels,datasets:[{data:bandData.counts,backgroundColor:bandData.colors,borderWidth:0,hoverOffset:8}]},options:{...baseOpts,cutout:'60%',plugins:{...baseOpts.plugins,legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed.toLocaleString()} (${(ctx.parsed/11847*100).toFixed(1)}%)`}}}}});
+}
+
+const pageInits={'overview':initOverview,'cuisine':initCuisine,'location':initLocation,'insights':initInsights};
+const pageTitles={'overview':'Overview','cuisine':'Cuisine & Features','location':'Location Intelligence','insights':'Key Findings'};
+
+let currentPage='overview';
+initOverview();
+
+function setPage(id,el){
+  document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  el.classList.add('active');
+  document.getElementById('page-title').textContent=pageTitles[id];
+  currentPage=id;
+  if(pageInits[id])pageInits[id]();
+}
+
+function applyFilter(){
+  const seg=document.getElementById('seg-filter').value;
+  const band=document.getElementById('band-filter').value;
+  // Simplified filter feedback — update KPIs
+  let total=11847,avg=3.52,high=1837,low=1291;
+  if(seg!=='all'){
+    const si=segData.labels.findIndex(l=>l===seg||(seg==='Bakery & Sweet Shop'&&l==='Bakery & Sweet'));
+    if(si>=0){total=segData.counts[si];avg=segData.ratings[si];high=Math.round(total*0.15);low=Math.round(total*0.10);}
+  }
+  if(band!=='all'){
+    const bi=bandData.labels.indexOf(band);
+    if(bi>=0){total=bandData.counts[bi];high=bi<=1?total:0;low=bi===4?total:0;}
+  }
+  document.getElementById('kpi-total').textContent=total.toLocaleString();
+  document.getElementById('kpi-avg').textContent=avg.toFixed(2);
+  document.getElementById('kpi-high').textContent=high.toLocaleString();
+  document.getElementById('kpi-low').textContent=low.toLocaleString();
+}
+</script>
+</body>
+</html>

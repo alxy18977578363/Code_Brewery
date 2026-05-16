@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Chennai Restaurant Dashboard{% endblock %}</title>
+    <style>
+        :root {
+            --nav-bg: #7a1f1f;
+            --nav-text: #fff7f2;
+            --page-bg: #fff6f0;
+            --content-text: #2f2522;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            background: var(--page-bg);
+            color: var(--content-text);
+        }
+
+        .site-shell {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #651616 0%, #a32626 100%);
+            color: var(--nav-text);
+            box-shadow: 0 10px 28px rgba(90, 16, 16, 0.18);
+        }
+
+        .site-brand {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .site-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-link {
+            color: var(--nav-text);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background-color 0.2s ease;
+        }
+
+        .site-link:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .site-main {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .site-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px 16px;
+            }
+
+            .site-links {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="site-shell">
+        <nav class="site-nav">
+            <h1 class="site-brand">Chennai Restaurant Dashboard</h1>
+            <div class="site-links">
+                <a class="site-link" href="{{ url_for('overview.overview_page') }}">Overview</a>
+                <a class="site-link" href="{{ url_for('overview.spatial_diagnostics_page') }}">Spatial Diagnostics</a>
+                <a class="site-link" href="{{ url_for('overview.market_segment_rating_page') }}">Segment & Rating</a>
+                <a class="site-link" href="{{ url_for('overview.prediction_analysis_page') }}">Prediction Lab</a>
+                <a class="site-link" href="{{ url_for('overview.dashboard_page') }}">Dashboard</a>
+            </div>
+        </nav>
+
+        <main class="site-main">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

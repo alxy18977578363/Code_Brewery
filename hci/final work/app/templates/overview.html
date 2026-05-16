@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Overview{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/overview.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="overview-page">
+    <header class="overview-header">
+        <h1>Chennai Restaurant Overview</h1>
+        <p>Explore restaurant locations and ratings across Chennai.</p>
+    </header>
+
+    <section class="overview-map-section">
+        <div id="overview-map"></div>
+    </section>
+
+    <section class="overview-histogram-section">
+        <div class="overview-section-header">
+            <h2>Rating Distribution by Market Segment</h2>
+            <p>Rating histogram for each market segment, binned at 0.3 intervals.</p>
+        </div>
+        <div id="segment-histogram-grid" class="histogram-grid"></div>
+    </section>
+
+    <section class="overview-histogram-section">
+        <div class="overview-section-header">
+            <h2>Rating Distribution by Area</h2>
+            <p>Rating histogram for each area, binned at 0.3 intervals.</p>
+        </div>
+        <div id="area-histogram-grid" class="histogram-grid"></div>
+    </section>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="{{ url_for('static', filename='js/overview.js') }}"></script>
+{% endblock %}

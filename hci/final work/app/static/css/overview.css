@@ -1,0 +1,155 @@
+.overview-page {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: linear-gradient(180deg, #fffaf8 0%, #fff1eb 100%);
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.overview-header {
+    padding: 24px 28px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 18px 40px rgba(120, 48, 32, 0.08);
+    border: 1px solid rgba(179, 0, 0, 0.08);
+}
+
+.overview-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #7a1f1f;
+    font-weight: 700;
+}
+
+.overview-header p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6b5b57;
+}
+
+.overview-map-section {
+    padding: 18px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 20px 48px rgba(120, 48, 32, 0.12);
+    border: 1px solid rgba(179, 0, 0, 0.08);
+}
+
+#overview-map {
+    width: 100%;
+    height: 76vh;
+    min-height: 560px;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(255, 235, 235, 0.95), rgba(255, 255, 255, 0.98)),
+        #ffffff;
+}
+
+#overview-map .js-plotly-plot,
+#overview-map .plot-container,
+#overview-map .svg-container {
+    border-radius: 18px;
+}
+
+.overview-histogram-section {
+    padding: 24px 28px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 48px rgba(120, 48, 32, 0.08);
+    border: 1px solid rgba(179, 0, 0, 0.08);
+}
+
+.overview-section-header {
+    margin-bottom: 18px;
+}
+
+.overview-section-header h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: #611818;
+}
+
+.overview-section-header p {
+    margin: 0;
+    color: #71625b;
+    line-height: 1.6;
+}
+
+.histogram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+}
+
+.histogram-card {
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(138, 42, 24, 0.08);
+    box-shadow: 0 10px 28px rgba(120, 48, 32, 0.06);
+    overflow: hidden;
+}
+
+.histogram-card-header {
+    padding: 12px 16px 0;
+}
+
+.histogram-card-header h3 {
+    margin: 0 0 2px;
+    font-size: 14px;
+    color: #611818;
+}
+
+.histogram-card-header p {
+    margin: 0;
+    font-size: 11px;
+    color: #999;
+}
+
+.histogram-card .chart-host-mini {
+    width: 100%;
+    height: 220px;
+}
+
+@media (max-width: 768px) {
+    .overview-page {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .overview-header {
+        padding: 18px 20px;
+        border-radius: 16px;
+    }
+
+    .overview-header h1 {
+        font-size: 24px;
+    }
+
+    .overview-header p {
+        font-size: 14px;
+    }
+
+    .overview-map-section {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    #overview-map {
+        height: 68vh;
+        min-height: 420px;
+        border-radius: 14px;
+    }
+
+    .overview-histogram-section {
+        padding: 16px;
+    }
+
+    .histogram-grid {
+        grid-template-columns: 1fr;
+    }
+}

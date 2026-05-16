@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Analysis{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/prediction_analysis.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="prediction-page">
+    <header class="prediction-header">
+        <p class="prediction-kicker">ML Rating Prediction</p>
+        <h1>Rating Prediction: What Makes a Chennai Restaurant Score Higher?</h1>
+        <p class="prediction-description">
+            A machine-learning study that trains multiple regressors to predict restaurant ratings
+            from market segment, area, cuisine, service features, dishes, and location signals.
+            The page shows model performance, error anatomy, feature importance, and partial dependence.
+        </p>
+    </header>
+
+    <div id="loading-hint" class="loading-hint">
+        <div class="spinner"></div>
+        <div>Training models... This may take up to 60 seconds on first load.</div>
+    </div>
+
+    <table class="prediction-table" id="analysis-table" style="display:none">
+        <thead>
+            <tr>
+                <th colspan="2">Data Audit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Feature Blocks</h2>
+                            <p>Summary of raw input columns used by the pipeline.</p>
+                        </div>
+                        <div id="feature-audit-table"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Train / Test Split</h2>
+                            <p>Grouped split by restaurant name to prevent leakage.</p>
+                        </div>
+                        <div id="split-audit-table"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Model Performance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Model Leaderboard</h2>
+                            <p>Test MAE (lower is better). Train MAE shown for comparison.</p>
+                        </div>
+                        <div id="leaderboard-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Residual Anatomy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Actual vs Predicted</h2>
+                            <p>Hex density of grouped test predictions.</p>
+                        </div>
+                        <div id="hexbin-chart" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Residual Distribution</h2>
+                            <p>Positive residuals = under-predicted restaurants.</p>
+                        </div>
+                        <div id="residual-hist-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Error Analysis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Error by Market Segment</h2>
+                            <p>MAE per segment; color follows bias direction.</p>
+                        </div>
+                        <div id="error-segment-chart" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Error by Area</h2>
+                            <p>Top 20 hardest neighborhoods (min 18 test rows).</p>
+                        </div>
+                        <div id="error-area-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Feature Interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Permutation Importance</h2>
+                            <p>MAE increase after shuffling each raw feature block.</p>
+                        </div>
+                        <div id="perm-importance-chart" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Ridge Coefficient Direction</h2>
+                            <p>Top positive and negative transformed feature associations.</p>
+                        </div>
+                        <div id="ridge-coef-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Partial Dependence</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Partial Dependence Curves</h2>
+                            <p>How the model's average prediction changes as one feature is varied.</p>
+                        </div>
+                        <div class="partial-dep-grid">
+                            <div id="pdp-brand-chart" class="chart-host-half"></div>
+                            <div id="pdp-distance-chart" class="chart-host-half"></div>
+                            <div id="pdp-dish-chart" class="chart-host-half"></div>
+                            <div id="pdp-segment-chart" class="chart-host-half"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <thead>
+            <tr>
+                <th colspan="2">Dataset Critique</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Worst Misses</h2>
+                            <p>Top 18 restaurants with the largest prediction errors.</p>
+                        </div>
+                        <div id="worst-misses-table"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="{{ url_for('static', filename='js/prediction_analysis.js') }}"></script>
+{% endblock %}

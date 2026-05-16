@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Market Segment & Rating Lab{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/market_segment_rating_lab.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="market-segment-lab-page">
+    <header class="market-segment-lab-header">
+        <p class="market-segment-kicker">Market Segment Analysis</p>
+        <h1>Market Segment & Rating Lab</h1>
+        <p class="market-segment-description">
+            Explore how customer ratings vary across different market segments.
+            The ridgeline chart reveals rating distribution shapes, the grouped bar chart
+            compares rating-band composition, and the heatmap shows feature adoption patterns.
+        </p>
+    </header>
+
+    <table class="market-segment-lab-table">
+        <thead>
+            <tr>
+                <th>Segment Rating Distribution</th>
+                <th>Segment Rating Band Composition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Rating Ridgeline</h2>
+                            <p>Density curves for each market segment; vertical bars mark medians.</p>
+                        </div>
+                        <div id="ridgeline-chart" class="chart-host chart-host-wide"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Grouped Rating-Band Bar</h2>
+                            <p>Restaurant count by rating band, grouped by market segment.</p>
+                        </div>
+                        <div id="grouped-bar-chart" class="chart-host chart-host-wide"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Feature Adoption Heatmap</h2>
+                            <p>Service feature adoption rate (%) across market segments.</p>
+                        </div>
+                        <div id="heatmap-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Top Cuisines</h2>
+                            <p>Tagged outlet count and avg rating dot per cuisine; green = local Chennai/South Indian term.</p>
+                        </div>
+                        <div id="cuisine-top-chart" class="chart-host chart-host-wide"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Top Dishes</h2>
+                            <p>Lollipop chart of dish popularity; brown markers highlight local Chennai dishes.</p>
+                        </div>
+                        <div id="dish-top-chart" class="chart-host chart-host-wide"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="{{ url_for('static', filename='js/market_segment_rating.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Area Atlas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/spatial_diagnostics.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="area-atlas-page">
+    <header class="area-atlas-header">
+        <div>
+            <p class="area-kicker">Area Diagnostics</p>
+            <h1>Chennai Area Atlas</h1>
+            <p class="area-description">
+                This page compares area-level restaurant supply and rating structure through a stacked rating-band chart
+                and two area choropleth-style symbol maps.
+            </p>
+        </div>
+    </header>
+
+    <table class="area-dashboard-table">
+        <thead>
+            <tr>
+                <th>Area Token Distribution</th>
+                <th>Area Rating Violin Plot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Area Token Chart</h2>
+                            <p>Area names are repeated as tokens according to restaurant supply.</p>
+                        </div>
+                        <div id="area-token-chart" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Area Rating Box Plot</h2>
+                            <p>Horizontal box plot of rating distribution by area.</p>
+                        </div>
+                        <div id="area-violin-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Stacked Rating-Band Bar Chart</h2>
+                            <p>Area-level composition by rating band, with total supply labeled on top.</p>
+                        </div>
+                        <div id="area-rating-band-chart" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Area Supply-Rating Bubble Plot</h2>
+                            <p>x = restaurant count, y = average rating, bubble size = area supply scale.</p>
+                        </div>
+                        <div id="area-bubble-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Average Rating Density Surface</h2>
+                            <p>Continuous kernel-style heat surface for area mean ratings.</p>
+                        </div>
+                        <div id="area-rating-map" class="chart-host"></div>
+                    </div>
+                </td>
+                <td>
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Restaurant Supply Density Surface</h2>
+                            <p>Continuous kernel-style heat surface for area-level restaurant supply.</p>
+                        </div>
+                        <div id="area-supply-map" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <h2>Area Quadrant Matrix (Supply vs Rating)</h2>
+                            <p>Each area plotted by restaurant count (x) and average rating (y), divided into four strategic quadrants by medians.</p>
+                        </div>
+                        <div id="area-quadrant-chart" class="chart-host"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2/dist/echarts-wordcloud.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="{{ url_for('static', filename='js/spatial_diagnostics.js') }}"></script>
+{% endblock %}
