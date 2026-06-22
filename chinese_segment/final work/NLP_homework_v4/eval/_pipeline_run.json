@@ -1,0 +1,174 @@
+{
+  "topic": "检索增强生成",
+  "method": "llm",
+  "n_papers": 8,
+  "papers": [
+    {
+      "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+      "year": 2024,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
+      "year": 2025,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+      "year": 2023,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
+      "year": 2025,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "year": 2025,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+      "year": 2025,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
+      "year": 2026,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    },
+    {
+      "title": "RAGPart & RAGMask: Retrieval-Stage Defenses Against Corpus Poisoning in Retrieval-Augmented Generation",
+      "year": 2025,
+      "source": "arxiv",
+      "stars": 0,
+      "code": ""
+    }
+  ],
+  "review_text": "## 研究背景\n\n检索增强生成（Retrieval-Augmented Generation, RAG）通过将外部知识库的检索与大型语言模型（LLM）的生成能力相结合，有效缓解了模型幻觉和知识过时问题，成为自然语言处理领域的研究热点。然而，RAG系统在实际部署中面临多重挑战：缺乏自动化的评估指标 [3]，易受语料投毒和成员推断等安全威胁 [2,8]，在音乐问答等垂直领域表现欠佳 [4]，多跳推理场景下的忠实性不足 [6]，以及元数据利用不充分导致检索精度受限 [7]。与此同时，利用RAG技术自动生成文献综述也成为提升学术效率的新方向 [1]。近年来，研究者从不同维度提出了针对性的解决方案，推动了RAG架构的演进与信任框架的构建 [5]。\n\n## 主要方法分类\n\n基于上述论文，可将RAG相关方法分为以下类别：\n\n- **评估与自动化综述**：Ragas [3] 提出了无需人工标注的多维度评估框架，用于衡量RAG管道的质量；[1] 则利用spaCy、Simple T5、GPT-3.5-turbo并融合检索增强生成，在SciTLDR数据集上以ROUGE-1为指标自动生成文献综述。\n- **安全攻击与防御**：[2] 提出Interrogation Attack方法，仅需30个自然查询即可在RAG系统中隐秘执行成员推断（TPR@1%FPR指标）；[8] 提出RAGPart和RAGMask，分别通过文档划分与目标标记掩码在检索阶段防御语料投毒，以攻击成功率和效用为指标。\n- **领域适应**：[4] 开发了MusT-RAG，结合专用音乐数据库MusWikiDB和微调策略，提升LLM在音乐问答上的域适应能力。\n- **忠实性增强**：[6] 提出的FAIR-RAG采用结构化证据评估（SEA）、自适应查询精炼和迭代精炼循环，在HotpotQA、2WikiMultiHopQA等数据集上以F1-score衡量，显著改善多跳问答的忠实性。\n- **元数据利用**：[7] 系统研究了元数据感知检索策略，包括前缀（Prefixing）、后缀（Suffix）、双编码器统一嵌入（Dual-Encoder Unified Embedding）等方法，在RAGMATE-10K数据集上验证了统一嵌入和前缀方法的优势。\n- **架构与信任框架综述**：[5] 通过系统文献综述整合了RAG架构与信任框架，提出了统一分类法，为构建安全鲁棒的系统提供指南。\n\n## 各类方法对比\n\n评估与自动化方法侧重于为RAG提供量化标准和高效工具，但Ragas仅能评估生成质量而未考虑安全维度 [3]，而[1]则直接面向应用。安全攻击和防御方法直接关系到RAG系统的可靠性：Interrogation Attack [2] 暴露了RAG的隐私漏洞，RAGPart和RAGMask [8] 则提供了检索阶段的实用防御，但两者均针对特定攻击模式，缺乏通用性。领域适应方法 [4] 通过构建专用语料库显著提升特定任务性能，但数据库构建成本较高。忠实性增强方法 [6] 通过迭代精炼提高了复杂推理的可信度，但计算开销增加",
+  "mermaid": "graph LR\n    N0[\"Ragas 2023\"]\n    N1[\"spaCy 2024\"]\n    N2[\"Interrogation Attack 2025\"]\n    N3[\"Retrieval Augmented Generation 2025\"]\n    N4[\"FAIR-RAG 2025\"]\n    N5[\"RAGPart 2025\"]\n    N6[\"Prefixing 2026\"]\n    N0 --> N1\n    N1 --> N2\n    N2 --> N3\n    N3 --> N4\n    N4 --> N5\n    N5 --> N6",
+  "citations_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "hallucinated": [],
+  "unsupported": [],
+  "mermaid_time_issues": [],
+  "fallback": false,
+  "clusters": [
+    "Prefixing、Suffix、Dual-Encoder Unified Embedding",
+    "Retrieval-Augmented Generation、RAGPart、RAGMask",
+    "Interrogation Attack、Large Language Models、Retrieval Augmented Generation"
+  ],
+  "year_trend": [
+    [
+      2023,
+      1
+    ],
+    [
+      2024,
+      1
+    ],
+    [
+      2025,
+      5
+    ],
+    [
+      2026,
+      1
+    ]
+  ],
+  "keyword_cloud": [
+    {
+      "text": "Retrieval-Augmented Generation",
+      "weight": 7
+    },
+    {
+      "text": "Large Language Models",
+      "weight": 3
+    },
+    {
+      "text": "Retrieval Augmented Generation",
+      "weight": 3
+    },
+    {
+      "text": "Interrogation Attack",
+      "weight": 2
+    },
+    {
+      "text": "Fine-tuning",
+      "weight": 2
+    },
+    {
+      "text": "RAGPart",
+      "weight": 2
+    },
+    {
+      "text": "RAGMask",
+      "weight": 2
+    },
+    {
+      "text": "Document Partitioning",
+      "weight": 2
+    },
+    {
+      "text": "Automated Literature Review",
+      "weight": 1
+    },
+    {
+      "text": "Natural Language Processing",
+      "weight": 1
+    },
+    {
+      "text": "Large Language Model",
+      "weight": 1
+    },
+    {
+      "text": "Transformer",
+      "weight": 1
+    },
+    {
+      "text": "ROUGE",
+      "weight": 1
+    },
+    {
+      "text": "SciTLDR",
+      "weight": 1
+    },
+    {
+      "text": "spaCy",
+      "weight": 1
+    }
+  ],
+  "log": [
+    "[0.0s] 开始：主题=「检索增强生成」, 方法=llm, 最大8篇",
+    "[1.6s] 中文主题已翻译为英文检索词：「retrieval augmented generation」",
+    "[6.7s] 初筛检索完成：共 22 篇候选文献",
+    "[68.4s] 按 Github Stars 排序并截断至 8 篇（最高 Star：0）",
+    "[83.8s] 抽取完成：8 条结构化记录（llm）",
+    "[88.8s] 聚类完成：3 个主题",
+    "[110.5s] 综述完成：LLM 版，有效引用 8 个，越界引用 0 个，疑似张冠李戴 0 处",
+    "[110.5s] 演进图时间校验：修正 0 处时间错误"
+  ]
+}

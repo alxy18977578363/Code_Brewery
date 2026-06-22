@@ -1,0 +1,322 @@
+[
+  {
+    "topic": "retrieval augmented generation",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "AR-RAG: Autoregressive Retrieval Augmentation for Image Gene",
+        true
+      ],
+      [
+        "Intelligent Interaction Strategies for Context-Aware Cogniti",
+        false
+      ],
+      [
+        "Factually: Exploring Wearable Fact-Checking for Augmented Tr",
+        false
+      ],
+      [
+        "Designing AI Systems that Augment Human Performed vs. Demons",
+        false
+      ],
+      [
+        "Automated Literature Review Using NLP Techniques and LLM-Bas",
+        true
+      ],
+      [
+        "EHR-RAGp: Retrieval-Augmented Prototype-Guided Foundation Mo",
+        false
+      ],
+      [
+        "EVOR: Evolving Retrieval for Code Generation",
+        true
+      ],
+      [
+        "Riddle Me This! Stealthy Membership Inference for Retrieval-",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "chain of thought reasoning",
+    "n": 8,
+    "relevant": 6,
+    "acc": 0.75,
+    "details": [
+      [
+        "Understanding Reasoning in Chain-of-Thought from the Hopfiel",
+        true
+      ],
+      [
+        "DiffCoT: Diffusion-styled Chain-of-Thought Reasoning in LLMs",
+        true
+      ],
+      [
+        "Towards Reasoning Era: A Survey of Long Chain-of-Thought for",
+        true
+      ],
+      [
+        "Navigating the State of Cognitive Flow: Context-Aware AI Int",
+        false
+      ],
+      [
+        "Let's Do a Thought Experiment: Using Counterfactuals to Impr",
+        false
+      ],
+      [
+        "Chain-of-Thought Hub: A Continuous Effort to Measure Large L",
+        true
+      ],
+      [
+        "LongCoT: Benchmarking Long-Horizon Chain-of-Thought Reasonin",
+        true
+      ],
+      [
+        "Buffer of Thoughts: Thought-Augmented Reasoning with Large L",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "diffusion model image generation",
+    "n": 8,
+    "relevant": 6,
+    "acc": 0.75,
+    "details": [
+      [
+        "Text-to-image Diffusion Models in Generative AI: A Survey",
+        true
+      ],
+      [
+        "DIRE for Diffusion-Generated Image Detection",
+        false
+      ],
+      [
+        "Controllable Generation with Text-to-Image Diffusion Models:",
+        true
+      ],
+      [
+        "A Flow-based Truncated Denoising Diffusion Model for Super-r",
+        true
+      ],
+      [
+        "Pisces: An Auto-regressive Foundation Model for Image Unders",
+        false
+      ],
+      [
+        "MirrorDiffusion: Stabilizing Diffusion Process in Zero-shot ",
+        true
+      ],
+      [
+        "Image is All You Need to Empower Large-scale Diffusion Model",
+        true
+      ],
+      [
+        "Alleviating Distortion in Image Generation via Multi-Resolut",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "graph neural network",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "A Tutorial about Random Neural Networks in Supervised Learni",
+        false
+      ],
+      [
+        "Learning Universal Graph Neural Network Embeddings With Aid ",
+        true
+      ],
+      [
+        "Predicting concentration levels of air pollutants by transfe",
+        false
+      ],
+      [
+        "Masked Conditional Neural Networks for Audio Classification",
+        false
+      ],
+      [
+        "The Deep Arbitrary Polynomial Chaos Neural Network or how De",
+        false
+      ],
+      [
+        "Graph Neural Network Training Systems: A Performance Compari",
+        true
+      ],
+      [
+        "Proficient Graph Neural Network Design by Accumulating Knowl",
+        true
+      ],
+      [
+        "Fast and Deep Graph Neural Networks",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "object detection",
+    "n": 8,
+    "relevant": 7,
+    "acc": 0.875,
+    "details": [
+      [
+        "Oriented object detection in optical remote sensing images u",
+        true
+      ],
+      [
+        "Object Contour and Edge Detection with RefineContourNet",
+        false
+      ],
+      [
+        "Exploring Depth Contribution for Camouflaged Object Detectio",
+        true
+      ],
+      [
+        "PVAFN: Point-Voxel Attention Fusion Network with Multi-Pooli",
+        true
+      ],
+      [
+        "TJU-DHD: A Diverse High-Resolution Dataset for Object Detect",
+        true
+      ],
+      [
+        "A Survey of Self-Supervised and Few-Shot Object Detection",
+        true
+      ],
+      [
+        "Super Sparse 3D Object Detection",
+        true
+      ],
+      [
+        "Object Detection with Multimodal Large Vision-Language Model",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "knowledge graph embedding",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "Subsampling for Knowledge Graph Embedding Explained",
+        true
+      ],
+      [
+        "AI Agent-Driven Framework for Automated Product Knowledge Gr",
+        false
+      ],
+      [
+        "Template-Based Graph Clustering",
+        false
+      ],
+      [
+        "A Multi-Agent System for Semantic Mapping of Relational Data",
+        false
+      ],
+      [
+        "Adversarial Learning for Debiasing Knowledge Graph Embedding",
+        true
+      ],
+      [
+        "Improving Graph Embeddings in Machine Learning Using Knowled",
+        true
+      ],
+      [
+        "Exploiting Global Semantic Similarities in Knowledge Graphs ",
+        true
+      ],
+      [
+        "Knowledge Graph Embeddings and Explainable AI",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "reinforcement learning from human feedback",
+    "n": 8,
+    "relevant": 5,
+    "acc": 0.625,
+    "details": [
+      [
+        "RLHF-Blender: A Configurable Interactive Interface for Learn",
+        true
+      ],
+      [
+        "Reinforcement Learning from Human Feedback: Whose Culture, W",
+        true
+      ],
+      [
+        "Value Bonuses using Ensemble Errors for Exploration in Reinf",
+        false
+      ],
+      [
+        "Multi-Agent Reinforcement Learning from Delayed Marketplace ",
+        false
+      ],
+      [
+        "Directed Policy Gradient for Safe Reinforcement Learning wit",
+        true
+      ],
+      [
+        "Humans are not Boltzmann Distributions: Challenges and Oppor",
+        true
+      ],
+      [
+        "Exploring Hierarchy-Aware Inverse Reinforcement Learning",
+        false
+      ],
+      [
+        "Reinforcement Learning from Human Feedback with High-Confide",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "contrastive learning representation",
+    "n": 8,
+    "relevant": 7,
+    "acc": 0.875,
+    "details": [
+      [
+        "On the Similarities of Embeddings in Contrastive Learning",
+        true
+      ],
+      [
+        "Learning Cross-Lingual Sentence Representations via a Multi-",
+        false
+      ],
+      [
+        "Network Comparison with Interpretable Contrastive Network Re",
+        true
+      ],
+      [
+        "Khan-GCL: Kolmogorov-Arnold Network Based Graph Contrastive ",
+        true
+      ],
+      [
+        "CLUDA : Contrastive Learning in Unsupervised Domain Adaptati",
+        true
+      ],
+      [
+        "Let Invariant Rationale Discovery Inspire Graph Contrastive ",
+        true
+      ],
+      [
+        "Video Contrastive Learning with Global Context",
+        true
+      ],
+      [
+        "Supervised Contrastive Learning for Accented Speech Recognit",
+        true
+      ]
+    ]
+  }
+]

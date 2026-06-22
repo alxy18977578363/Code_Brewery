@@ -1,0 +1,32 @@
+[
+  {
+    "topic": "大语言模型 思维链推理",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0
+  },
+  {
+    "topic": "检索增强生成",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0
+  },
+  {
+    "topic": "中文命名实体识别",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0
+  },
+  {
+    "topic": "对比学习 句向量",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0
+  },
+  {
+    "topic": "retrieval augmented generation",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0
+  }
+]

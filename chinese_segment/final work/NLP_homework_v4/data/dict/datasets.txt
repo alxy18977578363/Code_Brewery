@@ -1,0 +1,56 @@
+ImageNet
+CIFAR-10
+CIFAR-100
+MNIST
+COCO
+PASCAL VOC
+GLUE
+SuperGLUE
+SQuAD
+MS MARCO
+TriviaQA
+HotpotQA
+NaturalQuestions
+CoNLL
+Penn Treebank
+WikiText
+C4
+Common Crawl
+BookCorpus
+OpenWebText
+LAMBADA
+MMLU
+BIG-bench
+HumanEval
+MBPP
+GSM8K
+MATH
+ARC
+HellaSwag
+WinoGrande
+PIQA
+CommonsenseQA
+WMT
+IWSLT
+LDC
+OntoNotes
+Weibo
+微博
+人民日报
+CLUE
+CMRC
+DRCD
+CMNLI
+OCNLI
+ChnSentiCorp
+THUCNews
+MSRA NER
+MSRA
+DuReader
+LCQMC
+BQ Corpus
+NLPCC
+CCKS
+CAIL
+DuConv
+KdConv

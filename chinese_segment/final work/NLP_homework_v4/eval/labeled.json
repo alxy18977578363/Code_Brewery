@@ -1,0 +1,146 @@
+[
+  {
+    "paper_id": "eval:1",
+    "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "year": 2019,
+    "abstract": "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models, BERT is designed to pre-train deep bidirectional representations from unlabeled text. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks. BERT obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5% and SQuAD v1.1 F1 to 93.2.",
+    "gold": {
+      "methods": ["BERT", "Transformer", "预训练", "微调"],
+      "datasets": ["GLUE", "SQuAD"],
+      "metrics": ["F1"],
+      "conclusion_keywords": [["state-of-the-art", "最优", "最先进", "SOTA"], ["BERT"], ["GLUE"]]
+    }
+  },
+  {
+    "paper_id": "eval:2",
+    "title": "面向中文命名实体识别的预训练模型对比研究",
+    "year": 2022,
+    "abstract": "本文针对中文命名实体识别任务，系统对比了 BERT、RoBERTa、ALBERT 三种预训练模型的表现。我们在 MSRA NER 和 Weibo NER 数据集上进行实验，结果表明 RoBERTa 取得最优 F1 值，相较 BERT 提升 1.8 个百分点。实验进一步分析了不同微调策略对结果的影响，为中文 NER 实践提供了参考。",
+    "gold": {
+      "methods": ["BERT", "RoBERTa", "ALBERT", "预训练", "微调"],
+      "datasets": ["MSRA NER", "Weibo"],
+      "metrics": ["F1"],
+      "conclusion_keywords": [["RoBERTa"], ["F1"]]
+    }
+  },
+  {
+    "paper_id": "eval:3",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "year": 2020,
+    "abstract": "Large pre-trained language models have been shown to store factual knowledge in their parameters. We introduce retrieval-augmented generation (RAG) models that combine pre-trained parametric and non-parametric memory for language generation. Our RAG models achieve state-of-the-art results on three open-domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures.",
+    "gold": {
+      "methods": ["RAG", "retrieval-augmented", "Seq2Seq", "预训练"],
+      "datasets": [],
+      "metrics": [],
+      "conclusion_keywords": [["state-of-the-art", "最优", "最先进", "SOTA"], ["outperform", "优于", "超过", "超越", "胜过"]]
+    }
+  },
+  {
+    "paper_id": "eval:4",
+    "title": "基于对比学习的中文文本分类方法研究",
+    "year": 2023,
+    "abstract": "本研究提出一种基于对比学习的中文文本分类方法。我们在 THUCNews 和 ChnSentiCorp 数据集上评估方法，准确率分别达到 96.3% 和 94.8%，相较传统监督学习基线提升明显。结果表明对比学习在小样本场景下尤其有效。",
+    "gold": {
+      "methods": ["对比学习", "监督学习"],
+      "datasets": ["THUCNews", "ChnSentiCorp"],
+      "metrics": ["准确率"],
+      "conclusion_keywords": [["对比学习", "contrastive learning"], ["小样本", "few-shot", "few shot"]]
+    }
+  },
+  {
+    "paper_id": "eval:5",
+    "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    "year": 2022,
+    "abstract": "We explore how generating a chain of thought—a series of intermediate reasoning steps—significantly improves the ability of large language models to perform complex reasoning. Experiments on three large language models show that chain-of-thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks. On GSM8K, a state-of-the-art accuracy of 56.9% is reached.",
+    "gold": {
+      "methods": ["chain-of-thought", "prompting", "LLM"],
+      "datasets": ["GSM8K"],
+      "metrics": ["accuracy"],
+      "conclusion_keywords": [["chain-of-thought", "思维链", "CoT"], ["reasoning", "推理"]]
+    }
+  },
+  {
+    "paper_id": "eval:6",
+    "title": "知识图谱与大语言模型融合的问答系统综述",
+    "year": 2024,
+    "abstract": "本文对知识图谱与大语言模型融合的问答系统进行系统综述。我们总结了三类主流方法：检索增强、知识蒸馏与提示工程。实验显示融合方法在 DuReader 和 CMRC 数据集上的 F1 较纯 LLM 基线平均提升 5.2 个百分点。本文进一步讨论了幻觉抑制与可解释性等开放问题。",
+    "gold": {
+      "methods": ["知识图谱", "大语言模型", "LLM", "检索增强", "知识蒸馏"],
+      "datasets": ["DuReader", "CMRC"],
+      "metrics": ["F1"],
+      "conclusion_keywords": [["融合", "fusion", "结合"], ["幻觉", "hallucination"]]
+    }
+  },
+  {
+    "paper_id": "eval:7",
+    "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "year": 2021,
+    "abstract": "We propose Low-Rank Adaptation (LoRA), which freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks. LoRA performs on-par or better than fine-tuning on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite having 10000x fewer trainable parameters.",
+    "gold": {
+      "methods": ["LoRA", "Transformer", "RoBERTa", "GPT", "微调"],
+      "datasets": [],
+      "metrics": [],
+      "conclusion_keywords": [["LoRA"], ["fine-tuning", "微调", "fine tuning"]]
+    }
+  },
+  {
+    "paper_id": "eval:8",
+    "title": "面向中文摘要生成的指针网络改进方法",
+    "year": 2021,
+    "abstract": "本文提出一种改进的指针网络用于中文文本摘要生成，结合了注意力机制与覆盖机制。在 LCSTS 数据集上，模型 ROUGE-1 达到 39.4，ROUGE-L 达到 36.2，优于多个基线模型。实验表明覆盖机制能有效缓解重复生成问题。",
+    "gold": {
+      "methods": ["指针网络", "注意力机制", "摘要生成"],
+      "datasets": ["LCSTS"],
+      "metrics": ["ROUGE-1", "ROUGE-L"],
+      "conclusion_keywords": [["覆盖机制", "coverage"], ["ROUGE"]]
+    }
+  },
+  {
+    "paper_id": "eval:9",
+    "title": "Few-Shot Learning with Language Models via In-Context Demonstrations",
+    "year": 2022,
+    "abstract": "We investigate how large language models can perform new tasks given only a few demonstrations in context, without any parameter updates. Our experiments on MMLU and BIG-bench show that in-context learning with carefully selected demonstrations achieves strong few-shot performance, narrowing the gap to fully supervised models.",
+    "gold": {
+      "methods": ["few-shot", "in-context learning", "LLM"],
+      "datasets": ["MMLU", "BIG-bench"],
+      "metrics": [],
+      "conclusion_keywords": [["few-shot", "小样本", "few shot"], ["in-context", "上下文学习", "in context"]]
+    }
+  },
+  {
+    "paper_id": "eval:10",
+    "title": "基于图神经网络的中文事件抽取方法",
+    "year": 2023,
+    "abstract": "本文提出一种基于图神经网络（GNN）的中文事件抽取方法，利用句法依存图建模触发词与论元的关系。在 ACE 2005 中文事件抽取数据集上，触发词识别 F1 达到 75.4%，论元角色分类 F1 达到 63.1%，超过基于 BERT 的主流方法。",
+    "gold": {
+      "methods": ["图神经网络", "GNN", "BERT", "事件抽取"],
+      "datasets": ["ACE 2005"],
+      "metrics": ["F1"],
+      "conclusion_keywords": [["GNN", "图神经网络", "graph neural network"], ["事件抽取", "event extraction"]]
+    }
+  },
+  {
+    "paper_id": "eval:11",
+    "title": "Diffusion Models for Text Generation: A Survey",
+    "year": 2024,
+    "abstract": "Diffusion models have shown remarkable success in image generation and are now being applied to text generation. This survey reviews recent advances of diffusion models for text, including continuous, discrete, and semi-autoregressive variants. We compare their performance on language modeling benchmarks like WikiText and discuss the gap with autoregressive models on perplexity.",
+    "gold": {
+      "methods": ["扩散模型", "diffusion"],
+      "datasets": ["WikiText"],
+      "metrics": ["perplexity"],
+      "conclusion_keywords": [["diffusion", "扩散"], ["autoregressive", "自回归"]]
+    }
+  },
+  {
+    "paper_id": "eval:12",
+    "title": "基于强化学习人类反馈的中文对话系统训练",
+    "year": 2023,
+    "abstract": "我们提出基于强化学习人类反馈（RLHF）的中文对话系统训练框架，融合指令微调与人类偏好优化。在 KdConv 和 DuConv 数据集上，BLEU 和人工评测均显著高于 SFT 基线。实验表明 RLHF 能有效提升对话的安全性与有用性。",
+    "gold": {
+      "methods": ["RLHF", "强化学习", "指令微调", "SFT", "对话系统"],
+      "datasets": ["KdConv", "DuConv"],
+      "metrics": ["BLEU"],
+      "conclusion_keywords": [["RLHF", "人类反馈强化学习"], ["对话", "dialogue", "conversation"]]
+    }
+  }
+]

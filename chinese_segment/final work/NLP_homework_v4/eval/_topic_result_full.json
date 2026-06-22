@@ -1,0 +1,174 @@
+[
+  {
+    "topic": "大语言模型 思维链推理",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "Chain-of-Thought Hub: A Continuous Effort to Measure Large L",
+        true
+      ],
+      [
+        "Towards Reasoning Era: A Survey of Long Chain-of-Thought for",
+        true
+      ],
+      [
+        "Chain-of-Thought Prompting Elicits Reasoning in Large Langua",
+        true
+      ],
+      [
+        "Graph-of-Thought: Utilizing Large Language Models to Solve C",
+        false
+      ],
+      [
+        "Buffer of Thoughts: Thought-Augmented Reasoning with Large L",
+        true
+      ],
+      [
+        "Learning From Failure: Integrating Negative Examples when Fi",
+        false
+      ],
+      [
+        "Demystifying Instruction Mixing for Fine-tuning Large Langua",
+        false
+      ],
+      [
+        "WizardLM: Empowering large pre-trained language models to fo",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "检索增强生成",
+    "n": 6,
+    "relevant": 3,
+    "acc": 0.5,
+    "details": [
+      [
+        "Automated Literature Review Using NLP Techniques and LLM-Bas",
+        true
+      ],
+      [
+        "Riddle Me This! Stealthy Membership Inference for Retrieval-",
+        false
+      ],
+      [
+        "EVOR: Evolving Retrieval for Code Generation",
+        true
+      ],
+      [
+        "AR-RAG: Autoregressive Retrieval Augmentation for Image Gene",
+        false
+      ],
+      [
+        "EHR-RAGp: Retrieval-Augmented Prototype-Guided Foundation Mo",
+        true
+      ],
+      [
+        "Factually: Exploring Wearable Fact-Checking for Augmented Tr",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "中文命名实体识别",
+    "n": 8,
+    "relevant": 1,
+    "acc": 0.125,
+    "details": [
+      [
+        "Query-Based Named Entity Recognition",
+        true
+      ],
+      [
+        "BanglaCoNER: Towards Robust Bangla Complex Named Entity Reco",
+        false
+      ],
+      [
+        "A Morpho-Syntactically Informed LSTM-CRF Model for Named Ent",
+        false
+      ],
+      [
+        "CMNEROne at SemEval-2022 Task 11: Code-Mixed Named Entity Re",
+        false
+      ],
+      [
+        "Feature-Rich Named Entity Recognition for Bulgarian Using Co",
+        false
+      ],
+      [
+        "On Fusing ChatGPT and Ensemble Learning in Discon-tinuous Na",
+        false
+      ],
+      [
+        "An HMM Based Named Entity Recognition System for Indian Lang",
+        false
+      ],
+      [
+        "Chinese Herbal Recognition based on Competitive Attentional ",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "对比学习 句向量",
+    "n": 5,
+    "relevant": 2,
+    "acc": 0.4,
+    "details": [
+      [
+        "miCSE: Mutual Information Contrastive Learning for Low-shot ",
+        true
+      ],
+      [
+        "Batch-Softmax Contrastive Loss for Pairwise Sentence Scoring",
+        true
+      ],
+      [
+        "On the Similarities of Embeddings in Contrastive Learning",
+        false
+      ],
+      [
+        "Supervised Contrastive Learning for Accented Speech Recognit",
+        false
+      ],
+      [
+        "Temporal Supervised Contrastive Learning for Modeling Patien",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "retrieval augmented generation",
+    "n": 6,
+    "relevant": 5,
+    "acc": 0.8333333333333334,
+    "details": [
+      [
+        "Automated Literature Review Using NLP Techniques and LLM-Bas",
+        true
+      ],
+      [
+        "Riddle Me This! Stealthy Membership Inference for Retrieval-",
+        true
+      ],
+      [
+        "EVOR: Evolving Retrieval for Code Generation",
+        true
+      ],
+      [
+        "AR-RAG: Autoregressive Retrieval Augmentation for Image Gene",
+        true
+      ],
+      [
+        "EHR-RAGp: Retrieval-Augmented Prototype-Guided Foundation Mo",
+        true
+      ],
+      [
+        "Factually: Exploring Wearable Fact-Checking for Augmented Tr",
+        false
+      ]
+    ]
+  }
+]

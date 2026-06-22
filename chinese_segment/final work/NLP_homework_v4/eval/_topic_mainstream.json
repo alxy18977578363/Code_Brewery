@@ -1,0 +1,234 @@
+[
+  {
+    "topic": "大语言模型 思维链推理",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "Chain-of-Thought Hub: A Continuous Effort to Measure Large L",
+        true
+      ],
+      [
+        "Towards Reasoning Era: A Survey of Long Chain-of-Thought for",
+        true
+      ],
+      [
+        "Chain-of-Thought Prompting Elicits Reasoning in Large Langua",
+        true
+      ],
+      [
+        "Graph-of-Thought: Utilizing Large Language Models to Solve C",
+        false
+      ],
+      [
+        "Buffer of Thoughts: Thought-Augmented Reasoning with Large L",
+        true
+      ],
+      [
+        "Learning From Failure: Integrating Negative Examples when Fi",
+        false
+      ],
+      [
+        "Demystifying Instruction Mixing for Fine-tuning Large Langua",
+        false
+      ],
+      [
+        "WizardLM: Empowering large pre-trained language models to fo",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "检索增强生成",
+    "n": 6,
+    "relevant": 5,
+    "acc": 0.8333333333333334,
+    "details": [
+      [
+        "Automated Literature Review Using NLP Techniques and LLM-Bas",
+        true
+      ],
+      [
+        "Riddle Me This! Stealthy Membership Inference for Retrieval-",
+        true
+      ],
+      [
+        "EVOR: Evolving Retrieval for Code Generation",
+        true
+      ],
+      [
+        "AR-RAG: Autoregressive Retrieval Augmentation for Image Gene",
+        true
+      ],
+      [
+        "EHR-RAGp: Retrieval-Augmented Prototype-Guided Foundation Mo",
+        true
+      ],
+      [
+        "Factually: Exploring Wearable Fact-Checking for Augmented Tr",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "扩散模型 图像生成",
+    "n": 8,
+    "relevant": 6,
+    "acc": 0.75,
+    "details": [
+      [
+        "Controllable Generation with Text-to-Image Diffusion Models:",
+        true
+      ],
+      [
+        "Image is All You Need to Empower Large-scale Diffusion Model",
+        true
+      ],
+      [
+        "Alleviating Distortion in Image Generation via Multi-Resolut",
+        true
+      ],
+      [
+        "Text-to-image Diffusion Models in Generative AI: A Survey",
+        true
+      ],
+      [
+        "MirrorDiffusion: Stabilizing Diffusion Process in Zero-shot ",
+        true
+      ],
+      [
+        "Pisces: An Auto-regressive Foundation Model for Image Unders",
+        false
+      ],
+      [
+        "DIRE for Diffusion-Generated Image Detection",
+        false
+      ],
+      [
+        "A Flow-based Truncated Denoising Diffusion Model for Super-r",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "图神经网络",
+    "n": 8,
+    "relevant": 4,
+    "acc": 0.5,
+    "details": [
+      [
+        "A Tutorial about Random Neural Networks in Supervised Learni",
+        false
+      ],
+      [
+        "Learning Universal Graph Neural Network Embeddings With Aid ",
+        true
+      ],
+      [
+        "Predicting concentration levels of air pollutants by transfe",
+        false
+      ],
+      [
+        "Masked Conditional Neural Networks for Audio Classification",
+        false
+      ],
+      [
+        "The Deep Arbitrary Polynomial Chaos Neural Network or how De",
+        false
+      ],
+      [
+        "Graph Neural Network Training Systems: A Performance Compari",
+        true
+      ],
+      [
+        "Proficient Graph Neural Network Design by Accumulating Knowl",
+        true
+      ],
+      [
+        "Fast and Deep Graph Neural Networks",
+        true
+      ]
+    ]
+  },
+  {
+    "topic": "视觉语言预训练模型",
+    "n": 8,
+    "relevant": 0,
+    "acc": 0.0,
+    "details": [
+      [
+        "Procedural Pretraining: Warming Up Language Models with Abst",
+        false
+      ],
+      [
+        "Mix, MinHash, and Match: Cross-Source Agreement for Multilin",
+        false
+      ],
+      [
+        "Pretraining Strategies and Scaling for ECG Foundation Models",
+        false
+      ],
+      [
+        "VITaL Pretraining: Visuo-Tactile Pretraining for Tactile and",
+        false
+      ],
+      [
+        "Evaluating Pretrained models for Deployable Lifelong Learnin",
+        false
+      ],
+      [
+        "PRIMUS: Pretraining IMU Encoders with Multimodal Self-Superv",
+        false
+      ],
+      [
+        "Enhancing pretraining efficiency for medical image segmentat",
+        false
+      ],
+      [
+        "MTP: Advancing Remote Sensing Foundation Model via Multi-Tas",
+        false
+      ]
+    ]
+  },
+  {
+    "topic": "参数高效微调",
+    "n": 8,
+    "relevant": 5,
+    "acc": 0.625,
+    "details": [
+      [
+        "Parameter-Efficient Fine-Tuning of Large Pretrained Models f",
+        true
+      ],
+      [
+        "See Further for Parameter Efficient Fine-tuning by Standing ",
+        true
+      ],
+      [
+        "Point-PEFT: Parameter-Efficient Fine-Tuning for 3D Pre-train",
+        true
+      ],
+      [
+        "Differentially Private Fine-tuning of Language Models",
+        true
+      ],
+      [
+        "Evaluating Fine-Tuning Efficiency of Human-Inspired Learning",
+        false
+      ],
+      [
+        "Spatio-Temporal Side Tuning Pre-trained Foundation Models fo",
+        true
+      ],
+      [
+        "Is The Universal Matter - Antimatter Asymmetry Fine Tuned?",
+        false
+      ],
+      [
+        "Parameter Tuning for Self-optimizing Software at Scale",
+        false
+      ]
+    ]
+  }
+]
