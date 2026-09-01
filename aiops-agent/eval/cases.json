@@ -1,0 +1,230 @@
+[
+  {
+    "schema_version": "1.0",
+    "case_id": "case-001",
+    "observed_at": "2026-08-26T10:00:00+08:00",
+    "service": {
+      "name": "demo-service"
+    },
+    "metrics": {
+      "cpu_usage_percent": 95.2,
+      "memory_usage_percent": 87.4,
+      "disk_usage_percent": 63.1,
+      "load_1m": 4.8,
+      "request_rate_per_sec": 120.5,
+      "response_time_ms": 850,
+      "error_rate_percent": 8.5,
+      "db_connection_usage_percent": 92.0
+    },
+    "logs": [
+      {
+        "timestamp": "2026-08-26T10:00:03+08:00",
+        "level": "ERROR",
+        "source": "database",
+        "message": "database connection timeout"
+      }
+    ],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-002",
+    "observed_at": "2026-08-26T10:05:00+08:00",
+    "service": {
+      "name": "demo-service"
+    },
+    "metrics": {
+      "cpu_usage_percent": 32.5,
+      "memory_usage_percent": 48.0,
+      "disk_usage_percent": 55.2,
+      "load_1m": 0.9,
+      "request_rate_per_sec": 80.0,
+      "response_time_ms": 120,
+      "error_rate_percent": 0.2,
+      "db_connection_usage_percent": 35.0
+    },
+    "logs": [
+      {
+        "timestamp": "2026-08-26T10:05:01+08:00",
+        "level": "INFO",
+        "source": "application",
+        "message": "request completed successfully"
+      }
+    ],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-003",
+    "observed_at": "2026-08-26T10:10:00+08:00",
+    "service": {"name": "demo-service"},
+    "metrics": {
+      "cpu_usage_percent": 18.0,
+      "memory_usage_percent": 35.0,
+      "disk_usage_percent": 42.0,
+      "load_1m": 0.4,
+      "request_rate_per_sec": 25.0,
+      "response_time_ms": 95,
+      "error_rate_percent": 0.0,
+      "db_connection_usage_percent": 20.0
+    },
+    "logs": [],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-004",
+    "observed_at": "2026-08-26T10:15:00+08:00",
+    "service": {"name": "checkout-service"},
+    "metrics": {"cpu_usage_percent": 68.0, "memory_usage_percent": 62.0, "disk_usage_percent": 70.0, "load_1m": 2.1, "request_rate_per_sec": 450.0, "response_time_ms": 210, "error_rate_percent": 0.8, "db_connection_usage_percent": 65.0},
+    "logs": [{"timestamp": "2026-08-26T10:15:02+08:00", "level": "INFO", "source": "application", "message": "traffic increase handled within SLO"}],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-005",
+    "observed_at": "2026-08-26T10:20:00+08:00",
+    "service": {"name": "compute-service"},
+    "metrics": {"cpu_usage_percent": 98.7, "memory_usage_percent": 51.0, "disk_usage_percent": 50.0, "load_1m": 3.2, "request_rate_per_sec": 110.0, "response_time_ms": 180, "error_rate_percent": 0.5, "db_connection_usage_percent": 40.0},
+    "logs": [{"timestamp": "2026-08-26T10:20:01+08:00", "level": "WARN", "source": "runtime", "message": "CPU utilization exceeded warning threshold"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-006",
+    "observed_at": "2026-08-26T10:25:00+08:00",
+    "service": {"name": "cache-service"},
+    "metrics": {"cpu_usage_percent": 45.0, "memory_usage_percent": 96.3, "disk_usage_percent": 58.0, "load_1m": 1.7, "request_rate_per_sec": 140.0, "response_time_ms": 160, "error_rate_percent": 0.4, "db_connection_usage_percent": 45.0},
+    "logs": [{"timestamp": "2026-08-26T10:25:02+08:00", "level": "WARN", "source": "memory", "message": "memory pressure is high"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-007",
+    "observed_at": "2026-08-26T10:30:00+08:00",
+    "service": {"name": "storage-service"},
+    "metrics": {"cpu_usage_percent": 40.0, "memory_usage_percent": 50.0, "disk_usage_percent": 96.5, "load_1m": 1.0, "request_rate_per_sec": 60.0, "response_time_ms": 130, "error_rate_percent": 0.2, "db_connection_usage_percent": 30.0},
+    "logs": [{"timestamp": "2026-08-26T10:30:03+08:00", "level": "ERROR", "source": "storage", "message": "disk space is almost exhausted"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-008",
+    "observed_at": "2026-08-26T10:35:00+08:00",
+    "service": {"name": "worker-service"},
+    "metrics": {"cpu_usage_percent": 72.0, "memory_usage_percent": 64.0, "disk_usage_percent": 60.0, "load_1m": 14.8, "request_rate_per_sec": 180.0, "response_time_ms": 260, "error_rate_percent": 1.0, "db_connection_usage_percent": 55.0},
+    "logs": [{"timestamp": "2026-08-26T10:35:01+08:00", "level": "WARN", "source": "scheduler", "message": "run queue is growing"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-009",
+    "observed_at": "2026-08-26T10:40:00+08:00",
+    "service": {"name": "api-service"},
+    "metrics": {"cpu_usage_percent": 58.0, "memory_usage_percent": 60.0, "disk_usage_percent": 52.0, "load_1m": 1.8, "request_rate_per_sec": 90.0, "response_time_ms": 1450, "error_rate_percent": 1.2, "db_connection_usage_percent": 48.0},
+    "logs": [{"timestamp": "2026-08-26T10:40:02+08:00", "level": "WARN", "source": "gateway", "message": "upstream response latency increased"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-010",
+    "observed_at": "2026-08-26T10:45:00+08:00",
+    "service": {"name": "payment-service"},
+    "metrics": {"cpu_usage_percent": 62.0, "memory_usage_percent": 66.0, "disk_usage_percent": 57.0, "load_1m": 2.4, "request_rate_per_sec": 150.0, "response_time_ms": 310, "error_rate_percent": 12.6, "db_connection_usage_percent": 70.0},
+    "logs": [{"timestamp": "2026-08-26T10:45:04+08:00", "level": "ERROR", "source": "payment", "message": "payment provider returned failures"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-011",
+    "observed_at": "2026-08-26T10:50:00+08:00",
+    "service": {"name": "order-service"},
+    "metrics": {"cpu_usage_percent": 55.0, "memory_usage_percent": 58.0, "disk_usage_percent": 61.0, "load_1m": 1.5, "request_rate_per_sec": 130.0, "response_time_ms": 220, "error_rate_percent": 0.7, "db_connection_usage_percent": 98.0},
+    "logs": [{"timestamp": "2026-08-26T10:50:01+08:00", "level": "ERROR", "source": "database", "message": "connection pool is exhausted"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-012",
+    "observed_at": "2026-08-26T10:55:00+08:00",
+    "service": {"name": "profile-service"},
+    "metrics": {"cpu_usage_percent": 35.0, "memory_usage_percent": 45.0, "disk_usage_percent": 50.0, "load_1m": 0.8, "request_rate_per_sec": 70.0, "response_time_ms": 110, "error_rate_percent": 0.1, "db_connection_usage_percent": 30.0},
+    "logs": [{"timestamp": "2026-08-26T10:55:02+08:00", "level": "ERROR", "source": "application", "message": "unexpected exception in background task"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-013",
+    "observed_at": "2026-08-26T11:00:00+08:00",
+    "service": {"name": "search-service"},
+    "metrics": {"cpu_usage_percent": 74.0, "memory_usage_percent": 72.0, "disk_usage_percent": 76.0, "load_1m": 2.9, "request_rate_per_sec": 210.0, "response_time_ms": 340, "error_rate_percent": 2.5, "db_connection_usage_percent": 73.0},
+    "logs": [{"timestamp": "2026-08-26T11:00:01+08:00", "level": "WARN", "source": "indexer", "message": "index refresh took longer than usual"}],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-014",
+    "observed_at": "2026-08-26T11:05:00+08:00",
+    "service": {"name": "batch-service"},
+    "metrics": {"cpu_usage_percent": 93.0, "memory_usage_percent": 91.0, "disk_usage_percent": 65.0, "load_1m": 10.2, "request_rate_per_sec": 40.0, "response_time_ms": 500, "error_rate_percent": 3.0, "db_connection_usage_percent": 68.0},
+    "logs": [{"timestamp": "2026-08-26T11:05:03+08:00", "level": "ERROR", "source": "worker", "message": "worker process is overloaded"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-015",
+    "observed_at": "2026-08-26T11:10:00+08:00",
+    "service": {"name": "gateway-service"},
+    "metrics": {"cpu_usage_percent": 82.0, "memory_usage_percent": 79.0, "disk_usage_percent": 62.0, "load_1m": 6.5, "request_rate_per_sec": 900.0, "response_time_ms": 980, "error_rate_percent": 9.2, "db_connection_usage_percent": 88.0},
+    "logs": [{"timestamp": "2026-08-26T11:10:02+08:00", "level": "ERROR", "source": "gateway", "message": "multiple upstream requests failed"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-016",
+    "observed_at": "2026-08-26T11:15:00+08:00",
+    "service": {"name": "report-service"},
+    "metrics": {"cpu_usage_percent": 44.0, "memory_usage_percent": 53.0, "disk_usage_percent": 59.0, "load_1m": 1.2, "request_rate_per_sec": 35.0, "response_time_ms": 190, "error_rate_percent": 0.3, "db_connection_usage_percent": 94.0},
+    "logs": [{"timestamp": "2026-08-26T11:15:01+08:00", "level": "ERROR", "source": "database", "message": "database connection timeout while generating report"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-017",
+    "observed_at": "2026-08-26T11:20:00+08:00",
+    "service": {"name": "partial-metrics-service"},
+    "metrics": {"cpu_usage_percent": 88.0, "memory_usage_percent": null, "disk_usage_percent": 64.0, "load_1m": null, "request_rate_per_sec": 100.0, "response_time_ms": 720, "error_rate_percent": null, "db_connection_usage_percent": 81.0},
+    "logs": [{"timestamp": "2026-08-26T11:20:03+08:00", "level": "WARN", "source": "collector", "message": "some host metrics are temporarily unavailable"}],
+    "expected_label": "abnormal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-018",
+    "observed_at": "2026-08-26T11:25:00+08:00",
+    "service": {"name": "telemetry-service"},
+    "metrics": {"cpu_usage_percent": null, "memory_usage_percent": 40.0, "disk_usage_percent": null, "load_1m": 0.7, "request_rate_per_sec": 55.0, "response_time_ms": 100, "error_rate_percent": 0.0, "db_connection_usage_percent": null},
+    "logs": [{"timestamp": "2026-08-26T11:25:01+08:00", "level": "INFO", "source": "collector", "message": "metric collection completed with partial data"}],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-019",
+    "observed_at": "2026-08-26T11:30:00+08:00",
+    "service": {"name": "notification-service"},
+    "metrics": {"cpu_usage_percent": 27.0, "memory_usage_percent": 39.0, "disk_usage_percent": 47.0, "load_1m": 0.6, "request_rate_per_sec": 65.0, "response_time_ms": 105, "error_rate_percent": 0.1, "db_connection_usage_percent": 28.0},
+    "logs": [{"timestamp": "2026-08-26T11:30:02+08:00", "level": "DEBUG", "source": "notification", "message": "notification queue is empty"}],
+    "expected_label": "normal"
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-020",
+    "observed_at": "2026-08-26T11:35:00+08:00",
+    "service": {"name": "critical-service"},
+    "metrics": {"cpu_usage_percent": 99.5, "memory_usage_percent": 97.8, "disk_usage_percent": 98.2, "load_1m": 18.0, "request_rate_per_sec": 760.0, "response_time_ms": 2200, "error_rate_percent": 18.0, "db_connection_usage_percent": 99.0},
+    "logs": [
+      {"timestamp": "2026-08-26T11:35:01+08:00", "level": "ERROR", "source": "system", "message": "service is failing across compute, storage, and database layers"},
+      {"timestamp": "2026-08-26T11:35:02+08:00", "level": "ERROR", "source": "database", "message": "connection pool exhausted"}
+    ],
+    "expected_label": "abnormal"
+  }
+]

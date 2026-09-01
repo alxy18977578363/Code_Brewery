@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "evaluated_at": "2026-08-31T17:19:18.446+00:00",
+  "total_cases": 20,
+  "correct_cases": 20,
+  "incorrect_cases": 0,
+  "accuracy": 1.0,
+  "accuracy_percent": 100.0,
+  "t4_latency_ms": {
+    "average": 0.004,
+    "minimum": 0.002,
+    "maximum": 0.019,
+    "median": 0.003
+  },
+  "case_results": [
+    {
+      "case_id": "case-001",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.019,
+      "t5_latency_ms": 0.162,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-002",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.006,
+      "t5_latency_ms": 0.021,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-003",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.016,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-004",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.015,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-005",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.004,
+      "t5_latency_ms": 0.051,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-006",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.044,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-007",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.052,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-008",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.041,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-009",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.041,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-010",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.043,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-011",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.004,
+      "t5_latency_ms": 0.051,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-012",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.037,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-013",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.002,
+      "t5_latency_ms": 0.016,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-014",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 2.399,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-015",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.077,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-016",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.004,
+      "t5_latency_ms": 0.048,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-017",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.004,
+      "t5_latency_ms": 0.078,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-018",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.003,
+      "t5_latency_ms": 0.021,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-019",
+      "expected_label": "normal",
+      "actual_label": "normal",
+      "correct": true,
+      "t4_latency_ms": 0.002,
+      "t5_latency_ms": 0.013,
+      "model_used": false,
+      "detector": "rule-v1"
+    },
+    {
+      "case_id": "case-020",
+      "expected_label": "abnormal",
+      "actual_label": "abnormal",
+      "correct": true,
+      "t4_latency_ms": 0.005,
+      "t5_latency_ms": 0.1,
+      "model_used": false,
+      "detector": "rule-v1"
+    }
+  ],
+  "t5_latency_ms": {
+    "average": 0.166,
+    "minimum": 0.013,
+    "maximum": 2.399,
+    "median": 0.043
+  },
+  "model_usage": {
+    "model_calls": 0,
+    "fallback_cases": 0,
+    "normal_cases_without_model": 6,
+    "rule_cases": 20
+  }
+}

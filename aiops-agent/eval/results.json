@@ -1,0 +1,981 @@
+[
+  {
+    "schema_version": "1.0",
+    "case_id": "case-001",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "demo-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "high",
+      "confidence": 0.99,
+      "summary": "检测到 5 个异常信号：CPU 使用率超过异常阈值；响应时间超过异常阈值；错误率超过异常阈值等"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 95.2,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        },
+        {
+          "name": "response_time_ms",
+          "value": 850,
+          "threshold": 500,
+          "operator": ">",
+          "reason": "响应时间超过异常阈值"
+        },
+        {
+          "name": "error_rate_percent",
+          "value": 8.5,
+          "threshold": 5,
+          "operator": ">",
+          "reason": "错误率超过异常阈值"
+        },
+        {
+          "name": "db_connection_usage_percent",
+          "value": 92.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:00:03+08:00",
+          "level": "ERROR",
+          "source": "database",
+          "message": "database connection timeout",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.019,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-002",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "demo-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.9,
+      "summary": "未发现超过第一版阈值的指标或 ERROR 日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": []
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.006,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-003",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "demo-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.9,
+      "summary": "未发现超过第一版阈值的指标或 ERROR 日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": []
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-004",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "checkout-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.9,
+      "summary": "未发现超过第一版阈值的指标或 ERROR 日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": []
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-005",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "compute-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "low",
+      "confidence": 0.8,
+      "summary": "检测到 1 个异常信号：CPU 使用率超过异常阈值"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 98.7,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:20:01+08:00",
+          "level": "WARN",
+          "source": "runtime",
+          "message": "CPU utilization exceeded warning threshold",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.004,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-006",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "cache-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "low",
+      "confidence": 0.8,
+      "summary": "检测到 1 个异常信号：内存使用率超过异常阈值"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "memory_usage_percent",
+          "value": 96.3,
+          "threshold": 95,
+          "operator": ">",
+          "reason": "内存使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:25:02+08:00",
+          "level": "WARN",
+          "source": "memory",
+          "message": "memory pressure is high",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-007",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "storage-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.85,
+      "summary": "检测到 2 个异常信号：磁盘使用率超过异常阈值；检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "disk_usage_percent",
+          "value": 96.5,
+          "threshold": 90,
+          "operator": ">",
+          "reason": "磁盘使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:30:03+08:00",
+          "level": "ERROR",
+          "source": "storage",
+          "message": "disk space is almost exhausted",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-008",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "worker-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "low",
+      "confidence": 0.8,
+      "summary": "检测到 1 个异常信号：1 分钟系统负载超过演示阈值"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "load_1m",
+          "value": 14.8,
+          "threshold": 8,
+          "operator": ">",
+          "reason": "1 分钟系统负载超过演示阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:35:01+08:00",
+          "level": "WARN",
+          "source": "scheduler",
+          "message": "run queue is growing",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-009",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "api-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "low",
+      "confidence": 0.8,
+      "summary": "检测到 1 个异常信号：响应时间超过异常阈值"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "response_time_ms",
+          "value": 1450,
+          "threshold": 500,
+          "operator": ">",
+          "reason": "响应时间超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:40:02+08:00",
+          "level": "WARN",
+          "source": "gateway",
+          "message": "upstream response latency increased",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-010",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "payment-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.85,
+      "summary": "检测到 2 个异常信号：错误率超过异常阈值；检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "error_rate_percent",
+          "value": 12.6,
+          "threshold": 5,
+          "operator": ">",
+          "reason": "错误率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:45:04+08:00",
+          "level": "ERROR",
+          "source": "payment",
+          "message": "payment provider returned failures",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-011",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "order-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.85,
+      "summary": "检测到 2 个异常信号：数据库连接使用率超过异常阈值；检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "db_connection_usage_percent",
+          "value": 98.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:50:01+08:00",
+          "level": "ERROR",
+          "source": "database",
+          "message": "connection pool is exhausted",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.004,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-012",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "profile-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "low",
+      "confidence": 0.8,
+      "summary": "检测到 1 个异常信号：检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T10:55:02+08:00",
+          "level": "ERROR",
+          "source": "application",
+          "message": "unexpected exception in background task",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-013",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "search-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.9,
+      "summary": "未发现超过第一版阈值的指标或 ERROR 日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:00:01+08:00",
+          "level": "WARN",
+          "source": "indexer",
+          "message": "index refresh took longer than usual",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.002,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-014",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "batch-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.9,
+      "summary": "检测到 3 个异常信号：CPU 使用率超过异常阈值；1 分钟系统负载超过演示阈值；检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 93.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        },
+        {
+          "name": "load_1m",
+          "value": 10.2,
+          "threshold": 8,
+          "operator": ">",
+          "reason": "1 分钟系统负载超过演示阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:05:03+08:00",
+          "level": "ERROR",
+          "source": "worker",
+          "message": "worker process is overloaded",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-015",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "gateway-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "high",
+      "confidence": 0.99,
+      "summary": "检测到 5 个异常信号：CPU 使用率超过异常阈值；响应时间超过异常阈值；错误率超过异常阈值等"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 82.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        },
+        {
+          "name": "response_time_ms",
+          "value": 980,
+          "threshold": 500,
+          "operator": ">",
+          "reason": "响应时间超过异常阈值"
+        },
+        {
+          "name": "error_rate_percent",
+          "value": 9.2,
+          "threshold": 5,
+          "operator": ">",
+          "reason": "错误率超过异常阈值"
+        },
+        {
+          "name": "db_connection_usage_percent",
+          "value": 88.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:10:02+08:00",
+          "level": "ERROR",
+          "source": "gateway",
+          "message": "multiple upstream requests failed",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-016",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "report-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.85,
+      "summary": "检测到 2 个异常信号：数据库连接使用率超过异常阈值；检测到 ERROR 级别日志"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "db_connection_usage_percent",
+          "value": 94.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:15:01+08:00",
+          "level": "ERROR",
+          "source": "database",
+          "message": "database connection timeout while generating report",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.004,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-017",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "partial-metrics-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "medium",
+      "confidence": 0.9,
+      "summary": "检测到 3 个异常信号：CPU 使用率超过异常阈值；响应时间超过异常阈值；数据库连接使用率超过异常阈值"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 88.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        },
+        {
+          "name": "memory_usage_percent",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        },
+        {
+          "name": "load_1m",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        },
+        {
+          "name": "response_time_ms",
+          "value": 720,
+          "threshold": 500,
+          "operator": ">",
+          "reason": "响应时间超过异常阈值"
+        },
+        {
+          "name": "error_rate_percent",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        },
+        {
+          "name": "db_connection_usage_percent",
+          "value": 81.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:20:03+08:00",
+          "level": "WARN",
+          "source": "collector",
+          "message": "some host metrics are temporarily unavailable",
+          "reason": "WARN 日志作为辅助证据"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.004,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-018",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "telemetry-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.65,
+      "summary": "未发现明确异常，但部分指标缺失，判断置信度有限"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        },
+        {
+          "name": "disk_usage_percent",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        },
+        {
+          "name": "db_connection_usage_percent",
+          "value": null,
+          "threshold": null,
+          "operator": "missing",
+          "reason": "指标缺失，未参与异常判断"
+        }
+      ],
+      "logs": []
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.003,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-019",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "notification-service"
+    },
+    "result": {
+      "label": "normal",
+      "severity": "normal",
+      "confidence": 0.9,
+      "summary": "未发现超过第一版阈值的指标或 ERROR 日志"
+    },
+    "evidence": {
+      "metrics": [],
+      "logs": []
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.002,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "case_id": "case-020",
+    "analyzed_at": "2026-08-31T17:19:05.801+00:00",
+    "service": {
+      "name": "critical-service"
+    },
+    "result": {
+      "label": "abnormal",
+      "severity": "critical",
+      "confidence": 0.99,
+      "summary": "检测到 9 个异常信号：CPU 使用率超过异常阈值；内存使用率超过异常阈值；磁盘使用率超过异常阈值等"
+    },
+    "evidence": {
+      "metrics": [
+        {
+          "name": "cpu_usage_percent",
+          "value": 99.5,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "CPU 使用率超过异常阈值"
+        },
+        {
+          "name": "memory_usage_percent",
+          "value": 97.8,
+          "threshold": 95,
+          "operator": ">",
+          "reason": "内存使用率超过异常阈值"
+        },
+        {
+          "name": "disk_usage_percent",
+          "value": 98.2,
+          "threshold": 90,
+          "operator": ">",
+          "reason": "磁盘使用率超过异常阈值"
+        },
+        {
+          "name": "load_1m",
+          "value": 18.0,
+          "threshold": 8,
+          "operator": ">",
+          "reason": "1 分钟系统负载超过演示阈值"
+        },
+        {
+          "name": "response_time_ms",
+          "value": 2200,
+          "threshold": 500,
+          "operator": ">",
+          "reason": "响应时间超过异常阈值"
+        },
+        {
+          "name": "error_rate_percent",
+          "value": 18.0,
+          "threshold": 5,
+          "operator": ">",
+          "reason": "错误率超过异常阈值"
+        },
+        {
+          "name": "db_connection_usage_percent",
+          "value": 99.0,
+          "threshold": 80,
+          "operator": ">",
+          "reason": "数据库连接使用率超过异常阈值"
+        }
+      ],
+      "logs": [
+        {
+          "timestamp": "2026-08-26T11:35:01+08:00",
+          "level": "ERROR",
+          "source": "system",
+          "message": "service is failing across compute, storage, and database layers",
+          "reason": "检测到 ERROR 级别日志"
+        },
+        {
+          "timestamp": "2026-08-26T11:35:02+08:00",
+          "level": "ERROR",
+          "source": "database",
+          "message": "connection pool exhausted",
+          "reason": "检测到 ERROR 级别日志"
+        }
+      ]
+    },
+    "root_causes": [],
+    "recommendations": [],
+    "safety": {
+      "auto_remediation_allowed": false,
+      "actions_taken": []
+    },
+    "performance": {
+      "latency_ms": 0.005,
+      "detector": "rule-v1",
+      "model_used": false,
+      "model_name": null
+    }
+  }
+]

@@ -1,0 +1,27 @@
+services:
+  demo-service:
+    build:
+      context: ./demo_service
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./runtime:/runtime
+    restart: unless-stopped
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: freeaiops
+    ports:
+      - "3307:3306"
+    volumes:
+      - freeaiops_mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p123456"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  freeaiops_mysql_data:

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "case_id": "case-011",
+  "analyzed_at": "2026-08-28T12:26:06.743+00:00",
+  "service": {
+    "name": "order-service"
+  },
+  "result": {
+    "label": "abnormal",
+    "severity": "medium",
+    "confidence": 0.85,
+    "summary": "检测到 2 个异常信号：数据库连接使用率超过异常阈值；检测到 ERROR 级别日志"
+  },
+  "evidence": {
+    "metrics": [
+      {
+        "name": "db_connection_usage_percent",
+        "value": 98.0,
+        "threshold": 80,
+        "operator": ">",
+        "reason": "数据库连接使用率超过异常阈值"
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-08-26T10:50:01+08:00",
+        "level": "ERROR",
+        "source": "database",
+        "message": "connection pool is exhausted",
+        "reason": "检测到 ERROR 级别日志"
+      }
+    ]
+  },
+  "root_causes": [
+    {
+      "cause": "数据库连接池可能接近耗尽，或存在连接泄漏",
+      "confidence": 0.8,
+      "evidence_refs": [
+        "metrics.db_connection_usage_percent",
+        "logs[0]"
+      ]
+    },
+    {
+      "cause": "应用组件或上游依赖发生失败，需要结合错误日志定位",
+      "confidence": 0.72,
+      "evidence_refs": [
+        "logs[0]"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "P1",
+      "action": "人工检查数据库连接池配置和连接使用情况，确认是否存在连接泄漏或连接未正确释放",
+      "rationale": "连接使用率高达98%且日志显示连接池耗尽，需人工介入排查连接管理问题",
+      "requires_approval": true
+    },
+    {
+      "priority": "P2",
+      "action": "人工审查相关应用日志和错误堆栈，定位连接池耗尽的具体触发点",
+      "rationale": "日志仅显示连接池耗尽，需结合更多日志信息确定根因",
+      "requires_approval": true
+    },
+    {
+      "priority": "P2",
+      "action": "人工检查数据库服务健康状态和资源使用情况，排除数据库自身性能问题",
+      "rationale": "数据库连接异常可能由数据库端问题引起，需人工确认",
+      "requires_approval": true
+    },
+    {
+      "priority": "P3",
+      "action": "人工评估是否需要调整连接池大小或优化连接获取逻辑，但需先确认根因",
+      "rationale": "在未确认根因前，调整配置可能无效或引入风险，需人工谨慎评估",
+      "requires_approval": true
+    }
+  ],
+  "safety": {
+    "auto_remediation_allowed": false,
+    "actions_taken": []
+  },
+  "performance": {
+    "latency_ms": 3134.076,
+    "detector": "rule-v1+llm-v1",
+    "model_used": true,
+    "model_name": "deepseek-chat"
+  }
+}
